@@ -1,0 +1,97 @@
+package blog.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import blog.model.User;
+import blog.service.UserService;
+import blog.startup.Config;
+
+@Controller
+public class IndexController {
+
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/index")
+	public String index(HttpServletRequest request) {
+		return "index";
+	}
+
+	/////////////////////////// 普通会员登录////////////////////////////////////////
+	@RequestMapping("/memloginsubmit")
+	public String memLoginSubmit(HttpServletRequest request,
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "pw", required = false) String pw) {
+		User u = this.userService.checkUser(email, pw);
+
+		if (u == null) {
+			request.getSession().setAttribute("error_wrongpw", "wrongpw");
+			return "redirect:/index";
+		}
+
+		request.getSession().setAttribute(Config.memAuth, u);
+
+		// 如果为非首页需求登录
+		Object path = request.getSession().getAttribute("recentView");
+		request.getSession().setAttribute("recentView", "");// 用完后清理
+		if (path != null && !path.toString().isEmpty()) {
+			return "redirect:" + Config.getConfig().getRootPath() + path.toString();
+		}
+
+		return "redirect:/index";
+	}
+	
+	/**
+	 * 登出
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/memlogoutsubmit")
+	public String memLogoutSubmit(HttpServletRequest request,
+			@RequestParam(value = "goback", required = false) String goback) {
+		request.getSession().setAttribute(Config.memAuth, null);
+
+		// 优先级, goback优先
+		if (goback != null && !goback.isEmpty()) {
+			return "redirect:" + Config.getConfig().getRootPath() + goback;
+		}
+
+		return "redirect:/index";
+	}
+	
+	/////////////////////////// 普通会员注册////////////////////////////////////////
+	/**
+	 * 用户注册
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/memregister")
+	public String memRegister(HttpServletRequest request) {
+		request.getSession().setAttribute("register", "on");
+		return "memregister";
+	}
+	
+	/**
+	 * 用户注册提交
+	 * @param email
+	 * @param pw
+	 * @return
+	 */
+	@RequestMapping("/memregistersubmit")
+	public String memRegisterSubmit(HttpServletRequest request, @RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "pw", required = false) String pw) {
+		if(request.getSession().getAttribute("register")==null)
+		{
+			return "redirect:/index";
+		}
+		request.getSession().setAttribute("register", null);
+		this.userService.registerUser(email, pw);
+		return "redirect:/memlogin";
+	}
+}
