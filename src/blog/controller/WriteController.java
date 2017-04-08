@@ -21,11 +21,18 @@ import blog.startup.Config;
  *
  */
 @Controller
+@RequestMapping("write")
 public class WriteController {
 
 	@Autowired
 	private ImgService imgService;
 
+	@RequestMapping("")
+	public String write()
+	{
+		return "write";
+	}
+	
 	@RequestMapping("imgUpload")
 	public String fileUpload(HttpServletRequest request,@RequestParam("imgfile") MultipartFile file) 
 	{
