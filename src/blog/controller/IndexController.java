@@ -92,6 +92,6 @@ public class IndexController {
 		}
 		request.getSession().setAttribute("register", null);
 		this.userService.registerUser(email, pw);
-		return "redirect:/memlogin";
+		return "redirect:/index";
 	}
 }
