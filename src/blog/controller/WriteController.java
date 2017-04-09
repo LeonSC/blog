@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import blog.model.User;
@@ -21,7 +22,7 @@ import blog.startup.Config;
  *
  */
 @Controller
-@RequestMapping("write")
+@RequestMapping("/write")
 public class WriteController {
 
 	@Autowired
@@ -33,22 +34,28 @@ public class WriteController {
 		return "write";
 	}
 	
-	@RequestMapping("imgUpload")
-	public String fileUpload(HttpServletRequest request,@RequestParam("imgfile") MultipartFile file) 
+	@RequestMapping("/imgUpload")
+	@ResponseBody
+	public String fileUpload(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile file) 
 	{
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		
+		if(u==null)
+		{
+			return "";
+		}
+		String[] array = {""};
 		// 判断文件是否为空
-		if (!file.isEmpty()) {
+		if (file!=null&&!file.isEmpty()) {
 			try {
+				array = this.imgService.getImgPhysicalPath("123", file.getOriginalFilename());
 				// 转存文件
-				file.transferTo(new File(this.imgService.getImgPhysicalPath(u.getBM_ID(), file.getOriginalFilename())));
+				file.transferTo(new File(array[1]));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		// 重定向
-		return "redirect:/list.html";
+		return array[0];
 	}
 
 }

@@ -179,8 +179,6 @@ public class UserDao {
 		Page<User> page=new Page<User>();
 		
 		page.setTotal(query.count());
-		
-		
 		page.setNowPage(nowPage);
 		page.setTotalInPage(numInPage);
 		

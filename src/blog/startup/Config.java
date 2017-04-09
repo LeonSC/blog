@@ -120,6 +120,10 @@ public class Config {
 		return prop;
 	}
 
+	/**
+	 * 结尾已经加/
+	 * @return
+	 */
 	public static String getImgWebPath() {
 		return imgWebPath;
 	}

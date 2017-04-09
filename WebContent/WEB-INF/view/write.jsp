@@ -5,6 +5,15 @@
 <script src="//cdn.bootcss.com/medium-editor/5.23.0/js/medium-editor.min.js"></script>
 <link rel="stylesheet" href="//cdn.bootcss.com/medium-editor/5.23.0/css/medium-editor.min.css" type="text/css" media="screen">
 <link rel="stylesheet" href="//cdn.bootcss.com/medium-editor/5.23.0/css/themes/bootstrap.min.css" type="text/css" media="screen">
+<link rel="stylesheet" href="${config.rootPath}/public/medium-editor-insert-plugin-2.4.0/medium-editor-insert-plugin.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" media="screen">
+<!-- JS -->
+<script src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.runtime.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-file-upload/9.18.0/js/vendor/jquery.ui.widget.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-file-upload/9.18.0/js/jquery.iframe-transport.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-file-upload/9.18.0/js/jquery.fileupload.min.js"></script>
+<script src="${config.rootPath}/public/medium-editor-insert-plugin-2.4.0/medium-editor-insert-plugin.min.js"></script>
 <body>
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
@@ -28,9 +37,35 @@
 				return true;
 			});
 			var editor = new MediumEditor('#editor', {
+				toolbar: {
+					buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'justifyLeft', 'justifyCenter'],
+				},
+				placeholder: {
+			        text: '请在这里输入您的文章'
+			    },
 				customClassOption : "card-text",
 				imageDragging : false
 			});
+			$('#editor').mediumInsert({
+		        editor: editor,
+		        addons: { // (object) Addons configuration
+		            images: { // (object) Image addon configuration
+		                deleteScript: 'delete.php', // (string) A relative path to a delete script
+		                deleteMethod: 'POST',
+		                fileDeleteOptions: {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
+		                fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
+		                    url: '${config.rootPath}/write/imgUpload', // (string) A relative path to an upload script
+		                    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i // (regexp) Regexp of accepted file types
+		                },
+		                messages: {
+		                    acceptFileTypesError: 'This file is not in a supported format: ',
+		                    maxFileSizeError: 'This file is too big: '
+		                },
+		                uploadCompleted: function ($el, data) {}, // (function) Callback function called when upload is completed
+		                uploadFailed: function (uploadErrors, data) {} // (function) Callback function called when upload failed
+		            }
+		        }
+		    });
 		});
 	</script>
 	<%@ include file="static/footer.jsp"%>
