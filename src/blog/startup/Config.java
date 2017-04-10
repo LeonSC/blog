@@ -95,11 +95,12 @@ public class Config {
 			root=roots[0].toString();
 		}
 		
-		String[] pathList={root+"blog.property",root+"home"+File.separator+"blog.property",root+"ubuntu"+File.separator+"blog.property",root+"work"+File.separator+"blog.property"};
+		String[] pathList={root+"blog.property",root+"home"+File.separator+"blog.property",root+"home"+File.separator+"ubuntu"+File.separator+"blog.property",root+"work"+File.separator+"blog.property"};
 		
 		try {
 			for(String base:pathList)
 			{
+				System.out.println("读取配置文件=>"+base);
 				File file = new File(base);
 				if(file.exists()&&!file.isDirectory())
 				{

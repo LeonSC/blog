@@ -19,8 +19,6 @@ public class StartUpLoader extends HttpServlet{
 		System.out.println("数据库用户=>"+Config.dbUser);
 		System.out.println("数据库=>"+Config.dbBase);
 		System.out.println("数据库地址=>"+Config.dbIP+":"+Config.dbPort);
-		System.out.println("图片根路径=>"+Config.getImgPhysicalPath());
-		System.out.println("图片访问路径=>"+Config.getImgWebPath());
 		System.out.println("==========================项目参数启动======================================");
 		
 		System.out.println("===============================启动mongodb=================================");
@@ -33,6 +31,8 @@ public class StartUpLoader extends HttpServlet{
 		
 		System.out.println("===============================获取地址图片存放地址=================================");
 		Config.setImgPath(application.getRealPath("/"), application.getContextPath());
+		System.out.println("图片根路径=>"+Config.getImgPhysicalPath());
+		System.out.println("图片访问路径=>"+Config.getImgWebPath());
 		System.out.println("===============================获取地址图片存放地址结束=================================");
 	}
 
