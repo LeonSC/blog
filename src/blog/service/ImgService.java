@@ -93,9 +93,11 @@ public class ImgService {
 		String del = path.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
 
 		del = del.replaceAll("/", File.separator);
-		
-		System.out.println("删除路径==>"+del);
-		System.out.println("成功后返回值==>"+tmp);
+		File file = new File(del);
+		if(file.exists())
+		{
+			file.delete();
+		}
 		
 		return tmp;
 	}
