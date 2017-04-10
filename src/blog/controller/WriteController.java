@@ -60,7 +60,7 @@ public class WriteController {
 
 	@RequestMapping("/imgDelete")
 	@ResponseBody
-	public String fileDelete(HttpServletRequest request)
+	public String fileDelete(HttpServletRequest request,@RequestParam(value = "file", required = false) String path)
 	{
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		if(u==null)
