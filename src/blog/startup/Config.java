@@ -146,14 +146,19 @@ public class Config {
 			return;
 		}
 		
-		if(work.length()>0)
+		if(work==null||work.isEmpty())
+		{
+			Config.imgPhysicalPath =total.substring(0, total.lastIndexOf("ROOT"))+"imgBlogFolder"+File.separator;
+			Config.imgWebPath =Config.rootPath+"/imgBlogFolder/";
+		}
+		else
 		{
 			work = work.substring(1)+File.separator;
 			Config.imgPhysicalPath =total.substring(0, total.lastIndexOf(work))+"imgBlogFolder"+File.separator;
-			Config.imgWebPath =Config.rootPath.substring(0, Config.rootPath.lastIndexOf(work.replace("\\", "")))+"imgBlogFolder"+"/";
+			Config.imgWebPath =Config.rootPath.substring(0, Config.rootPath.lastIndexOf(work.replace("\\", "")))+"imgBlogFolder/";
 		}
 	}
 	
 	//用于标识用户session
-	public static String memAuth="memAuth";
+	public final static String memAuth="memAuth";
 }

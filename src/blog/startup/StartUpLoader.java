@@ -30,6 +30,8 @@ public class StartUpLoader extends HttpServlet{
 		System.out.println("==========================装载超级用户结束======================================");
 		
 		System.out.println("===============================获取地址图片存放地址=================================");
+		System.out.println("工程真实路径=>"+application.getRealPath("/"));
+		System.out.println("工程名=>"+application.getContextPath());
 		Config.setImgPath(application.getRealPath("/"), application.getContextPath());
 		System.out.println("图片根路径=>"+Config.getImgPhysicalPath());
 		System.out.println("图片访问路径=>"+Config.getImgWebPath());
