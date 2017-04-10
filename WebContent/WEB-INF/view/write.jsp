@@ -50,7 +50,7 @@
 		        editor: editor,
 		        addons: { // (object) Addons configuration
 		            images: { // (object) Image addon configuration
-		                deleteScript: 'delete.php', // (string) A relative path to a delete script
+		                deleteScript: '${config.rootPath}/write/imgDelete', // (string) A relative path to a delete script
 		                deleteMethod: 'POST',
 		                fileDeleteOptions: {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
 		                fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options

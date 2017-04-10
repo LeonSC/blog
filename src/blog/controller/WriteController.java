@@ -47,7 +47,7 @@ public class WriteController {
 		// 判断文件是否为空
 		if (file!=null&&!file.isEmpty()) {
 			try {
-				array = this.imgService.getImgPhysicalPath("123", file.getOriginalFilename());
+				array = this.imgService.getImgPhysicalPath(u.getBM_ID(), file.getOriginalFilename());
 				// 转存文件
 				file.transferTo(new File(array[1]));
 			} catch (Exception e) {
@@ -58,4 +58,16 @@ public class WriteController {
 		return array[0];
 	}
 
+	@RequestMapping("/imgDelete")
+	@ResponseBody
+	public String fileDelete(HttpServletRequest request)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		if(u==null)
+		{
+			return "";
+		}
+		
+		return "";
+	}
 }
