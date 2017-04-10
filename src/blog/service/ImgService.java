@@ -56,6 +56,8 @@ public class ImgService {
 		Map<String,String> map = new HashMap<>();
 		map.put("name", newPicName);
 		map.put("url", visitPath);
+		map.put("delete_url", new StringBuffer(Config.rootPath+"/write/imgDelete?file=").append(File.separator).append(timePath).append(File.separator).append(newPicName).toString());
+		map.put("delete_type", "DELETE");
 		
 		List<Map<String,String>> list = new ArrayList<>();
 		list.add(map);
