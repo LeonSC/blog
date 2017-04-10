@@ -198,12 +198,10 @@
 							</div>
 							<div class="card-footer">
 								<ul class="nav nav-pills card-header-pills">
-									<li class="nav-item"><a class="nav-link" href="#">消息</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="#">收藏</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="${config.rootPath}/memlogoutsubmit">登出</a>
-									</li>
+									<li class="nav-item"><a class="nav-link" href="${config.rootPath}/write">写作</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">消息</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">收藏</a></li>
+									<li class="nav-item"><a class="nav-link" href="${config.rootPath}/memlogoutsubmit">登出</a></li>
 								</ul>
 							</div>
 						</div>

@@ -69,4 +69,34 @@ public class ImgService {
 		
 		return reArray;
 	}
+	
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public String delImgPhysicalPath(String path)
+	{
+		if (path.startsWith("data")) {
+			return "";
+		}
+
+		// 拼装需要返回给JS的字符串
+		Map<String, Boolean> map = new HashMap<>();
+		map.put(path, true);
+		List<Map<String, Boolean>> list = new ArrayList<>();
+		list.add(map);
+		Map<String, List<Map<String, Boolean>>> re = new HashMap<>();
+		re.put("files", list);
+		String tmp = JSON.toJSONString(re);
+
+		String del = path.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
+
+		del = del.replaceAll("/", File.separator);
+		
+		System.out.println("删除路径==>"+del);
+		System.out.println("成功后返回值==>"+tmp);
+		
+		return tmp;
+	}
 }

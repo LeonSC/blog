@@ -12,7 +12,7 @@ public class User extends BaseModel{
 	
 	private Integer lv;//0, 无会员, 1, 初级会员
 	
-	private Admin admin;
+	private Auth admin;
 	//由于管理员只是附着在普通用户上的权限系统, 所以在普通会员登录的时候, 会查找他的管理员属性.
 	//如果其有管理员属性, 则显示对应的操作项目
 	
@@ -51,11 +51,11 @@ public class User extends BaseModel{
 		this.nickname = nickname;
 	}
 
-	public Admin getAdmin() {
+	public Auth getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(Admin admin) {
+	public void setAdmin(Auth admin) {
 		this.admin = admin;
 	}
 

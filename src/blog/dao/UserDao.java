@@ -5,7 +5,7 @@ import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Repository;
 
-import blog.model.Admin;
+import blog.model.Auth;
 import blog.model.Page;
 import blog.model.User;
 import blog.startup.MongoDBConnector;
@@ -99,7 +99,7 @@ public class UserDao {
 			return user;
 		}
 		
-		Admin admin=new Admin();
+		Auth admin=new Auth();
 		admin.setPassword(u.getPw());
 		u.setAdmin(admin);
 		

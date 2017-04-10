@@ -37,4 +37,11 @@
 		<property name="maxInMemorySize" value="4096" />
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/write/**" />
+			<bean class="blog.interceptor.UserInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
