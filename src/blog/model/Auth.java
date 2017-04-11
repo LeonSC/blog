@@ -15,10 +15,10 @@ public class Auth {
 
 	private Integer visible=0;//0为通用
 	
-	private Integer create=0;
-	private Integer delete=0;
-	private Integer modify=0;
-	private Integer find=0;
+	private Integer create=10;
+	private Integer delete=100;
+	private Integer modify=100;
+	private Integer find=10;
 	
 	public Integer getVisible() {
 		return visible;

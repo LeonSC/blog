@@ -4,6 +4,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
+import com.alibaba.fastjson.JSON;
+
 public class StartUpLoader extends HttpServlet{
 	/**
 	 * 
@@ -36,6 +38,11 @@ public class StartUpLoader extends HttpServlet{
 		System.out.println("图片根路径=>"+Config.getImgPhysicalPath());
 		System.out.println("图片访问路径=>"+Config.getImgWebPath());
 		System.out.println("===============================获取地址图片存放地址结束=================================");
+		
+		System.out.println("===============================缓存设置=================================");
+		application.setAttribute("cache", TCache.getCache());
+		System.out.println("目录结构=>"+ JSON.toJSONString(TCache.getCache().titleCache));
+		System.out.println("===============================缓存设置结束=================================");
 	}
 
 }
