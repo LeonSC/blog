@@ -23,23 +23,19 @@
 						<div id="carouselExampleIndicators" class="carousel slide"
 							data-ride="carousel">
 							<ol class="carousel-indicators">
-								<li data-target="#carouselExampleIndicators" data-slide-to="0"
-									class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 							</ol>
 							<div class="carousel-inner" role="listbox">
 								<div class="carousel-item active">
-									<img class="d-block img-fluid"
-										src="holder.js/100px160?theme=simple" alt="First slide">
+									<img class="d-block img-fluid" src="holder.js/100px160?theme=simple" alt="First slide">
 								</div>
 								<div class="carousel-item">
-									<img class="d-block img-fluid"
-										src="holder.js/100px160?theme=simple" alt="Second slide">
+									<img class="d-block img-fluid" src="holder.js/100px160?theme=simple" alt="Second slide">
 								</div>
 								<div class="carousel-item">
-									<img class="d-block img-fluid"
-										src="holder.js/100px160?theme=simple" alt="Third slide">
+									<img class="d-block img-fluid" src="holder.js/100px160?theme=simple" alt="Third slide">
 								</div>
 							</div>
 						</div>
@@ -51,12 +47,9 @@
 						<div class="card text-center">
 							<div class="card-header">
 								<ul class="nav nav-tabs card-header-tabs">
-									<li class="nav-item"><a class="nav-link active" href="#">Active</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="#">Link</a>
-									</li>
-									<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
-									</li>
+									<li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+									<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
 								</ul>
 							</div>
 							<div class="card-block">
