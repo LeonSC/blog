@@ -21,21 +21,18 @@
 		<div class="row">
 			<div class="col col-xl-12">
 				<div class="card">
-					<div class="card-header">音像</div>
+					<div class="card-header">草稿</div>
 					<div class="card-block">
-						<h4 class="card-title" contenteditable="true">输入标题</h4>
+						<h4 class="card-title" contenteditable="true" id="editorTitle">输入标题</h4>
 						<div class="card-text" id="editor">输入内容.</div>
 					</div>
-					<div class="card-footer"><a href="#" class="btn btn-primary">保存</a></div>
+					<div class="card-footer"><a href="#" class="btn btn-primary" id="writeSave">保存并预览</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
 		$(document).ready(function() {
-			$("form").submit(function() {
-				return true;
-			});
 			var editor = new MediumEditor('#editor', {
 				toolbar: {
 					buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'justifyLeft', 'justifyCenter'],
@@ -66,6 +63,16 @@
 		            }
 		        }
 		    });
+			$("#writeSave").click(function(e) {
+				e.preventDefault();
+				var allContents = editor.serialize();
+				var elContent = allContents["editor"].value;
+				$.post("${config.rootPath}/write/savedraft", { title: $("#editorTitle").html(), content: elContent },
+					function(data){
+					alert("Data Loaded: " + data);
+				});
+				return;
+			});
 		});
 	</script>
 	<%@ include file="static/footer.jsp"%>

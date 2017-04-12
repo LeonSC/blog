@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/topic")
-public class ContentController {
+public class TopicController {
 
 	@RequestMapping("/{topic}")
 	public String topic()

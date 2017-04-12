@@ -34,6 +34,12 @@ public class WriteController {
 		return "write";
 	}
 	
+	/**
+	 * 图片上传
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("/imgUpload")
 	@ResponseBody
 	public String fileUpload(HttpServletRequest request,@RequestParam(value = "files[]", required = false) MultipartFile file) 
@@ -58,6 +64,11 @@ public class WriteController {
 		return array[0];
 	}
 
+	/**
+	 * 图片删除
+	 * @param path
+	 * @return
+	 */
 	@RequestMapping("/imgDelete")
 	@ResponseBody
 	public String fileDelete(@RequestParam(value = "file", required = false) String path)
@@ -65,5 +76,12 @@ public class WriteController {
 		String re = this.imgService.delImgPhysicalPath(path);
 		
 		return re;
+	}
+	
+	@RequestMapping("/savedraft")
+	@ResponseBody
+	public String saveDraft(@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "content", required = false) String content) {
+		return "";
 	}
 }
