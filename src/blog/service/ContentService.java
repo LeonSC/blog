@@ -109,4 +109,15 @@ public class ContentService {
 		}
 		return m.group(1);
 	}
+	
+	
+	public Draft getDraftByUser(String bmid)
+	{
+		if(bmid==null)
+		{
+			return null;
+		}
+		Draft d = this.draftDao.getDraftByUser(bmid);
+		return d;
+	}
 }
