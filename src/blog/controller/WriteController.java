@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import blog.model.User;
+import blog.service.ContentService;
 import blog.service.ImgService;
 import blog.startup.Config;
 
@@ -27,6 +28,8 @@ public class WriteController {
 
 	@Autowired
 	private ImgService imgService;
+	@Autowired
+	private ContentService contentService; 
 
 	@RequestMapping("")
 	public String write()
@@ -80,8 +83,10 @@ public class WriteController {
 	
 	@RequestMapping("/savedraft")
 	@ResponseBody
-	public String saveDraft(@RequestParam(value = "title", required = false) String title,
+	public String saveDraft(HttpServletRequest request,@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "content", required = false) String content) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.contentService.saveDraft(u.getBM_ID(), title, content);
 		return "";
 	}
 }

@@ -7,20 +7,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
+import blog.dao.DraftDao;
 import blog.model.Draft;
 import blog.startup.Config;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 public class ContentService {
-
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private DraftDao draftDao;
 	
 	/**
 	 * 草稿
@@ -59,31 +59,32 @@ public class ContentService {
 		if(!cover.equals(""))
 		{
 			String coverpath = cover.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
-			this.log.info(coverpath);
-			coverpath = coverpath.replaceAll("/", File.separator);
-			this.log.info(coverpath);
 			File file = new File(coverpath);
 			if (file.exists()) {
 				try {
-					String[] tmp = coverpath.split("\\.");
-					coverpath = tmp[0]+"200x200."+tmp[1];
-					this.log.info(coverpath);
+					int last = coverpath.lastIndexOf(".");
+					String tmp = coverpath.substring(0, last)+"-200x200"+coverpath.substring(last,coverpath.length());
+					coverpath = tmp;
 					Thumbnails.of(file).size(200, 200).toFile(coverpath);
-					cover = coverpath.replace(Config.getImgPhysicalPath(),Config.getImgWebPath()).replaceAll("\\\\", "/");
-					this.log.info(cover);
+					cover = coverpath.replace(Config.getImgPhysicalPath(),Config.getImgWebPath());
 				} catch (IOException e) {
-					this.log.debug(e.getMessage());
+					e.getStackTrace();
 				}
 			}
 		}
 		//解析intro
-		String intro = content.replaceAll("\\&[a-zA-Z]{1,10};", "").replaceAll("<[^>]*>", "").replaceAll("[(/>)<]", "").trim().substring(100);
-		Draft c = new Draft();
-		c.setWrite(user);
-		c.setTitle(title);
-		c.setCover(cover);
-		c.setIntro(intro);
-		c.setContent(content);
+		String intro = content.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").trim();
+		if(intro.length()>100)
+		{
+			intro=intro.substring(0,100);
+		}
+		Draft draft = new Draft();
+		draft.setWrite(user);
+		draft.setTitle(title);
+		draft.setCover(cover);
+		draft.setIntro(intro);
+		draft.setContent(content);
+		this.draftDao.save(draft);
 		return JSON.toJSONString(map);
 	}
 	
