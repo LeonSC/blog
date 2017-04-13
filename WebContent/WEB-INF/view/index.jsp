@@ -7,19 +7,19 @@
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<img data-src="holder.js/100px130?theme=simple">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<%@ include file="static/navFunction.jsp"%>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-xl-9">
+			<div class="col col-9">
 				<div class="row">
-					<div class="col col-xl-12">
+					<div class="col col-12">
 						<div id="carouselExampleIndicators" class="carousel slide"
 							data-ride="carousel">
 							<ol class="carousel-indicators">
@@ -43,7 +43,7 @@
 				</div>
 				<br/>
 				<div class="row">
-					<div class="col col-xl-12">
+					<div class="col col-12">
 						<div class="card text-center">
 							<div class="card-header">
 								<ul class="nav nav-tabs card-header-tabs">
@@ -63,7 +63,7 @@
 				</div>
 				<br/>
 				<div class="row">
-					<div class="col col-xl-12">
+					<div class="col col-12">
 						<div class="card-columns">
 							<div class="card">
 								<img class="card-img-top img-fluid" src="holder.js/100px160?theme=simple"
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-xl-3">
+			<div class="col col-3">
 				<%@ include file="myself.jsp"%>
 			</div>
 		</div>

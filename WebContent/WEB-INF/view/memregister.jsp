@@ -6,12 +6,12 @@
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<img data-src="holder.js/100px130?theme=simple">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<form method="post" action="${config.rootPath}/memregistersubmit">
 					<div class="form-group">
 						<label for="inputEmail">Email address</label>

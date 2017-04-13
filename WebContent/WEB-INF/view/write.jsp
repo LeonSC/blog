@@ -19,7 +19,7 @@
 	<div class="container">
 		<br/>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<div class="card">
 					<div class="card-header">草稿</div>
 					<div class="card-block">

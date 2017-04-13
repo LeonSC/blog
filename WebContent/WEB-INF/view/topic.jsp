@@ -7,19 +7,19 @@
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<img data-src="holder.js/100px130?theme=simple">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<%@ include file="static/navFunction.jsp"%>
 			</div>
 		</div>
 		<div class="row">
-		<div class="col col-xl-9">
+		<div class="col col-9">
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<ul class="list-group">
 					<li class="list-group-item">
 						<table>
@@ -53,7 +53,7 @@
 		</div>
 		<br/>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<div class="card-group">
 					<div class="card">
 						<img class="card-img-top" src="holder.js/100px160?theme=simple" alt="Card image cap">
@@ -109,7 +109,7 @@
 		</div>
 		<br/>
 		<div class="row">
-			<div class="col col-xl-12">
+			<div class="col col-12">
 				<ul class="list-group">
 					<li class="list-group-item">
 						<table>
@@ -142,7 +142,7 @@
 			</div>
 		</div>
 		</div>
-		<div class="col col-xl-3">
+		<div class="col col-3">
 		<%@ include file="myself.jsp"%>
 		</div>
 		</div>

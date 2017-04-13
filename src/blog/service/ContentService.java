@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -18,6 +20,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @Service
 public class ContentService {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	/**
 	 * 草稿
 	 * @param title
@@ -52,18 +56,24 @@ public class ContentService {
 		}
 		//解析第一张图片
 		String cover = this.getFirstImg(content);
-		cover = "";
-		String coverpath = cover.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
-		coverpath = coverpath.replaceAll("/", File.separator);
-		File file = new File(coverpath);
-		if (file.exists()) {
-			try {
-				String[] tmp = coverpath.split("\\.");
-				coverpath = tmp[0]+"200x200."+tmp[1];
-				Thumbnails.of(file).size(200, 200).toFile(coverpath);
-				cover = coverpath.replace(Config.getImgPhysicalPath(),Config.getImgWebPath());;
-			} catch (IOException e) {
-				e.printStackTrace();
+		if(!cover.equals(""))
+		{
+			String coverpath = cover.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
+			this.log.info(coverpath);
+			coverpath = coverpath.replaceAll("/", File.separator);
+			this.log.info(coverpath);
+			File file = new File(coverpath);
+			if (file.exists()) {
+				try {
+					String[] tmp = coverpath.split("\\.");
+					coverpath = tmp[0]+"200x200."+tmp[1];
+					this.log.info(coverpath);
+					Thumbnails.of(file).size(200, 200).toFile(coverpath);
+					cover = coverpath.replace(Config.getImgPhysicalPath(),Config.getImgWebPath()).replaceAll("\\\\", "/");
+					this.log.info(cover);
+				} catch (IOException e) {
+					this.log.debug(e.getMessage());
+				}
 			}
 		}
 		//解析intro
