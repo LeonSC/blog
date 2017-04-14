@@ -84,7 +84,7 @@ public class ContentService {
 		draft.setCover(cover);
 		draft.setIntro(intro);
 		draft.setContent(content);
-		this.draftDao.save(draft);
+		this.draftDao.saveOrUpdate(draft);
 		return JSON.toJSONString(map);
 	}
 	

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="static/header.jsp"%>
@@ -23,10 +24,19 @@
 				<div class="card">
 					<div class="card-header">草稿</div>
 					<div class="card-block">
-						<h4 class="card-title" contenteditable="true" id="editorTitle">输入标题</h4>
-						<div class="card-text" id="editor">输入内容.</div>
+						<h4 class="card-title" contenteditable="true" id="editorTitle">
+							<c:if test="${empty draft.title}">输入标题</c:if>
+							<c:if test="${not empty draft.title}">${draft.title}</c:if>
+						</h4>
+						<div class="card-text" id="editor">
+							<c:if test="${empty draft.content}"><p>输入内容.</p></c:if>
+							<c:if test="${not empty draft.content}">${draft.content}</c:if>
+						</div>
 					</div>
-					<div class="card-footer"><a href="#" class="btn btn-primary" id="writeSave">保存并预览</a></div>
+					<div class="card-footer">
+						<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a>
+						<a href="#" class="btn btn-primary">预览</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -43,6 +53,7 @@
 				customClassOption : "card-text",
 				imageDragging : false
 			});
+			//editor.setContent('${draft.title}');
 			$('#editor').mediumInsert({
 		        editor: editor,
 		        addons: { // (object) Addons configuration

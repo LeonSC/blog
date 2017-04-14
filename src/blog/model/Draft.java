@@ -11,7 +11,7 @@ public class Draft extends BaseModel{
 	private String intro;
 	private String content;
 	private String cover;
-	
+	private Long lastUpdate;
 	
 	public String getTitle() {
 		return title;
@@ -42,5 +42,11 @@ public class Draft extends BaseModel{
 	}
 	public void setWrite(String write) {
 		this.write = write;
+	}
+	public Long getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(Long lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 }

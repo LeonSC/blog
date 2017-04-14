@@ -33,8 +33,11 @@ public class WriteController {
 	private ContentService contentService; 
 
 	@RequestMapping("")
-	public String write()
+	public String write(HttpServletRequest request)
 	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
+		request.setAttribute("draft", draft);
 		return "write";
 	}
 	
