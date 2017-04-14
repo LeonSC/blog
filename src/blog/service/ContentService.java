@@ -111,6 +111,11 @@ public class ContentService {
 	}
 	
 	
+	/**
+	 * 通过用户ID查找
+	 * @param bmid
+	 * @return
+	 */
 	public Draft getDraftByUser(String bmid)
 	{
 		if(bmid==null)

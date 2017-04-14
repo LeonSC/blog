@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import blog.model.Draft;
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
@@ -81,12 +82,32 @@ public class WriteController {
 		return re;
 	}
 	
+	/**
+	 * 保存草稿
+	 * @param request
+	 * @param title
+	 * @param content
+	 * @return
+	 */
 	@RequestMapping("/savedraft")
 	@ResponseBody
 	public String saveDraft(HttpServletRequest request,@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "content", required = false) String content) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.saveDraft(u.getBM_ID(), title, content);
-		return "";
+		String re = this.contentService.saveDraft(u.getBM_ID(), title, content);
+		return re;
+	}
+	
+	/**
+	 * 获取预览
+	 * @return
+	 */
+	@RequestMapping("/preview")
+	public String preView(HttpServletRequest request)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
+		request.setAttribute("draft", draft);
+		return "preview";
 	}
 }
