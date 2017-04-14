@@ -65,7 +65,7 @@
 							<div class="form-group row">
 								<div class="col-12">
 									<button type="submit" class="btn btn-primary">发布</button>
-									<button type="submit" class="btn btn-primary">再改改</button>
+									<a href="${config.rootPath}/write" class="btn btn-primary">再改改</a>
 								</div>
 							</div>
 						</form>

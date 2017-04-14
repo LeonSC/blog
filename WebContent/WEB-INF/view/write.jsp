@@ -35,7 +35,7 @@
 					</div>
 					<div class="card-footer">
 						<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a>
-						<a href="#" class="btn btn-primary">预览</a>
+						<a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
 					</div>
 				</div>
 			</div>
@@ -53,7 +53,6 @@
 				customClassOption : "card-text",
 				imageDragging : false
 			});
-			//editor.setContent('${draft.title}');
 			$('#editor').mediumInsert({
 		        editor: editor,
 		        addons: { // (object) Addons configuration
@@ -80,8 +79,15 @@
 				var elContent = allContents["editor"].value;
 				$.post("${config.rootPath}/write/savedraft", { title: $("#editorTitle").html(), content: elContent },
 					function(data){
-					alert("Data Loaded: " + data);
-				});
+						if(data.status=="0")
+						{
+							location.href = '${config.rootPath}/write/preview';
+						}
+						else
+						{
+							alert(data.info);
+						}
+				},"json");
 				return;
 			});
 		});

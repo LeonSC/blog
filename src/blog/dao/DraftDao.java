@@ -50,7 +50,7 @@ public class DraftDao {
 		ops.set("intro", draft.getIntro());
 		ops.set("content", draft.getContent());
 		ops.set("cover", draft.getCover());
-		ops.set("lastUpdate", draft.getLastUpdate());
+		ops.set("lastUpdate", Tools.getServerTime());
 		
 		MongoDBConnector.datastore.update(updateQuery, ops,true);
 		

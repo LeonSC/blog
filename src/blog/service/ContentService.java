@@ -38,6 +38,7 @@ public class ContentService {
 			map.put("status", "-1");
 			map.put("info", "title is empty");
 		}
+		title= title.trim();
 		if(title.length()>50)
 		{
 			map.put("status", "-2");
