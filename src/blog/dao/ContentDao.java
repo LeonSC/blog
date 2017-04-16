@@ -3,6 +3,7 @@ package blog.dao;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.FindOptions;
 import org.springframework.stereotype.Repository;
 
 import blog.model.Content;
@@ -25,7 +26,7 @@ public class ContentDao {
 	 */
 	public List<Content> getContentListByTopic(String topic)
 	{
-		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).asList();
+		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).order("-BM_TIME").asList(new FindOptions().limit(15));
 		return list;
 	}
 }

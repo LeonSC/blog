@@ -65,33 +65,17 @@
 		<div class="row">
 			<div class="col col-12">
 				<ul class="list-group">
+					<c:forEach var="item" items="${list}" begin="4">
 					<li class="list-group-item">
 						<table>
 							<tr>
-								<td><img class="rounded float-left" src="holder.js/70x70?theme=simple"/></td>
+								<td><img class="rounded float-left img-fluid custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple"/></td>
 								<td style="width:1rem"></td>
-								<td><p>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio</p></td>
+								<td><p>${item.intro}</p></td>
 							</tr>
 						</table>
 					</li>
-					<li class="list-group-item">
-						<table>
-							<tr>
-								<td><img class="rounded float-left" src="holder.js/70x70?theme=simple"/></td>
-								<td style="width:1rem"></td>
-								<td><p>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio</p></td>
-							</tr>
-						</table>
-					</li>
-					<li class="list-group-item">
-						<table>
-							<tr>
-								<td><img class="rounded float-left" src="holder.js/70x70?theme=simple"/></td>
-								<td style="width:1rem"></td>
-								<td><p>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio</p></td>
-							</tr>
-						</table>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
