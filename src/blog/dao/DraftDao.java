@@ -71,4 +71,20 @@ public class DraftDao {
 		Draft d = MongoDBConnector.datastore.createQuery(Draft.class).field("write").equal(bmid).get();
 		return d;
 	}
+	
+	/**
+	 * 根据一个用户删除一个草稿
+	 * @param bmid
+	 * @return
+	 */
+	public int deleteDraftByUser(String bmid)
+	{
+		if(bmid==null)
+		{
+			return 0;
+		}
+		Query<Draft> query=MongoDBConnector.datastore.createQuery(Draft.class).field("write").equal(bmid);
+		MongoDBConnector.datastore.delete(query);
+		return 0;
+	}
 }

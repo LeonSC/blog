@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.NotSaved;
 @NotSaved
 public class Auth {
 
-	private Integer lv=0;
+	private Integer lv=0;//任意人可以浏览
 	
 	private String password;
 

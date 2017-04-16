@@ -5,14 +5,14 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity("content")
 public class Content extends BaseModel {
 
-	private String outkey;
+	private String topic;//标识属于哪个topic
 	
 	private String title;
 	private String intro;
 	private String content;
 	private String cover;
 	
-	private Auth need;
+	private Auth need =new Auth();
 	
 	private User user;
 
@@ -63,13 +63,12 @@ public class Content extends BaseModel {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public String getOutkey() {
-		return outkey;
+	public String getTopic() {
+		return topic;
 	}
 
-	public void setOutkey(String outkey) {
-		this.outkey = outkey;
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 	
 }

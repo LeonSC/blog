@@ -3,6 +3,7 @@ package blog.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,8 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
+import blog.dao.ContentDao;
 import blog.dao.DraftDao;
+import blog.dao.UserDao;
+import blog.model.Content;
 import blog.model.Draft;
+import blog.model.User;
 import blog.startup.Config;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -21,7 +26,10 @@ import net.coobird.thumbnailator.Thumbnails;
 public class ContentService {
 	@Autowired
 	private DraftDao draftDao;
-	
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private ContentDao contentDao;
 	/**
 	 * 草稿
 	 * @param title
@@ -125,5 +133,44 @@ public class ContentService {
 		}
 		Draft d = this.draftDao.getDraftByUser(bmid);
 		return d;
+	}
+	
+	/**
+	 * 将一个草稿发布
+	 * @param userid
+	 * @param topic
+	 * @return
+	 */
+	public Content publishContent(String userid, String topic)
+	{
+		if(topic==null||topic.isEmpty())
+		{
+			return null;
+		}
+		Draft d = this.draftDao.getDraftByUser(userid);
+		User u = this.userDao.findUserByBMID(userid);
+		Content c= new Content();
+		c.setTopic(topic);
+		c.setUser(u);
+		c.setTitle(d.getTitle());
+		c.setCover(d.getCover());
+		c.setIntro(d.getIntro());
+		c.setContent(d.getContent());
+		c = this.contentDao.save(c);
+		//删除草稿
+		this.draftDao.deleteDraftByUser(userid);
+		return c;
+	}
+	
+	
+	/**
+	 * 通过topic查找列表
+	 * @param topic
+	 * @return
+	 */
+	public List<Content> getContentListByTopic(String topic)
+	{
+		List<Content> list = this.contentDao.getContentListByTopic(topic);
+		return list;
 	}
 }

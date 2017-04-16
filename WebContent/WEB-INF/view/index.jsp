@@ -6,16 +6,7 @@
 <body>
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
-		<div class="row">
-			<div class="col col-12">
-				<img data-src="holder.js/100px130?theme=simple">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col col-12">
-				<%@ include file="static/navFunction.jsp"%>
-			</div>
-		</div>
+		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 			<div class="col col-9">
 				<div class="row">
@@ -150,7 +141,7 @@
 				</div>
 			</div>
 			<div class="col col-3">
-				<%@ include file="myself.jsp"%>
+				<%@ include file="static/myself.jsp"%>
 			</div>
 		</div>
 	</div>

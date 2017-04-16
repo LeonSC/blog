@@ -5,11 +5,7 @@
 <body>
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
-		<div class="row">
-			<div class="col col-12">
-				<img data-src="holder.js/100px130?theme=simple">
-			</div>
-		</div>
+		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 			<div class="col col-12">
 				<form method="post" action="${config.rootPath}/memregistersubmit">

@@ -113,4 +113,13 @@ public class WriteController {
 		request.setAttribute("draft", draft);
 		return "preview";
 	}
+	
+	@RequestMapping("/publish")
+	public String publish(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic,
+			@RequestParam(value = "draft", required = false) String bmid) 
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.contentService.publishContent(u.getBM_ID(), topic);
+		return "redirect:/topic/" + topic;
+	}
 }

@@ -8,30 +8,22 @@
 <body>
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
-		<div class="row">
-			<div class="col col-12">
-				<img data-src="holder.js/100px130?theme=simple">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col col-12">
-				<%@ include file="static/navFunction.jsp"%>
-			</div>
-		</div>
+		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 			<div class="col col-9">
 				<div class="row">
 					<div class="col col-12">
 						<hr/>
-						<form>
+						<form  method="post" action="${config.rootPath}/write/publish">
 							<div class="form-group">
 								<label class="mr-sm-2">发布到</label>
-								<select class="custom-select mb-2 mr-sm-2 mb-sm-0">
+								<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="topic">
 									<c:forEach var="item" items="${cache.titleCache}">
 										<option value="${item.BM_ID}">${item.name}</option>
 									</c:forEach>
 								</select>
 							</div>
+							<input type="hidden" name="draft" value="${draft.BM_ID}"/>
 							<!-- <fieldset class="form-group row">
 								<legend class="col-form-legend col-sm-2">Radios</legend>
 								<div class="col-sm-10">
@@ -78,7 +70,7 @@
 				</div>
 			</div>
 			<div class="col col-3">
-				<%@ include file="myself.jsp"%>
+				<%@ include file="static/myself.jsp"%>
 			</div>
 		</div>
 	</div>
