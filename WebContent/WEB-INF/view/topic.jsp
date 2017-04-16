@@ -48,7 +48,7 @@
 				<div class="card-group">
 					<c:forEach var="item" items="${list}" begin="0" end="3">
 					<div class="card">
-						<img class="card-img-top" src="holder.js/100px160?theme=simple" alt="Card image cap">
+						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple">
 						<div class="card-block">
 							<h4 class="card-title">${item.title}</h4>
 							<p class="card-text">${item.intro}</p>
