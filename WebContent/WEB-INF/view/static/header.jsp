@@ -13,5 +13,6 @@
 <style type="text/css">
 .custom-max { width:100%}
 .custom-max-70-70 { max-width:70px;max-height:70px;}
+.custom-height-25 { height:25px;overflow:hidden}
 </style>
 </head>

@@ -37,19 +37,32 @@
 				<br/>
 				<div class="row">
 					<div class="col col-12">
-						<div class="card text-center">
-							<div class="card-header">
-								<ul class="nav nav-tabs card-header-tabs">
-									<li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-									<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-								</ul>
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#zzzz" role="tab">重要通知</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#dddd" role="tab">次要通知</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="zzzz" role="tabpanel">
+								<div class="card text-center border-top-0">
+									<div class="card-header">Featured</div>
+									<div class="card-block">
+										<h4 class="card-title">Special title treatment</h4>
+										<p class="card-text custom-height-25">重要通知很重要.</p>
+										<a href="#" class="btn btn-primary">Go somewhere</a>
+									</div>
+									<div class="card-footer text-muted">2 days ago</div>
+								</div>
 							</div>
-							<div class="card-block">
-								<h4 class="card-title">Special title treatment</h4>
-								<p class="card-text">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+							<div class="tab-pane fade" id="dddd" role="tabpanel">
+								<div class="card text-center border-top-0">
+									<div class="card-header">Featured</div>
+									<div class="card-block">
+										<h4 class="card-title">Special title treatment</h4>
+										<p class="card-text custom-height-25">次要通知不是那么次要.</p>
+										<a href="#" class="btn btn-primary">Go somewhere</a>
+									</div>
+									<div class="card-footer text-muted">2 days ago</div>
+								</div>
 							</div>
 						</div>
 					</div>
