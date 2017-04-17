@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="timeValues" class="java.util.Date"/>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="static/header.jsp"%>
@@ -56,86 +58,18 @@
 				<div class="row">
 					<div class="col col-12">
 						<div class="card-columns">
+							<c:forEach var="item" items="${cache.indexPageContentList}">
 							<div class="card">
-								<img class="card-img-top img-fluid" src="holder.js/100px160?theme=simple"
-									alt="Card image cap">
+								<c:if test="${not empty item.cover}">
+								<img class="card-img-top img-fluid custom-max" src="${item.cover}" data-src="holder.js/100px160?theme=simple">
+								</c:if>
 								<div class="card-block">
-									<h4 class="card-title">Card title that wraps to a new line</h4>
-									<p class="card-text">This is a longer card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
+									<h4 class="card-title text-truncate">${item.title}</h4>
+									<p class="card-text">${item.intro}</p>
+									<p class="card-text"><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
 								</div>
 							</div>
-							<div class="card p-3">
-								<blockquote class="card-block card-blockquote">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Integer posuere erat a ante.</p>
-									<footer>
-										<small class="text-muted"> Someone famous in <cite
-											title="Source Title">Source Title</cite>
-										</small>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="card">
-								<img class="card-img-top img-fluid" src="holder.js/100px160?theme=simple"
-									alt="Card image cap">
-								<div class="card-block">
-									<h4 class="card-title">Card title</h4>
-									<p class="card-text">This card has supporting text below as
-										a natural lead-in to additional content.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-							<div class="card card-inverse card-primary p-3 text-center">
-								<blockquote class="card-blockquote">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Integer posuere erat.</p>
-									<footer>
-										<small> Someone famous in <cite title="Source Title">Source
-												Title</cite>
-										</small>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="card text-center">
-								<div class="card-block">
-									<h4 class="card-title">Card title</h4>
-									<p class="card-text">This card has supporting text below as
-										a natural lead-in to additional content.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-							<div class="card">
-								<img class="card-img img-fluid" src="holder.js/100px160?theme=simple" alt="Card image">
-							</div>
-							<div class="card p-3 text-right">
-								<blockquote class="card-blockquote">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Integer posuere erat a ante.</p>
-									<footer>
-										<small class="text-muted"> Someone famous in <cite
-											title="Source Title">Source Title</cite>
-										</small>
-									</footer>
-								</blockquote>
-							</div>
-							<div class="card">
-								<div class="card-block">
-									<h4 class="card-title">Card title</h4>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										card has even longer content than the first to show that equal
-										height action.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

@@ -20,6 +20,7 @@ import blog.model.Content;
 import blog.model.Draft;
 import blog.model.User;
 import blog.startup.Config;
+import blog.startup.TCache;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Service
@@ -159,6 +160,9 @@ public class ContentService {
 		c = this.contentDao.save(c);
 		//删除草稿
 		this.draftDao.deleteDraftByUser(userid);
+		//放入缓存
+		TCache.getCache().indexPageContentList.add(0,c);
+		TCache.getCache().indexPageContentList.remove(TCache.getCache().indexPageContentList.size()-1);
 		return c;
 	}
 	
