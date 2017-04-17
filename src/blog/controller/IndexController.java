@@ -94,4 +94,16 @@ public class IndexController {
 		this.userService.registerUser(email, pw);
 		return "redirect:/index";
 	}
+	
+	
+	///////////////////////////管理员登录页////////////////////////////////////////
+	@RequestMapping("/adminindex")
+	public String adminLoginPage() {
+		return "admin/adminIndex";
+	}
+	
+	@RequestMapping("/adminloginsubmit")
+	public String adminLoginSubmit() {
+		return "redirect:/admin/index";
+	}
 }
