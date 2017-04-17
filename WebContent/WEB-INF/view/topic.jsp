@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="timeValues" class="java.util.Date"/>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="static/header.jsp"%>
@@ -67,13 +69,13 @@
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}" begin="4">
 					<li class="list-group-item">
-						<table>
-							<tr>
-								<td><img class="rounded float-left img-fluid custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple"/></td>
-								<td style="width:1rem"></td>
-								<td><p>${item.intro}</p></td>
-							</tr>
-						</table>
+						<div class="media">
+							<img class="d-flex align-self-center mr-3 custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple">
+							<div class="media-body">
+								<h5 class="mt-0">${item.title}</h5>
+								<p>${item.intro}<br/><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
+							</div>
+						</div> 
 					</li>
 					</c:forEach>
 				</ul>
