@@ -75,6 +75,7 @@
 		    });
 			$("#writeSave").click(function(e) {
 				e.preventDefault();
+				$('#postModal').modal('show');
 				var allContents = editor.serialize();
 				var elContent = allContents["editor"].value;
 				$.post("${config.rootPath}/write/savedraft", { title: $("#editorTitle").html(), content: elContent },
@@ -93,5 +94,16 @@
 		});
 	</script>
 	<%@ include file="static/footer.jsp"%>
+	<!-- Modal -->
+	<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="postModalLabel">提交中</h5>
+				</div>
+				<div class="modal-body text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true"></i></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
