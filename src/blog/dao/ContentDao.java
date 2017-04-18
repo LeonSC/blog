@@ -29,4 +29,15 @@ public class ContentDao {
 		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).order("-BM_TIME").asList(new FindOptions().limit(15));
 		return list;
 	}
+	
+	/**
+	 * 更具ID找文章
+	 * @param bmid
+	 * @return
+	 */
+	public Content getContentByBMID(String bmid)
+	{
+		Content c = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid).get();
+		return c;
+	}
 }

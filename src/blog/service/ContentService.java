@@ -177,4 +177,10 @@ public class ContentService {
 		List<Content> list = this.contentDao.getContentListByTopic(topic);
 		return list;
 	}
+	
+	public Content getContentByBMID(String bmid)
+	{
+		Content c = this.contentDao.getContentByBMID(bmid);
+		return c;
+	}
 }

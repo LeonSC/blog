@@ -26,4 +26,12 @@ public class TopicController {
 		request.setAttribute("list", list);
 		return "topic";
 	}
+	
+	@RequestMapping("/art/{bmid}")
+	public String art(HttpServletRequest request,@PathVariable String bmid)
+	{
+		Content c = this.contentService.getContentByBMID(bmid);
+		request.setAttribute("c", c);
+		return "topic";
+	}
 }
