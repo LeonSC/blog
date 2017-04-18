@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import blog.model.User;
+import blog.service.AdminService;
 import blog.service.UserService;
 import blog.startup.Config;
 
@@ -16,6 +17,8 @@ public class IndexController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AdminService adminService;
 	
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
@@ -99,11 +102,21 @@ public class IndexController {
 	///////////////////////////管理员登录页////////////////////////////////////////
 	@RequestMapping("/adminindex")
 	public String adminLoginPage() {
-		return "admin/adminIndex";
+		return "admin/adminLogin";
 	}
 	
 	@RequestMapping("/adminloginsubmit")
-	public String adminLoginSubmit() {
+	public String adminLoginSubmit(HttpServletRequest request, @RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "pw", required = false) String pw) {
+		User u = this.adminService.checkAdmin(email, pw);
+
+		if (u == null) {
+			request.getSession().setAttribute("error_wrongpw", "wrongpw");
+			return "redirect:/adminindex";
+		}
+
+		request.getSession().setAttribute(Config.adminAuth, u);
+
 		return "redirect:/admin/index";
 	}
 }

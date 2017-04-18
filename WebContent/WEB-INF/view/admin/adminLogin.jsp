@@ -53,9 +53,9 @@ body {
 		<form class="form-signin" method="post" action="${config.rootPath}/adminloginsubmit">
 			<h2 class="form-signin-heading">管理员登录</h2>
 			<label class="sr-only">Email address</label>
-			<input type="email" class="form-control" required autofocus>
+			<input type="email" class="form-control" required autofocus name="email">
 			<label class="sr-only">Password</label>
-			<input type="password" class="form-control" required>
+			<input type="password" class="form-control" required name="pw">
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
 		</form>
 	</div>

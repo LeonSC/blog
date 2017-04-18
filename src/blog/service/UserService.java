@@ -40,7 +40,7 @@ public class UserService {
 			return null;
 		}
 		pw=Tools.digestSha1(pw);
-		if(u.getPw().equals(pw))
+		if(pw.equals(u.getAdmin().getPassword()))
 		{			
 			return u;
 		}

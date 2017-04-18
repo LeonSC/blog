@@ -161,4 +161,5 @@ public class Config {
 	
 	//用于标识用户session
 	public final static String memAuth="memAuth";
+	public final static String adminAuth="adminAuth";
 }
