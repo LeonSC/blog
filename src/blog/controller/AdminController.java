@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import blog.service.AdminService;
 import blog.service.ImgService;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,7 +21,9 @@ public class AdminController {
 
 	@Autowired
 	private ImgService imgService;
-	
+	@Autowired
+	private AdminService adminService;
+
 	@RequestMapping("/index")
 	public String index() {
 		return "admin/index";
@@ -38,10 +42,12 @@ public class AdminController {
 		String name = file.getOriginalFilename();
 		String[] tmp = this.imgService.getAdminImgPhysicalPath(name);
 		try {
-			Thumbnails.of(file.getInputStream()).size(825, 160).toFile(tmp[1]);
+			Thumbnails.of(file.getInputStream()).sourceRegion(Positions.CENTER, 825, 160).size(825, 160)
+					.keepAspectRatio(false).toFile(tmp[1]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.adminService.saveCarousel(bmid, tmp[0], link);
 		return "redirect:/admin/indexsetting";
 	}
 }

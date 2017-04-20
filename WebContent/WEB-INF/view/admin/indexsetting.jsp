@@ -12,7 +12,7 @@
 				<small class="form-text text-muted">图片会被强制修改到 <mark>825</mark> X <mark>160</mark>.</small>
 			</div>
 			<div class="col col-4">
-				<form>
+				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
 						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
@@ -27,7 +27,7 @@
 				</form>
 			</div>
 			<div class="col col-4">
-				<form>
+				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
 						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
@@ -42,7 +42,7 @@
 				</form>
 			</div>
 			<div class="col col-4">
-				<form>
+				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
 						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
