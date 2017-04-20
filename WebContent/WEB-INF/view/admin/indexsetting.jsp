@@ -14,9 +14,14 @@
 			<div class="col col-4">
 				<form>
 					<div class="form-group">
-						<img data-src="holder.js/825x160?theme=simple">
-						<input type="file" class="form-control-file">
+						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<input type="file" class="form-control-file" name="name">
+						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[0].BM_ID}">
 						<small class="form-text text-muted">第一张轮播图.</small>
+					</div>
+					<div class="form-group">
+						<label>链接</label>
+						<input type="text" class="form-control" name="link" value="${cache.indexPageCarouselList[0].link}"/>
 					</div>
 					<button type="submit" class="btn btn-primary">修改</button>
 				</form>
@@ -24,9 +29,14 @@
 			<div class="col col-4">
 				<form>
 					<div class="form-group">
-						<img data-src="holder.js/825x160?theme=simple">
-						<input type="file" class="form-control-file">
-						<small class="form-text text-muted">第一张轮播图.</small>
+						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<input type="file" class="form-control-file" name="name">
+						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[1].BM_ID}">
+						<small class="form-text text-muted">第二张轮播图.</small>
+					</div>
+					<div class="form-group">
+						<label>链接</label>
+						<input type="text" class="form-control" name="link" value="${cache.indexPageCarouselList[1].link}"/>
 					</div>
 					<button type="submit" class="btn btn-primary">修改</button>
 				</form>
@@ -34,9 +44,14 @@
 			<div class="col col-4">
 				<form>
 					<div class="form-group">
-						<img data-src="holder.js/825x160?theme=simple">
-						<input type="file" class="form-control-file">
-						<small class="form-text text-muted">第一张轮播图.</small>
+						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<input type="file" class="form-control-file" name="name">
+						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[2].BM_ID}">
+						<small class="form-text text-muted">第三张轮播图.</small>
+					</div>
+					<div class="form-group">
+						<label>链接</label>
+						<input type="text" class="form-control" name="link" value="${cache.indexPageCarouselList[2].link}"/>
 					</div>
 					<button type="submit" class="btn btn-primary">修改</button>
 				</form>

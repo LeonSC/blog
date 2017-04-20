@@ -56,12 +56,17 @@ public class TCache {
 
 	private int initIndexPageCarouselList()
 	{
-		if(TCache.getCache().indexPageCarouselList == null)
+		TCache.getCache().indexPageCarouselList = MongoDBConnector.datastore.find(Carousel.class).order("BM_TIME").asList(new FindOptions().limit(3));
+		if(TCache.getCache().indexPageCarouselList.size()<3)
 		{
-			TCache.getCache().indexPageCarouselList = new ArrayList<>();
+			int rest = 3-TCache.getCache().indexPageCarouselList.size();
+			for(int i=0;i<rest;i++)
+			{
+				Carousel c = new Carousel();
+				MongoDBConnector.datastore.save(c);
+			}
+			TCache.getCache().indexPageCarouselList = MongoDBConnector.datastore.find(Carousel.class).order("BM_TIME").asList(new FindOptions().limit(3));
 		}
-		
-		TCache.getCache().indexPageCarouselList = MongoDBConnector.datastore.find(Carousel.class).asList();
 		return 0;
 	}
 	
@@ -73,13 +78,11 @@ public class TCache {
 	
 	private int initIndexPageContentList()
 	{
-		if(TCache.getCache().indexPageContentList ==null)
+		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-BM_TIME").asList(new FindOptions().limit(15));
+		if(TCache.getCache().indexPageContentList == null)
 		{
 			TCache.getCache().indexPageContentList = new ArrayList<>();
 		}
-		
-		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-BM_TIME").asList(new FindOptions().limit(15));
-		
 		return 0;
 	}
 	
