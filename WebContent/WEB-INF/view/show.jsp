@@ -14,9 +14,9 @@
 				<div class="row">
 					<div class="col col-12">
 						<h3>${c.title}</h3>
-						<small><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small>
+						<small><c:set target="${timeValues}" value="${c.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small>
 						<hr/>
-						
+						${c.content}
 					</div>
 				</div>
 			</div>

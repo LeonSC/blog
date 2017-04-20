@@ -49,7 +49,7 @@
 			<div class="col col-12">
 				<div class="card-group">
 					<c:forEach var="item" items="${list}" begin="0" end="3">
-					<div class="card">
+					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple">
 						<div class="card-block">
 							<h4 class="card-title">${item.title}</h4>
@@ -69,7 +69,7 @@
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}" begin="4">
 					<li class="list-group-item">
-						<div class="media">
+						<div class="media" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 							<img class="d-flex align-self-center mr-3 custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple">
 							<div class="media-body">
 								<h5 class="mt-0">${item.title}</h5>

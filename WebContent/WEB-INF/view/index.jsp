@@ -68,7 +68,7 @@
 					<div class="col col-12">
 						<div class="card-columns">
 							<c:forEach var="item" items="${cache.indexPageContentList}">
-							<div class="card">
+							<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 								<c:if test="${not empty item.cover}">
 								<img class="card-img-top img-fluid custom-max" src="${item.cover}" data-src="holder.js/100px160?theme=simple">
 								</c:if>

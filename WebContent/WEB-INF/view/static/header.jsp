@@ -15,4 +15,12 @@
 .custom-max-70-70 { max-width:70px;max-height:70px;}
 .custom-height-22 { height:22px;overflow:hidden}
 </style>
+<script>
+$(document).ready(function() {
+	$("div[data-href]").css("cursor","pointer");
+	$("div[data-href]").click(function(){
+		location.href = $(this).attr("data-href");
+	});
+});
+</script>
 </head>

@@ -32,6 +32,6 @@ public class TopicController {
 	{
 		Content c = this.contentService.getContentByBMID(bmid);
 		request.setAttribute("c", c);
-		return "topic";
+		return "show";
 	}
 }
