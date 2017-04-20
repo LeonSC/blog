@@ -8,6 +8,33 @@
 		<%@ include file="nav.jsp"%>
 		<div class="row">
 			<div class="col col-12">
+				<h4>通知设置设置</h4>
+				<small class="form-text text-muted">最多显示前四条.</small>
+			</div>
+			<div class="col col-12">
+				<form method="post" action="${config.rootPath}/admin/index/notice/submit">
+				<div class="form-group row">
+					<label class="col-2 col-form-label">标签(4字以内)</label>
+					<div class="col-10"><input class="form-control" type="text" name="bar"/></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">标题(15字以内)</label>
+					<div class="col-10"><input class="form-control" type="text" name="title"/></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">内容(150字以内)</label>
+					<div class="col-10"><input class="form-control" type="text" name="notice"/></div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">链接</label>
+					<div class="col-10"><input class="form-control" type="text" name="link"/></div>
+				</div>
+				</form>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col col-12">
 				<h4>首页轮播图设置</h4>
 				<small class="form-text text-muted">图片会被强制修改到 <mark>825</mark> X <mark>160</mark>.</small>
 			</div>

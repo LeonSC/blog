@@ -2,8 +2,6 @@ package blog.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +32,15 @@ public class AdminController {
 		return "admin/indexsetting";
 	}
 
+	/**
+	 * 保存首页轮播图
+	 * @param file
+	 * @param bmid
+	 * @param link
+	 * @return
+	 */
 	@RequestMapping("/index/carousel/submit")
-	public String carouselSetting(HttpServletRequest request,
-			@RequestParam(value = "img", required = false) MultipartFile file,
+	public String carouselSetting(@RequestParam(value = "img", required = false) MultipartFile file,
 			@RequestParam(value = "bmid", required = false) String bmid,
 			@RequestParam(value = "link", required = false) String link) {
 		String name = file.getOriginalFilename();
@@ -48,6 +52,24 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		this.adminService.saveCarousel(bmid, tmp[1], link);
+		return "redirect:/admin/index/setting";
+	}
+	
+	/**
+	 * 保存首页的重要通知
+	 * @param bar
+	 * @param title
+	 * @param notice
+	 * @param link
+	 * @return
+	 */
+	@RequestMapping("/index/notice/submit")
+	public String noticeSetting(@RequestParam(value = "bar", required = false) String bar,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "notice", required = false) String notice,
+			@RequestParam(value = "link", required = false) String link)
+	{
+		this.adminService.saveNotice(bar, title, notice, link);
 		return "redirect:/admin/index/setting";
 	}
 }

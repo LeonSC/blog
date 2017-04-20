@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import blog.dao.CarouselDao;
+import blog.dao.NoticeDao;
 import blog.dao.UserDao;
 import blog.model.Carousel;
+import blog.model.Notice;
 import blog.model.User;
 import blog.startup.SuperAdminConfig;
 import blog.startup.TCache;
@@ -18,6 +20,8 @@ public class AdminService {
 	private UserDao userDao;
 	@Autowired
 	private CarouselDao carouselDao;
+	@Autowired
+	private NoticeDao noticeDao;
 	
 	public User checkAdmin(String email,String pw)
 	{
@@ -68,6 +72,30 @@ public class AdminService {
 				cc.setImg(c.getImg());
 				cc.setLink(c.getLink());
 			}
+		}
+		return 0;
+	}
+	
+	/**
+	 * 替换首页提示
+	 * @param bar
+	 * @param title
+	 * @param notice
+	 * @param link
+	 * @return
+	 */
+	public int saveNotice(String bar, String title, String notice, String link)
+	{
+		Notice n = new Notice();
+		n.setBar(bar);
+		n.setTitle(title);
+		n.setNotice(notice);
+		n.setLink(link);
+		n = this.noticeDao.save(n);
+		TCache.getCache().indexPageNoticeList.add(0,n);
+		if(TCache.getCache().indexPageNoticeList.size()>4)
+		{
+			TCache.getCache().indexPageNoticeList.remove(4);
 		}
 		return 0;
 	}

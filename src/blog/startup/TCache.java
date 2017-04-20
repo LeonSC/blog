@@ -7,6 +7,7 @@ import org.mongodb.morphia.query.FindOptions;
 
 import blog.model.Carousel;
 import blog.model.Content;
+import blog.model.Notice;
 import blog.model.Title;
 
 public class TCache {
@@ -21,6 +22,7 @@ public class TCache {
 			TCache.tcache.initTitleCache();
 			TCache.tcache.initIndexPageContentList();
 			TCache.tcache.initIndexPageCarouselList();
+			TCache.tcache.initIndexPageNoticeList();
 		}
 		return TCache.tcache;
 	}
@@ -66,6 +68,20 @@ public class TCache {
 				MongoDBConnector.datastore.save(c);
 			}
 			TCache.getCache().indexPageCarouselList = MongoDBConnector.datastore.find(Carousel.class).order("BM_TIME").asList(new FindOptions().limit(3));
+		}
+		return 0;
+	}
+	
+	public List<Notice> indexPageNoticeList = null;
+	public List<Notice> getIndexPageNoticeList() {
+		return indexPageNoticeList;
+	}
+	private int initIndexPageNoticeList()
+	{
+		TCache.getCache().indexPageNoticeList = MongoDBConnector.datastore.find(Notice.class).order("-BM_TIME").asList(new FindOptions().limit(4));
+		if(TCache.getCache().indexPageNoticeList == null)
+		{
+			TCache.getCache().indexPageNoticeList = new ArrayList<>();
 		}
 		return 0;
 	}
