@@ -20,13 +20,13 @@
 								<li data-target="#carouselIndicators" data-slide-to="2"></li>
 							</ol>
 							<div class="carousel-inner" role="listbox">
-								<div class="carousel-item active">
+								<div class="carousel-item active" data-href="http://${cache.indexPageCarouselList[0].link}">
 									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[0].img}" data-src="holder.js/100px160?theme=simple">
 								</div>
-								<div class="carousel-item">
+								<div class="carousel-item" data-href="http://${cache.indexPageCarouselList[1].link}">
 									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[1].img}" data-src="holder.js/100px160?theme=simple">
 								</div>
-								<div class="carousel-item">
+								<div class="carousel-item" data-href="http://${cache.indexPageCarouselList[2].link}">
 									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[2].img}" data-src="holder.js/100px160?theme=simple">
 								</div>
 							</div>
