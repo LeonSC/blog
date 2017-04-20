@@ -41,7 +41,7 @@
 								<ul class="nav nav-tabs card-header-tabs">
 									<li class="nav-item"><a class="nav-link active" href="#zzzzz" data-toggle="tab" role="tab">Active</a></li>
 									<li class="nav-item"><a class="nav-link" href="#ddddd" data-toggle="tab" role="tab">Link</a></li>
-									<li class="nav-item"><a class="nav-link disabled" href="#ccccc">Disabled</a></li>
+									<li class="nav-item"><a class="nav-link" href="#ccccc" data-toggle="tab" role="tab">Disabled</a></li>
 								</ul>
 							</div>
 							<div class="tab-content">
@@ -53,6 +53,13 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="ddddd" role="tabpanel">
+									<div class="card-block">
+										<h4 class="card-title">Special title treatment</h4>
+										<p class="card-text custom-height-22">With supporting text below as a natural lead-in to additional content.</p>
+										<a href="#" class="btn btn-primary">Go somewhere</a>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="ccccc" role="tabpanel">
 									<div class="card-block">
 										<h4 class="card-title">Special title treatment</h4>
 										<p class="card-text custom-height-22">With supporting text below as a natural lead-in to additional content.</p>
