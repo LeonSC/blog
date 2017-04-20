@@ -11,4 +11,9 @@ public class AdminController {
 	public String index() {
 		return "admin/index";
 	}
+	
+	@RequestMapping("/index/setting")
+	public String indexsetting() {
+		return "admin/indexsetting";
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mongodb.morphia.query.FindOptions;
 
+import blog.model.Carousel;
 import blog.model.Content;
 import blog.model.Title;
 
@@ -19,6 +20,7 @@ public class TCache {
 			TCache.tcache=new TCache();
 			TCache.tcache.initTitleCache();
 			TCache.tcache.initIndexPageContentList();
+			TCache.tcache.initIndexPageCarouselList();
 		}
 		return TCache.tcache;
 	}
@@ -44,7 +46,28 @@ public class TCache {
 	}
 	
 	/**
+	 * 首页轮转图
+	 */
+	public List<Carousel> indexPageCarouselList = null;
+	
+	public List<Carousel> getIndexPageCarouselList() {
+		return indexPageCarouselList;
+	}
+
+	private int initIndexPageCarouselList()
+	{
+		if(TCache.getCache().indexPageCarouselList == null)
+		{
+			TCache.getCache().indexPageCarouselList = new ArrayList<>();
+		}
+		
+		TCache.getCache().indexPageCarouselList = MongoDBConnector.datastore.find(Carousel.class).asList();
+		return 0;
+	}
+	
+	/**
 	 * 首页的缓存
+	 * 下面的瀑布流
 	 */
 	public List<Content> indexPageContentList = null;
 	
@@ -55,7 +78,7 @@ public class TCache {
 			TCache.getCache().indexPageContentList = new ArrayList<>();
 		}
 		
-		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-BM_TIME").asList(new FindOptions().limit(10));
+		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-BM_TIME").asList(new FindOptions().limit(15));
 		
 		return 0;
 	}
