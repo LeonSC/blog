@@ -105,7 +105,7 @@ public class ImgService {
 	/**
 	 * 获取管理员上传图片的地址和访问地址
 	 * @param name
-	 * @return 1, 文件地址, 2, 访问地址
+	 * @return 0, 文件地址, 1, 访问地址
 	 */
 	public String[] getAdminImgPhysicalPath(String name) 
 	{

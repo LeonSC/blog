@@ -14,7 +14,7 @@
 			<div class="col col-4">
 				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
-						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<img class="img-fluid" src="${cache.indexPageCarouselList[0].img}" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
 						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[0].BM_ID}">
 						<small class="form-text text-muted">第一张轮播图.</small>
@@ -29,7 +29,7 @@
 			<div class="col col-4">
 				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
-						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<img class="img-fluid" src="${cache.indexPageCarouselList[1].img}" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
 						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[1].BM_ID}">
 						<small class="form-text text-muted">第二张轮播图.</small>
@@ -44,7 +44,7 @@
 			<div class="col col-4">
 				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/index/carousel/submit">
 					<div class="form-group">
-						<img class="img-fluid" data-src="holder.js/825x160?theme=simple">
+						<img class="img-fluid" src="${cache.indexPageCarouselList[2].img}" data-src="holder.js/825x160?theme=simple">
 						<input type="file" class="form-control-file" name="img">
 						<input type="hidden" name="bmid" value="${cache.indexPageCarouselList[2].BM_ID}">
 						<small class="form-text text-muted">第三张轮播图.</small>

@@ -43,11 +43,11 @@ public class AdminController {
 		String[] tmp = this.imgService.getAdminImgPhysicalPath(name);
 		try {
 			Thumbnails.of(file.getInputStream()).sourceRegion(Positions.CENTER, 825, 160).size(825, 160)
-					.keepAspectRatio(false).toFile(tmp[1]);
+					.keepAspectRatio(false).toFile(tmp[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.adminService.saveCarousel(bmid, tmp[0], link);
-		return "redirect:/admin/indexsetting";
+		this.adminService.saveCarousel(bmid, tmp[1], link);
+		return "redirect:/admin/index/setting";
 	}
 }
