@@ -46,7 +46,7 @@ public class ImgService {
 			file.mkdirs();
 		}
 		
-		rePath.append(File.separator).append(newPicName).toString();
+		rePath.append(File.separator).append(newPicName);
 
 		//访问路径
 		String visitPath = new StringBuffer(Config.getImgWebPath()).append(bmid).append("/")
@@ -100,5 +100,32 @@ public class ImgService {
 		}
 		
 		return tmp;
+	}
+	
+	/**
+	 * 获取管理员上传图片的地址和访问地址
+	 * @param name
+	 * @return 1, 文件地址, 2, 访问地址
+	 */
+	public String[] getAdminImgPhysicalPath(String name) 
+	{
+		String[] re={"",""};
+		String[] tmp = name.split("\\.");
+		String suffix = tmp[tmp.length - 1];
+		String newPicName = new StringBuffer(Tools.getID()).append(".").append(suffix).toString();
+		// 拼接需要返回的字符串信息
+		StringBuffer rePath = new StringBuffer(Config.getImgPhysicalPath()).append("admin");
+		//目录不存在就创建
+		File file = new File(rePath.toString());
+		if(!file.exists())
+		{
+			file.mkdirs();
+		}
+		rePath.append(File.separator).append(newPicName);
+		//访问路径
+		String visitPath = new StringBuffer(Config.getImgWebPath()).append("admin").append("/").append(newPicName).toString();
+		re[0] = rePath.toString();
+		re[1] = visitPath;
+		return re;
 	}
 }

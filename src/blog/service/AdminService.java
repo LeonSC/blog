@@ -40,4 +40,9 @@ public class AdminService {
 		}
 		return null;
 	}
+	
+	public int saveCarousel(String bmid, String visitPath, String link)
+	{
+		return 0;
+	}
 }
