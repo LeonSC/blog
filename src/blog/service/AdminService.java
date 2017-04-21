@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import blog.dao.CarouselDao;
 import blog.dao.NoticeDao;
 import blog.dao.UserDao;
+import blog.model.Auth;
 import blog.model.Carousel;
 import blog.model.Notice;
 import blog.model.User;
@@ -108,6 +109,48 @@ public class AdminService {
 	{
 		this.noticeDao.deleteByBMID(bmid);
 		TCache.getCache().indexPageNoticeList = this.noticeDao.findNoticeList(4);
+		return 0;
+	}
+	
+	/**
+	 * 修改用户的权限, 以及把普通用户设置成管理员
+	 * @param bmid
+	 * @param lv
+	 * @param auth
+	 * @param adminlv
+	 * @param adminvisible
+	 * @param admincreate
+	 * @param admindelete
+	 * @param adminmodify
+	 * @param adminfind
+	 * @return
+	 */
+	public int updateAdmin(String bmid, Integer lv, Integer auth, Integer adminlv, Integer adminvisible, Integer admincreate, Integer admindelete, Integer adminmodify, Integer adminfind)
+	{
+		User u = this.userDao.findUserByBMID(bmid);
+		if(u==null)
+		{
+			return -1;
+		}
+		u.setLv(lv);
+		if(u.getAdmin()==null&&auth==1)
+		{
+			u.setAdmin(new Auth());
+		}
+		if(u.getAdmin()!=null&&auth==0)
+		{
+			u.setAdmin(null);
+		}
+		if(u.getAdmin()!=null)
+		{
+			u.getAdmin().setLv(adminlv);
+			u.getAdmin().setVisible(adminvisible);
+			u.getAdmin().setCreate(admincreate);
+			u.getAdmin().setDelete(admindelete);
+			u.getAdmin().setModify(adminmodify);
+			u.getAdmin().setFind(adminfind);
+		}
+		this.userDao.editAuth(u);
 		return 0;
 	}
 }

@@ -53,13 +53,13 @@
 				<c:if test="${not empty user}">
 					<form method="post" action="${config.rootPath}/admin/account/update">
 						<div class="form-group row">
-							<label class="col-12 col-form-label">${user.username}/${user.nickname}</label>
+							<label class="col-12 col-form-label">${user.username} / ${user.nickname}</label>
 							<input type="hidden" value="${user.BM_ID}" name="bmid"/>
 						</div>
 						<div class="form-group row">
 							<label class="col-2 col-form-label">会员等级</label>
 							<div class="col-10">
-								<input class="form-control" type="number" value="${user.lv}">
+								<input class="form-control" type="number" value="${user.lv}" name="lv">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -77,37 +77,37 @@
 							<div class="form-group row">
 								<label class="col-2 col-form-label">管理员等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.lv}">
+									<input class="form-control" type="number" value="${user.admin.lv}" name="adminlv">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-2 col-form-label">可视等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.visible}">
+									<input class="form-control" type="number" value="${user.admin.visible}" name="adminvisible">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-2 col-form-label">创建等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.create}">
+									<input class="form-control" type="number" value="${user.admin.create}" name="admincreate">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-2 col-form-label">删除等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.delete}">
+									<input class="form-control" type="number" value="${user.admin.delete}" name="admindelete">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-2 col-form-label">修改等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.modify}">
+									<input class="form-control" type="number" value="${user.admin.modify}" name="adminmodify">
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-2 col-form-label">查找等级</label>
 								<div class="col-10">
-									<input class="form-control" type="number" value="${user.admin.find}">
+									<input class="form-control" type="number" value="${user.admin.find}" name="adminfind">
 								</div>
 							</div>
 						</c:if>

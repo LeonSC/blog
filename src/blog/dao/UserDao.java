@@ -3,6 +3,7 @@ package blog.dao;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateResults;
 import org.springframework.stereotype.Repository;
 
 import blog.model.Auth;
@@ -148,6 +149,19 @@ public class UserDao {
 		
 		MongoDBConnector.datastore.updateFirst(MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()), u,false);
 		
+		return MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()).get();
+	}
+	
+	/**
+	 * 权限编辑
+	 * @param u
+	 * @return
+	 */
+	public User editAuth(User u)
+	{
+		Query<User> updateQuery = MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID());
+		UpdateResults re = MongoDBConnector.datastore.updateFirst(updateQuery, u,false);
+		re.getUpdatedCount();
 		return MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()).get();
 	}
 	

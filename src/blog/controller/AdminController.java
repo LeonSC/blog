@@ -40,6 +40,7 @@ public class AdminController {
 
 	/**
 	 * 保存首页轮播图
+	 * 
 	 * @param file
 	 * @param bmid
 	 * @param link
@@ -60,9 +61,10 @@ public class AdminController {
 		this.adminService.saveCarousel(bmid, tmp[1], link);
 		return "redirect:/admin/index/setting";
 	}
-	
+
 	/**
 	 * 保存首页的重要通知
+	 * 
 	 * @param bar
 	 * @param title
 	 * @param notice
@@ -73,38 +75,42 @@ public class AdminController {
 	public String noticeSubmit(@RequestParam(value = "bar", required = false) String bar,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "notice", required = false) String notice,
-			@RequestParam(value = "link", required = false) String link)
-	{
+			@RequestParam(value = "link", required = false) String link) {
 		this.adminService.saveNotice(bar, title, notice, link);
 		return "redirect:/admin/index/setting";
 	}
-	
-	
+
 	/**
 	 * 删除
+	 * 
 	 * @param bmid
 	 * @return
 	 */
 	@RequestMapping("/index/notice/delete")
-	public String noticeDelete(@RequestParam(value = "bmid", required = false) String bmid)
-	{
+	public String noticeDelete(@RequestParam(value = "bmid", required = false) String bmid) {
 		this.adminService.deleteNoticeByBMID(bmid);
 		return "redirect:/admin/index/setting";
 	}
-	
+
 	@RequestMapping("/account")
-	public String account(HttpServletRequest request,@RequestParam(value = "email", required = false) String email)
-	{
+	public String account(HttpServletRequest request, @RequestParam(value = "email", required = false) String email) {
 		User u = this.userService.findUserByEmail(email);
 		request.setAttribute("user", u);
 		return "admin/account";
 	}
-	
+
 	@RequestMapping("/account/update")
-	public String accountUpdate(HttpServletRequest request,@RequestParam(value = "email", required = false) String email)
-	{
-		User u = this.userService.findUserByEmail(email);
-		request.setAttribute("user", u);
+	public String accountUpdate(HttpServletRequest request, 
+			@RequestParam(value = "bmid", required = false) String bmid,
+			@RequestParam(value = "lv", required = false) Integer lv,
+			@RequestParam(value = "auth", required = false) Integer auth,
+			@RequestParam(value = "adminlv", required = false) Integer adminlv,
+			@RequestParam(value = "adminvisible", required = false) Integer adminvisible,
+			@RequestParam(value = "admincreate", required = false) Integer admincreate,
+			@RequestParam(value = "admindelete", required = false) Integer admindelete,
+			@RequestParam(value = "adminmodify", required = false) Integer adminmodify,
+			@RequestParam(value = "adminfind", required = false) Integer adminfind) {
+
 		return "admin/account";
 	}
 }
