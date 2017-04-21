@@ -29,7 +29,18 @@
 					<label class="col-2 col-form-label">链接</label>
 					<div class="col-10"><input class="form-control" type="text" name="link"/></div>
 				</div>
+				<button type="submit" class="btn btn-primary">提交</button>
 				</form>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col col-12">
+				<ul class="list-group">
+					<c:forEach var="item" items="${cache.indexPageNoticeList}" begin="0" end="1">
+					<li class="list-group-item">Cras justo odio</li>
+					</c:forEach>
+				</ul>
 			</div>
 		</div>
 		<hr/>

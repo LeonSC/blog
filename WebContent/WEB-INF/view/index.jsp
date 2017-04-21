@@ -39,33 +39,45 @@
 						<div class="card text-center">
 							<div class="card-header">
 								<ul class="nav nav-tabs card-header-tabs">
-									<li class="nav-item"><a class="nav-link active" href="#zzzzz" data-toggle="tab" role="tab">Active</a></li>
-									<li class="nav-item"><a class="nav-link" href="#ddddd" data-toggle="tab" role="tab">Link</a></li>
-									<li class="nav-item"><a class="nav-link" href="#ccccc" data-toggle="tab" role="tab">Disabled</a></li>
+									<c:forEach var="item" items="${cache.indexPageNoticeList}" varStatus="i">
+									<c:if test="${i.first}">
+									<li class="nav-item"><a class="nav-link active" href="#tab${item.BM_ID}" data-toggle="tab" role="tab">${item.bar}</a></li>
+									</c:if>
+									<c:if test="${not i.first}">
+									<li class="nav-item"><a class="nav-link" href="#tab${item.BM_ID}" data-toggle="tab" role="tab">${item.bar}</a></li>
+									</c:if>
+									</c:forEach>
 								</ul>
 							</div>
 							<div class="tab-content">
-								<div class="tab-pane fade show active" id="zzzzz" role="tabpanel">
+								<c:forEach var="item" items="${cache.indexPageNoticeList}" varStatus="i">
+								<c:if test="${i.first}">
+								<div class="tab-pane fade show active" id="tab${item.BM_ID}" role="tabpanel">
 									<div class="card-block">
-										<h4 class="card-title">Special title treatment</h4>
-										<p class="card-text custom-height-22">With supporting text below as a natural lead-in to additional content.</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
+										<c:if test="${not empty item.title}">
+										<h4 class="card-title">${item.title}</h4>
+										</c:if>
+										<p class="card-text custom-height-22">${item.notice}</p>
+										<c:if test="${not empty item.link}">
+										<a href="http://${item.link}" class="btn btn-primary btn-sm">点击查看</a>
+										</c:if>
 									</div>
 								</div>
-								<div class="tab-pane fade" id="ddddd" role="tabpanel">
+								</c:if>
+								<c:if test="${not i.first}">
+								<div class="tab-pane fade" id="tab${item.BM_ID}" role="tabpanel">
 									<div class="card-block">
-										<h4 class="card-title">Special title treatment</h4>
-										<p class="card-text custom-height-22">With supporting text below as a natural lead-in to additional content.</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
+										<c:if test="${not empty item.title}">
+										<h4 class="card-title">${item.title}</h4>
+										</c:if>
+										<p class="card-text custom-height-22">${item.notice}</p>
+										<c:if test="${not empty item.link}">
+										<a href="http://${item.link}" class="btn btn-primary btn-sm">点击查看</a>
+										</c:if>
 									</div>
 								</div>
-								<div class="tab-pane fade" id="ccccc" role="tabpanel">
-									<div class="card-block">
-										<h4 class="card-title">Special title treatment</h4>
-										<p class="card-text custom-height-22">With supporting text below as a natural lead-in to additional content.</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
-									</div>
-								</div>
+								</c:if>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
