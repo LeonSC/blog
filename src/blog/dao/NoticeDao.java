@@ -1,6 +1,10 @@
 package blog.dao;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.FindOptions;
+import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Repository;
 
 import blog.model.Notice;
@@ -30,5 +34,22 @@ public class NoticeDao {
 		MongoDBConnector.datastore.save(notice);
 		ObjectId id = notice.getId();
 		return MongoDBConnector.datastore.get(Notice.class,id);
+	}
+	
+	
+	public int deleteByBMID(String bmid)
+	{
+		if(bmid==null)
+		{
+			return 0;
+		}
+		Query<Notice> query=MongoDBConnector.datastore.createQuery(Notice.class).field("BM_ID").equal(bmid);
+		MongoDBConnector.datastore.delete(query);
+		return 0;
+	}
+	
+	public List<Notice> findNoticeList(int size)
+	{
+		return MongoDBConnector.datastore.find(Notice.class).order("-BM_TIME").asList(new FindOptions().limit(size));
 	}
 }

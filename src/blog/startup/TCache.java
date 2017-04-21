@@ -79,10 +79,6 @@ public class TCache {
 	private int initIndexPageNoticeList()
 	{
 		TCache.getCache().indexPageNoticeList = MongoDBConnector.datastore.find(Notice.class).order("-BM_TIME").asList(new FindOptions().limit(4));
-		if(TCache.getCache().indexPageNoticeList == null)
-		{
-			TCache.getCache().indexPageNoticeList = new ArrayList<>();
-		}
 		return 0;
 	}
 	
@@ -95,10 +91,6 @@ public class TCache {
 	private int initIndexPageContentList()
 	{
 		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-BM_TIME").asList(new FindOptions().limit(15));
-		if(TCache.getCache().indexPageContentList == null)
-		{
-			TCache.getCache().indexPageContentList = new ArrayList<>();
-		}
 		return 0;
 	}
 	

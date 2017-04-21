@@ -37,8 +37,13 @@
 		<div class="row">
 			<div class="col col-12">
 				<ul class="list-group">
-					<c:forEach var="item" items="${cache.indexPageNoticeList}" begin="0" end="1">
-					<li class="list-group-item">Cras justo odio</li>
+					<c:forEach var="item" items="${cache.indexPageNoticeList}">
+					<li class="list-group-item list-group-item-action flex-column align-items-start">
+					<h4 class="card-title">${item.title}</h4>
+					<h5>${item.notice}</h5>
+					<h5>http://${item.link}</h5>
+					<a href="${config.rootPath}/admin/index/notice/delete?bmid=${item.BM_ID}" class="btn btn-primary btn-sm">删除</a>
+					</li>
 					</c:forEach>
 				</ul>
 			</div>

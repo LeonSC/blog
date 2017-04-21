@@ -92,11 +92,22 @@ public class AdminService {
 		n.setNotice(notice);
 		n.setLink(link);
 		n = this.noticeDao.save(n);
+		if(n==null)
+		{
+			return -1;
+		}
 		TCache.getCache().indexPageNoticeList.add(0,n);
 		if(TCache.getCache().indexPageNoticeList.size()>4)
 		{
 			TCache.getCache().indexPageNoticeList.remove(4);
 		}
+		return 0;
+	}
+	
+	public int deleteNoticeByBMID(String bmid)
+	{
+		this.noticeDao.deleteByBMID(bmid);
+		TCache.getCache().indexPageNoticeList = this.noticeDao.findNoticeList(4);
 		return 0;
 	}
 }

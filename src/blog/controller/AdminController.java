@@ -64,12 +64,25 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/index/notice/submit")
-	public String noticeSetting(@RequestParam(value = "bar", required = false) String bar,
+	public String noticeSubmit(@RequestParam(value = "bar", required = false) String bar,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "notice", required = false) String notice,
 			@RequestParam(value = "link", required = false) String link)
 	{
 		this.adminService.saveNotice(bar, title, notice, link);
+		return "redirect:/admin/index/setting";
+	}
+	
+	
+	/**
+	 * 删除
+	 * @param bmid
+	 * @return
+	 */
+	@RequestMapping("/index/notice/delete")
+	public String noticeDelete(@RequestParam(value = "bmid", required = false) String bmid)
+	{
+		this.adminService.deleteNoticeByBMID(bmid);
 		return "redirect:/admin/index/setting";
 	}
 }
