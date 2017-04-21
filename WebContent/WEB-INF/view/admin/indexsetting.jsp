@@ -22,7 +22,7 @@
 					<div class="col-10"><input class="form-control" type="text" name="title"/></div>
 				</div>
 				<div class="form-group row">
-					<label class="col-2 col-form-label">内容(150字以内)</label>
+					<label class="col-2 col-form-label">内容(150字以内)*</label>
 					<div class="col-10"><input class="form-control" type="text" name="notice"/></div>
 				</div>
 				<div class="form-group row">

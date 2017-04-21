@@ -10,7 +10,7 @@ public class User extends BaseModel{
 	private String nickname;
 	private String pw;
 	
-	private Integer lv;//0, 无会员, 1, 初级会员
+	private Integer lv=0;//0, 无会员, 1, 初级会员
 	
 	private Auth admin;
 	//由于管理员只是附着在普通用户上的权限系统, 所以在普通会员登录的时候, 会查找他的管理员属性.

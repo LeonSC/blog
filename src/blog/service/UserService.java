@@ -161,4 +161,18 @@ public class UserService {
 		}
 		return this.userDao.findUserByBMID(bmid);
 	}
+	
+	/**
+	 * 通过EMAIL查找用户
+	 * @param email
+	 * @return
+	 */
+	public User findUserByEmail(String email)
+	{
+		if(email==null)
+		{
+			return null;
+		}
+		return this.userDao.findByUserName(email);
+	}
 }

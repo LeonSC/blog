@@ -5,6 +5,7 @@
 		<ul class="nav">
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/index">首页</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/index/setting">首页设置</a></li>
+			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/account">会员管理</a></li>
 		</ul>
 	</div>
 </div>

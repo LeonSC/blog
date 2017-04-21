@@ -9,11 +9,11 @@ import org.mongodb.morphia.annotations.NotSaved;
 @NotSaved
 public class Auth {
 
-	private Integer lv=0;//任意人可以浏览
+	private Integer lv=10;//任意人可以浏览
 	
 	private String password;
 
-	private Integer visible=0;//0为通用
+	private Integer visible=999;//可视等级, 小于文档等级不现实. 这个数大于文档的阅读权限才显示
 	
 	private Integer create=10;
 	private Integer delete=100;

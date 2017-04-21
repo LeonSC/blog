@@ -2,14 +2,18 @@ package blog.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import blog.model.User;
 import blog.service.AdminService;
 import blog.service.ImgService;
+import blog.service.UserService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
@@ -21,6 +25,8 @@ public class AdminController {
 	private ImgService imgService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/index")
 	public String index() {
@@ -84,5 +90,21 @@ public class AdminController {
 	{
 		this.adminService.deleteNoticeByBMID(bmid);
 		return "redirect:/admin/index/setting";
+	}
+	
+	@RequestMapping("/account")
+	public String account(HttpServletRequest request,@RequestParam(value = "email", required = false) String email)
+	{
+		User u = this.userService.findUserByEmail(email);
+		request.setAttribute("user", u);
+		return "admin/account";
+	}
+	
+	@RequestMapping("/account/update")
+	public String accountUpdate(HttpServletRequest request,@RequestParam(value = "email", required = false) String email)
+	{
+		User u = this.userService.findUserByEmail(email);
+		request.setAttribute("user", u);
+		return "admin/account";
 	}
 }

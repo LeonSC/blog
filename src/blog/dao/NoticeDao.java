@@ -29,7 +29,23 @@ public class NoticeDao {
 		}
 		if(notice.getBar()==null||notice.getBar().isEmpty())
 		{
-			notice.setBar(notice.getTitle()==null?notice.getNotice().substring(0,3)+"..":(notice.getTitle().length()>4?notice.getTitle().substring(0,3)+"..":notice.getTitle()));
+			String bar = "";
+			if(notice.getTitle()==null||notice.getTitle().isEmpty())
+			{
+				bar = notice.getNotice().substring(0,3)+"..";
+			}
+			else
+			{
+				if(notice.getTitle().length()>4)
+				{
+					bar = notice.getTitle().substring(0,3)+"..";
+				}
+				else
+				{
+					bar = notice.getTitle();
+				}
+			}
+			notice.setBar(bar);
 		}
 		MongoDBConnector.datastore.save(notice);
 		ObjectId id = notice.getId();
