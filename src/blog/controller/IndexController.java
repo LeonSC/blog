@@ -105,6 +105,12 @@ public class IndexController {
 		return "admin/adminLogin";
 	}
 	
+	@RequestMapping("/adminlogoutsubmit")
+	public String memLogoutSubmit(HttpServletRequest request) {
+		request.getSession().setAttribute(Config.adminAuth, null);
+		return "redirect:/adminloginsubmit";
+	}
+	
 	@RequestMapping("/adminloginsubmit")
 	public String adminLoginSubmit(HttpServletRequest request, @RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "pw", required = false) String pw) {

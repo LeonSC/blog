@@ -43,5 +43,9 @@
 			<mvc:mapping path="/write/**" />
 			<bean class="blog.interceptor.UserInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="blog.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
