@@ -41,7 +41,7 @@
 			<div class="card-footer">
 				<ul class="nav nav-pills card-header-pills">
 					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/write">写</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">信</a></li>
+					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/personal/index">我</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">藏</a></li>
 					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/memlogoutsubmit">出</a></li>
 				</ul>
