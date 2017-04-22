@@ -53,7 +53,7 @@
 								<c:forEach var="item" items="${cache.indexPageNoticeList}" varStatus="i">
 								<c:if test="${i.first}">
 								<div class="tab-pane fade show active" id="tab${item.BM_ID}" role="tabpanel">
-									<div class="card-block">
+									<div class="card-block custom-height-66">
 										<c:if test="${not empty item.title}">
 										<h4 class="card-title">${item.title}</h4>
 										</c:if>
@@ -66,7 +66,7 @@
 								</c:if>
 								<c:if test="${not i.first}">
 								<div class="tab-pane fade" id="tab${item.BM_ID}" role="tabpanel">
-									<div class="card-block">
+									<div class="card-block custom-height-66">
 										<c:if test="${not empty item.title}">
 										<h4 class="card-title">${item.title}</h4>
 										</c:if>

@@ -13,7 +13,8 @@
 <style type="text/css">
 .custom-max { width:100%}
 .custom-max-70-70 { max-width:70px;max-height:70px;}
-.custom-height-22 { height:22px;overflow:hidden}
+.custom-height-22 { height:1.5rem;overflow:hidden}
+.custom-height-66 { height:9.1rem;overflow:hidden}
 </style>
 <script>
 $(document).ready(function() {
