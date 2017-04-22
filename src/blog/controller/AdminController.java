@@ -110,7 +110,7 @@ public class AdminController {
 			@RequestParam(value = "admindelete", required = false) Integer admindelete,
 			@RequestParam(value = "adminmodify", required = false) Integer adminmodify,
 			@RequestParam(value = "adminfind", required = false) Integer adminfind) {
-
+		this.adminService.updateAdminAuth(bmid, lv, auth, adminlv, adminvisible, admincreate, admindelete, adminmodify, adminfind);
 		return "admin/account";
 	}
 }

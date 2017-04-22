@@ -125,30 +125,30 @@ public class AdminService {
 	 * @param adminfind
 	 * @return
 	 */
-	public int updateAdmin(String bmid, Integer lv, Integer auth, Integer adminlv, Integer adminvisible, Integer admincreate, Integer admindelete, Integer adminmodify, Integer adminfind)
+	public int updateAdminAuth(String bmid, Integer lv, Integer auth, Integer adminlv, Integer adminvisible, Integer admincreate, Integer admindelete, Integer adminmodify, Integer adminfind)
 	{
 		User u = this.userDao.findUserByBMID(bmid);
 		if(u==null)
 		{
 			return -1;
 		}
-		u.setLv(lv);
-		if(u.getAdmin()==null&&auth==1)
+		if(lv!=null){u.setLv(lv);}
+		if(u.getAdmin()==null&&auth!=null&&auth==1)
 		{
 			u.setAdmin(new Auth());
 		}
-		if(u.getAdmin()!=null&&auth==0)
+		if(u.getAdmin()!=null&&auth!=null&&auth==0)
 		{
 			u.setAdmin(null);
 		}
 		if(u.getAdmin()!=null)
 		{
-			u.getAdmin().setLv(adminlv);
-			u.getAdmin().setVisible(adminvisible);
-			u.getAdmin().setCreate(admincreate);
-			u.getAdmin().setDelete(admindelete);
-			u.getAdmin().setModify(adminmodify);
-			u.getAdmin().setFind(adminfind);
+			if(adminlv!=null){u.getAdmin().setLv(adminlv);}
+			if(adminvisible!=null){u.getAdmin().setVisible(adminvisible);}
+			if(admincreate!=null){u.getAdmin().setCreate(admincreate);}
+			if(admindelete!=null){u.getAdmin().setDelete(admindelete);}
+			if(adminmodify!=null){u.getAdmin().setModify(adminmodify);}
+			if(adminfind!=null){u.getAdmin().setFind(adminfind);}
 		}
 		this.userDao.editAuth(u);
 		return 0;
