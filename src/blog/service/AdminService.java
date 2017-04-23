@@ -40,12 +40,16 @@ public class AdminService {
 		{
 			return null;
 		}
-		if(u.getPw()==null)
+		if(u.getAdmin()==null)
 		{
 			return null;
 		}
-		if(u.getPw().equals(pw))
+		if(u.getAdmin().getPassword()==null)
 		{			
+			return null;
+		}
+		if(u.getAdmin().getPassword().equals(pw))
+		{
 			return u;
 		}
 		return null;
