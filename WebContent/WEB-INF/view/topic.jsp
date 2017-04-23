@@ -11,6 +11,7 @@
 		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 		<div class="col col-9">
+		<!-- 
 		<div class="row">
 			<div class="col col-12">
 				<ul class="list-group">
@@ -45,6 +46,7 @@
 			</div>
 		</div>
 		<br/>
+		 -->
 		<div class="row">
 			<div class="col col-12">
 				<div class="card-group">
@@ -69,13 +71,15 @@
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}" begin="4">
 					<li class="list-group-item">
-						<div class="media" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
-							<img class="d-flex align-self-center mr-3 custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple">
-							<div class="media-body">
-								<h5 class="mt-0">${item.title}</h5>
-								<p>${item.intro}<br/><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
-							</div>
-						</div> 
+						<table>
+							<tr>
+								<td><img class="rounded float-left custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple&text=S&random=yes"/></td>
+								<td style="width:1rem"></td>
+								<td><h5 class="mt-0">${item.title}</h5>
+								<h6 style="margin-bottom:0">${item.intro}</h6>
+								<small><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></td>
+							</tr>
+						</table>
 					</li>
 					</c:forEach>
 				</ul>

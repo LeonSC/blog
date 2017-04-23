@@ -32,12 +32,12 @@ public class PersonalController {
 	}
 	
 	@RequestMapping("/headericon/update")
-	public String carouselSetting(HttpServletRequest request,@RequestParam(value = "img", required = false) MultipartFile file) {
+	public String userHeaderIconUpdate(HttpServletRequest request,@RequestParam(value = "img", required = false) MultipartFile file) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		String name = file.getOriginalFilename();
 		String[] tmp = this.imgService.getUserHeaderIconPhysicalPath(u.getBM_ID(),name);
 		try {
-			Thumbnails.of(file.getInputStream()).sourceRegion(Positions.CENTER, 825, 160).size(200, 200)
+			Thumbnails.of(file.getInputStream()).sourceRegion(Positions.CENTER, 200, 200).size(200, 200)
 					.keepAspectRatio(false).toFile(tmp[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,4 +47,12 @@ public class PersonalController {
 		return "redirect:/personal/index";
 	}
 	
+	@RequestMapping("/info/update")
+	public String userInfo(HttpServletRequest request,@RequestParam(value = "gender", required = false) Integer gender) 
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		u = this.userService.updateUserInfo(u.getBM_ID(), gender);
+		request.getSession().setAttribute(Config.memAuth, u);
+		return "redirect:/personal/index";
+	}
 }

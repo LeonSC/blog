@@ -4,7 +4,7 @@
 	<div class="col col-12">
 		<c:if test="${empty memAuth}">
 		<div class="card">
-			<img class="card-img-top" src="holder.js/100px200?theme=simple" alt="Card image cap">
+			<img class="card-img-top" src="holder.js/100px200?theme=simple&text=Hello" alt="Card image cap">
 			<div class="card-block">
 				<form method="post" action="${config.rootPath}/memloginsubmit">
 					<div class="form-group">
@@ -31,8 +31,7 @@
 		</c:if>
 		<c:if test="${not empty memAuth}">
 		<div class="card">
-			<img class="card-img-top" src="holder.js/100px200?theme=simple"
-				alt="Card image cap">
+			<img class="card-img-top" src="${memAuth.headerIcon}" data-src="holder.js/100px200?theme=simple">
 			<div class="card-block">
 				<h4 class="card-title">${memAuth.nickname}</h4>
 				<h6 class="card-title"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${memAuth.username}</h6>

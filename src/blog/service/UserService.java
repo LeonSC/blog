@@ -186,4 +186,17 @@ public class UserService {
 		u = this.userDao.editUser(u);
 		return u;
 	}
+	
+	public User updateUserInfo(String bmid, Integer gender)
+	{
+		if(gender==null)
+		{
+			gender=0;
+		}
+		User u = new User();
+		u.setBM_ID(bmid);
+		u.setGender(gender);
+		u = this.userDao.editUser(u);
+		return u;
+	}
 }

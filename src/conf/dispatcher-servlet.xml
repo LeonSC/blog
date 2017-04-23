@@ -41,6 +41,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/write/**" />
+			<mvc:mapping path="/personal/**" />
 			<bean class="blog.interceptor.UserInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
