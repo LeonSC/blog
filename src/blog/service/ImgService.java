@@ -128,4 +128,32 @@ public class ImgService {
 		re[1] = visitPath;
 		return re;
 	}
+	
+	
+	/**
+	 * 获取用户修改头像的路径
+	 * @param name
+	 * @return 0, 文件地址, 1, 访问地址
+	 */
+	public String[] getUserHeaderIconPhysicalPath(String bmid, String name) 
+	{
+		String[] re={"",""};
+		String[] tmp = name.split("\\.");
+		String suffix = tmp[tmp.length - 1];
+		String newPicName = new StringBuffer(Tools.getID()).append(".").append(suffix).toString();
+		// 拼接需要返回的字符串信息
+		StringBuffer rePath = new StringBuffer(Config.getImgPhysicalPath()).append(bmid);
+		//目录不存在就创建
+		File file = new File(rePath.toString());
+		if(!file.exists())
+		{
+			file.mkdirs();
+		}
+		rePath.append(File.separator).append(newPicName);
+		//访问路径
+		String visitPath = new StringBuffer(Config.getImgWebPath()).append(bmid).append("/").append(newPicName).toString();
+		re[0] = rePath.toString();
+		re[1] = visitPath;
+		return re;
+	}
 }

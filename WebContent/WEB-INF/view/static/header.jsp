@@ -10,6 +10,7 @@
 <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
 <link rel="stylesheet" href="${config.rootPath}/public/medium-editor-insert-plugin-2.4.0/medium-editor-insert-plugin-frontend.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 .custom-max { width:100%}
 .custom-max-70-70 { max-width:70px;max-height:70px;}

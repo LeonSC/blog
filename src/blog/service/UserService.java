@@ -175,4 +175,15 @@ public class UserService {
 		}
 		return this.userDao.findByUserName(email);
 	}
+	
+	
+	///////////////////////////update//////////////////////////////////////////
+	public User updateHeaderIcon(String bmid, String visitPath)
+	{
+		User u = new User();
+		u.setBM_ID(bmid);
+		u.setHeaderIcon(visitPath);
+		u = this.userDao.editUser(u);
+		return u;
+	}
 }

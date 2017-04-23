@@ -35,15 +35,16 @@
 				alt="Card image cap">
 			<div class="card-block">
 				<h4 class="card-title">${memAuth.nickname}</h4>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
+				<h6 class="card-title"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${memAuth.username}</h6>
+				<h6 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> ${memAuth.lv}</h6>
+				<p class="card-text">${memAuth.sign}</p>
 			</div>
 			<div class="card-footer">
 				<ul class="nav nav-pills card-header-pills">
-					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/write">写</a></li>
-					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/personal/index">我</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">藏</a></li>
-					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/memlogoutsubmit">出</a></li>
+					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/write"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/personal/index"><i class="fa fa-id-card" aria-hidden="true"></i></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
+					<li class="nav-item"><a class="nav-link" href="${config.rootPath}/memlogoutsubmit"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 				</ul>
 			</div>
 		</div>

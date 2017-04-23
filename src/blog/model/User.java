@@ -19,6 +19,8 @@ public class User extends BaseModel{
 	private String headerIcon;
 	private Integer gender;//0, 保密, 1, 男, 2, 女
 	
+	private String sign = "";
+	
 	public String getUsername() {
 		return username;
 	}
@@ -73,5 +75,13 @@ public class User extends BaseModel{
 
 	public void setGender(Integer gender) {
 		this.gender = gender;
+	}
+
+	public String getSign() {
+		return sign;
+	}
+
+	public void setSign(String sign) {
+		this.sign = sign;
 	}
 }
