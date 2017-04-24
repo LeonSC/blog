@@ -41,7 +41,7 @@
 													<input class="form-control" type="email" name="email" />
 												</div>
 											</div>
-											<button type="submit" class="btn btn-primary">提交</button>
+											<button type="submit" class="btn btn-primary btn-sm">提交</button>
 										</form>
 										<p class="card-text">${item.intro}</p>
 									</div>

@@ -12,8 +12,6 @@ import blog.model.User;
 import blog.startup.MongoDBConnector;
 import blog.startup.Tools;
 
-
-
 @Repository
 public class UserDao {
 

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.NotSaved;
 
 @Entity("title")
 public class Topic extends BaseModel{
@@ -16,7 +15,7 @@ public class Topic extends BaseModel{
 	
 	private Background background;
 	
-	private Map<User, Auth> manager=new HashMap<>();
+	private Map<String, Manager> manager=new HashMap<>();
 	//人, 可用权限, 如果此人被查找在本列表中, 此人将使用本列表的权限
 	//0, BMID, 1, 用户名
 	
@@ -46,10 +45,10 @@ public class Topic extends BaseModel{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	public Map<User, Auth> getManager() {
+	public Map<String, Manager> getManager() {
 		return manager;
 	}
-	public void setManager(Map<User, Auth> manager) {
+	public void setManager(Map<String, Manager> manager) {
 		this.manager = manager;
 	}
 	public Background getBackground() {
@@ -63,18 +62,5 @@ public class Topic extends BaseModel{
 	}
 	public void setAuth(Auth auth) {
 		this.auth = auth;
-	}
-	
-	@NotSaved
-	public class User  extends BaseModel {
-		private String username = "";
-
-		public String getUsername() {
-			return username;
-		}
-
-		public void setUsername(String username) {
-			this.username = username;
-		}
 	}
 }
