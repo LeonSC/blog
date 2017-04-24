@@ -187,7 +187,15 @@ public class UserService {
 		return u;
 	}
 	
-	public User updateUserInfo(String bmid, Integer gender)
+	/**
+	 * 
+	 * @param bmid
+	 * @param nickname
+	 * @param gender
+	 * @param sign
+	 * @return
+	 */
+	public User updateUserInfo(String bmid,String nickname, Integer gender, String sign)
 	{
 		if(gender==null)
 		{
@@ -195,7 +203,13 @@ public class UserService {
 		}
 		User u = new User();
 		u.setBM_ID(bmid);
+		u.setNickname(nickname);
 		u.setGender(gender);
+		if(sign!=null&&sign.length()>50)
+		{
+			sign = sign.substring(0, 50)+"..";
+		}
+		u.setSign(sign);
 		u = this.userDao.editUser(u);
 		return u;
 	}

@@ -146,6 +146,11 @@ public class UserDao {
 		{
 			u.setNickname(user.getNickname());
 		}
+		if(user.getSign()!=null&&!user.getSign().isEmpty())
+		{
+			u.setSign(user.getSign());
+		}
+		
 		
 		MongoDBConnector.datastore.updateFirst(MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()), u,false);
 		

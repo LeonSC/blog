@@ -27,6 +27,10 @@
 				<div class="row">
 					<div class="col col-12">
 						<form method="post" action="${config.rootPath}/personal/info/update">
+							<div class="form-group">
+								<label>昵称</label> 
+								<input type="text" class="form-control" name="nickname" value="${memAuth.nickname}"> 
+							</div>
 							<fieldset class="form-group">
 								<legend>性别设定</legend>
 								<div class="form-check">
@@ -54,6 +58,10 @@
 									</c:if>
 								</div>
 							</fieldset>
+							<div class="form-group">
+								<label>签名</label> 
+								<input type="text" class="form-control" name="sign" value="${memAuth.sign}"> 
+							</div>
 							<button type="submit" class="btn btn-primary">提交</button>
 						</form>
 					</div>
