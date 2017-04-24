@@ -113,4 +113,16 @@ public class AdminController {
 		this.adminService.updateAdminAuth(bmid, lv, auth, adminlv, adminvisible, admincreate, admindelete, adminmodify, adminfind);
 		return "admin/account";
 	}
+	
+	@RequestMapping("/topic")
+	public String topic()
+	{
+		return "admin/topic";
+	}
+	
+	@RequestMapping("/topic/addmanager")
+	public String topicAddManager(@RequestParam(value = "email", required = false) String email)
+	{
+		return "redirect:/admin/topic";
+	}
 }

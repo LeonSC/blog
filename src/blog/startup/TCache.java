@@ -8,7 +8,7 @@ import org.mongodb.morphia.query.FindOptions;
 import blog.model.Carousel;
 import blog.model.Content;
 import blog.model.Notice;
-import blog.model.Title;
+import blog.model.Topic;
 
 public class TCache {
 	private static TCache tcache;
@@ -30,20 +30,20 @@ public class TCache {
 	/**
 	 * 标题列表
 	 */
-	public List<Title> titleCache = null;
+	public List<Topic> titleCache = null;
 	
 	private int initTitleCache()
 	{
 		if(TCache.getCache().titleCache ==null)
 		{
-			TCache.getCache().titleCache = new ArrayList<Title>();
+			TCache.getCache().titleCache = new ArrayList<Topic>();
 		}
-		TCache.getCache().titleCache = MongoDBConnector.datastore.find(Title.class).order("order").asList();
+		TCache.getCache().titleCache = MongoDBConnector.datastore.find(Topic.class).order("order").asList();
 		
 		return 0;
 	}
 
-	public List<Title> getTitleCache() {
+	public List<Topic> getTitleCache() {
 		return titleCache;
 	}
 	

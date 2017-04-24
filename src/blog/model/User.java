@@ -15,6 +15,7 @@ public class User extends BaseModel{
 	private Auth admin;
 	//由于管理员只是附着在普通用户上的权限系统, 所以在普通会员登录的时候, 会查找他的管理员属性.
 	//如果其有管理员属性, 则显示对应的操作项目
+	//只影响后台的管理权限, 展示权限由每个节点自由设定
 	
 	private String headerIcon;
 	private Integer gender;//0, 保密, 1, 男, 2, 女

@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.NotSaved;
 
 @Entity("title")
-public class Title extends BaseModel{
+public class Topic extends BaseModel{
 	
 	private String name;
 	private String icon="";
@@ -15,7 +16,9 @@ public class Title extends BaseModel{
 	
 	private Background background;
 	
-	private Map<String, Auth> manager=new HashMap<String, Auth>();//人, 可用权限, 如果此人被查找在本列表中, 此人将使用本列表的权限
+	private Map<User, Auth> manager=new HashMap<>();
+	//人, 可用权限, 如果此人被查找在本列表中, 此人将使用本列表的权限
+	//0, BMID, 1, 用户名
 	
 	private Auth auth = new Auth();//这个节点的必须要的权限, 只有大于这个权限才能操作, 不可视一定不可操作
 	
@@ -43,10 +46,10 @@ public class Title extends BaseModel{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	public Map<String, Auth> getManager() {
+	public Map<User, Auth> getManager() {
 		return manager;
 	}
-	public void setManager(Map<String, Auth> manager) {
+	public void setManager(Map<User, Auth> manager) {
 		this.manager = manager;
 	}
 	public Background getBackground() {
@@ -60,5 +63,18 @@ public class Title extends BaseModel{
 	}
 	public void setAuth(Auth auth) {
 		this.auth = auth;
+	}
+	
+	@NotSaved
+	public class User  extends BaseModel {
+		private String username = "";
+
+		public String getUsername() {
+			return username;
+		}
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
 	}
 }
