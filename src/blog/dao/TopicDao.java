@@ -14,4 +14,9 @@ public class TopicDao {
 	{
 		return MongoDBConnector.datastore.find(Topic.class).order("order").asList();
 	}
+	
+	public Topic findTopicByBMID(String bmid)
+	{
+		return MongoDBConnector.datastore.find(Topic.class).field("BM_ID").equal(bmid).get();
+	}
 }

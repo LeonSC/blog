@@ -17,7 +17,7 @@ public class Topic extends BaseModel{
 	
 	private Map<String, Manager> manager=new HashMap<>();
 	//人, 可用权限, 如果此人被查找在本列表中, 此人将使用本列表的权限
-	//0, BMID, 1, 用户名
+	//key, BMID, value, 管理员实体
 	
 	private Auth auth = new Auth();//这个节点的必须要的权限, 只有大于这个权限才能操作, 不可视一定不可操作
 	
