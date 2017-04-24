@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.mongodb.morphia.annotations.Entity;
 
-@Entity("title")
+@Entity("topic")
 public class Topic extends BaseModel{
 	
 	private String name;

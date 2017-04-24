@@ -11,6 +11,7 @@ import blog.model.Auth;
 import blog.model.Manager;
 import blog.model.Topic;
 import blog.model.User;
+import blog.startup.TCache;
 
 @Service
 public class TopicService {
@@ -37,8 +38,9 @@ public class TopicService {
 			t.setManager(new HashMap<>());
 		}
 		t.getManager().put(u.getBM_ID(), m);
-		
-		
+		this.topicDao.updateTopicManagerByBMID(t);
+		//重新设置缓存
+		TCache.getCache().titleCache = this.topicDao.findTopicList();
 		return 0;
 	}
 }

@@ -29,8 +29,11 @@
 										<p class="card-text">已有管理员</p>
 										<p class="card-text">
 											<c:forEach var="manager" items="${item.manager}" varStatus="ii">
-												<c:if test="${i.first}">
-												${manager.key.username}
+												<c:if test="${ii.first}">
+												${manager.value.username}
+												</c:if>
+												<c:if test="${not ii.first}">
+												 , ${manager.value.username}
 												</c:if>
 											</c:forEach>
 										</p>
@@ -38,6 +41,7 @@
 											<div class="form-group row">
 												<label class="col-2 col-form-label">账户</label>
 												<div class="col-10">
+													<input type="hidden" name="bmid" value="${item.BM_ID}"/>
 													<input class="form-control" type="email" name="email" />
 												</div>
 											</div>
@@ -50,6 +54,27 @@
 							<c:if test="${not i.first}">
 								<div class="tab-pane fade" id="tab${item.BM_ID}" role="tabpanel">
 									<div class="card-block">
+										<p class="card-text">已有管理员</p>
+										<p class="card-text">
+											<c:forEach var="manager" items="${item.manager}" varStatus="ii">
+												<c:if test="${ii.first}">
+												${manager.value.username}
+												</c:if>
+												<c:if test="${not ii.first}">
+												 , ${manager.value.username}
+												</c:if>
+											</c:forEach>
+										</p>
+										<form method="post" action="${config.rootPath}/admin/topic/addmanager">
+											<div class="form-group row">
+												<label class="col-2 col-form-label">账户</label>
+												<div class="col-10">
+													<input type="hidden" name="bmid" value="${item.BM_ID}"/>
+													<input class="form-control" type="email" name="email" />
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary btn-sm">提交</button>
+										</form>
 										<p class="card-text">${item.intro}</p>
 									</div>
 								</div>

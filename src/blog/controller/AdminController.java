@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import blog.model.User;
 import blog.service.AdminService;
 import blog.service.ImgService;
+import blog.service.TopicService;
 import blog.service.UserService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -27,6 +28,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TopicService topicService;
 
 	@RequestMapping("/index")
 	public String index() {
@@ -121,8 +124,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/topic/addmanager")
-	public String topicAddManager(@RequestParam(value = "email", required = false) String email)
+	public String topicAddManager(@RequestParam(value = "bmid", required = false) String bmid,
+			@RequestParam(value = "email", required = false) String email)
 	{
+		this.topicService.updateTopicManager(bmid, email);
 		return "redirect:/admin/topic";
 	}
 }
