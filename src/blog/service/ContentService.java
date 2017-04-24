@@ -150,6 +150,8 @@ public class ContentService {
 		}
 		Draft d = this.draftDao.getDraftByUser(userid);
 		User u = this.userDao.findUserByBMID(userid);
+		u.setAdmin(null);
+		u.setPw(null);
 		Content c= new Content();
 		c.setTopic(topic);
 		c.setUser(u);
