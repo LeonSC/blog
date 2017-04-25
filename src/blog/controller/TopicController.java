@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import blog.model.Content;
+import blog.model.Reply;
 import blog.service.ContentService;
 
 @Controller
@@ -32,6 +33,8 @@ public class TopicController {
 	{
 		Content c = this.contentService.getContentByBMID(bmid);
 		request.setAttribute("c", c);
+		List<Reply> list = this.contentService.getReplyList(bmid);
+		request.setAttribute("replylist", list);
 		return "show";
 	}
 }

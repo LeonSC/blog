@@ -70,7 +70,7 @@
 			<div class="col col-12">
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}" begin="4">
-					<li class="list-group-item">
+					<li class="list-group-item" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 						<table>
 							<tr>
 								<td><img class="rounded float-left custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple&text=S&random=yes"/></td>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.FindOptions;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.stereotype.Repository;
 
 import blog.model.Content;
@@ -39,5 +41,19 @@ public class ContentDao {
 	{
 		Content c = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid).get();
 		return c;
+	}
+	
+	/**
+	 * 内容回复+1
+	 * @param bmid
+	 * @return
+	 */
+	public int incContentReplyOne(String bmid)
+	{
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.inc("replyCount");
+		MongoDBConnector.datastore.update(updateQuery, ops);
+		return 0;
 	}
 }

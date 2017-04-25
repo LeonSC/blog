@@ -15,9 +15,11 @@ import com.alibaba.fastjson.JSON;
 
 import blog.dao.ContentDao;
 import blog.dao.DraftDao;
+import blog.dao.ReplyDao;
 import blog.dao.UserDao;
 import blog.model.Content;
 import blog.model.Draft;
+import blog.model.Reply;
 import blog.model.User;
 import blog.startup.Config;
 import blog.startup.TCache;
@@ -31,6 +33,8 @@ public class ContentService {
 	private UserDao userDao;
 	@Autowired
 	private ContentDao contentDao;
+	@Autowired
+	private ReplyDao replyDao;
 	/**
 	 * 草稿
 	 * @param title
@@ -184,5 +188,38 @@ public class ContentService {
 	{
 		Content c = this.contentDao.getContentByBMID(bmid);
 		return c;
+	}
+	
+	/**
+	 * 
+	 * @param user
+	 * @param contentid
+	 * @param reply
+	 * @return
+	 */
+	public int setReplyForContent(User user, String contentid, String reply)
+	{
+		reply= reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
+		Reply r = new Reply();
+		r.setOkey(contentid);
+		r.setUsername(user.getUsername());
+		r.setNickname(user.getNickname());
+		r.setWrite(user.getBM_ID());
+		r.setHeadericon(user.getHeaderIcon());
+		r.setContent(reply);
+		this.replyDao.save(r);
+		this.contentDao.incContentReplyOne(contentid);
+		return 0;
+	}
+	
+	/**
+	 * 
+	 * @param okey
+	 * @return
+	 */
+	public List<Reply> getReplyList(String okey)
+	{
+		List<Reply> list = this.replyDao.getReplyList(okey);
+		return list;
 	}
 }

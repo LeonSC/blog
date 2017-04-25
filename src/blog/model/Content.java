@@ -15,6 +15,8 @@ public class Content extends BaseModel {
 	private Auth need =new Auth();
 	
 	private User user;
+	
+	private Integer replyCount = 0;
 
 	public String getTitle() {
 		return title;
@@ -69,6 +71,14 @@ public class Content extends BaseModel {
 
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+
+	public Integer getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(Integer replyCount) {
+		this.replyCount = replyCount;
 	}
 	
 }
