@@ -52,13 +52,11 @@
 				<div class="card-group">
 					<c:forEach var="item" items="${list}" begin="0" end="3">
 					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
-						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple">
+						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple&text=I&random=yes">
 						<div class="card-block">
 							<h4 class="card-title">${item.title}</h4>
 							<p class="card-text">${item.intro}</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
+							<p class="card-text"><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
 						</div>
 					</div>
 					</c:forEach>
