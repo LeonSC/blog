@@ -13,8 +13,13 @@
 			<div class="col col-9">
 				<div class="row">
 					<div class="col col-12">
-						<h3>${c.title}</h3>
-						<small class="text-muted">${c.user.nickname} 于 <c:set target="${timeValues}" value="${c.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small>
+						<div class="media">
+							<img class="d-flex rounded mr-3 custom-max-75-75" src="${c.user.headerIcon}" data-src="holder.js/75x75?theme=simple&text=P&random=yes">
+							<div class="media-body">
+								<h3>${c.title}</h3>
+								<small class="text-muted">${c.user.nickname} 于 <c:set target="${timeValues}" value="${c.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small>
+							</div>
+						</div>
 						<hr/>
 						${c.content}
 					</div>
