@@ -5,7 +5,7 @@
 	version="3.1">
 	<display-name>CedarBlog</display-name>
     <absolute-ordering>
-    	<name>spring_web</name>
+    	<name>blog</name>
     </absolute-ordering>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
