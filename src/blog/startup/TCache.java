@@ -90,7 +90,7 @@ public class TCache {
 	
 	public int initIndexPageContentList()
 	{
-		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-replyCount").order("-BM_TIME").asList(new FindOptions().limit(15));
+		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).order("-replyCount,-BM_TIME").asList(new FindOptions().limit(15));
 		return 0;
 	}
 	
