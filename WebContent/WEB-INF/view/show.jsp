@@ -18,6 +18,7 @@
 							<div class="media-body">
 								<h3>${c.title}</h3>
 								<small class="text-muted">${c.user.nickname} 于 <c:set target="${timeValues}" value="${c.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small>
+								<%@ include file="static/operation.jsp"%>
 							</div>
 						</div>
 						<hr/>

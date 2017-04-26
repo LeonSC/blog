@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import blog.model.Content;
 import blog.model.Reply;
+import blog.model.User;
 import blog.service.ContentService;
+import blog.startup.Config;
 
 @Controller
 @RequestMapping("/topic")
@@ -23,6 +25,8 @@ public class TopicController {
 	@RequestMapping("/{topic}")
 	public String topic(HttpServletRequest request,@PathVariable String topic)
 	{
+		List<Content> toplist = this.contentService.getContentTopListByTopic(topic);
+		request.setAttribute("toplist", toplist);
 		List<Content> list = this.contentService.getContentListByTopic(topic);
 		request.setAttribute("list", list);
 		return "topic";
@@ -36,5 +40,13 @@ public class TopicController {
 		List<Reply> list = this.contentService.getReplyList(bmid);
 		request.setAttribute("replylist", list);
 		return "show";
+	}
+	
+	@RequestMapping("/switchtop/{topic}/{bmid}")
+	public String switchArtTop(HttpServletRequest request,@PathVariable String topic,@PathVariable String bmid)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.contentService.changeContentToTop(u, topic, bmid);
+		return "redirect:/topic/art/"+bmid;
 	}
 }

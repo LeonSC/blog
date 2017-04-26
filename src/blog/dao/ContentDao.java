@@ -56,4 +56,30 @@ public class ContentDao {
 		MongoDBConnector.datastore.update(updateQuery, ops);
 		return 0;
 	}
+	
+	/**
+	 * 设置置顶
+	 * @param bmid
+	 * @param top
+	 * @return
+	 */
+	public int updateContentTop(String bmid, long top)
+	{
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.set("top",top);
+		MongoDBConnector.datastore.update(updateQuery, ops);
+		return 0;
+	}
+	
+	/**
+	 * 查询置顶帖子
+	 * @param topic
+	 * @return
+	 */
+	public List<Content> getContentTopListByTopic(String topic)
+	{
+		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).field("top").exists().field("top").notEqual(0L).order("-top").asList(new FindOptions().limit(3));
+		return list;
+	}
 }

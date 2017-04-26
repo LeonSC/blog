@@ -11,42 +11,28 @@
 		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 		<div class="col col-9">
-		<!-- 
+		<c:if test="${not empty toplist}">
 		<div class="row">
 			<div class="col col-12">
 				<ul class="list-group">
-					<li class="list-group-item">
+					<c:forEach var="item" items="${toplist}">
+					<li class="list-group-item" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 						<table>
 							<tr>
-								<td><img class="rounded float-left" src="holder.js/75x75?theme=simple"/></td>
+								<td><img class="rounded float-left custom-max-75-75" src="${item.cover}" data-src="holder.js/75x75?theme=simple&text=TOP&random=yes"/></td>
 								<td style="width:1rem"></td>
-								<td>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio<br style="margin:0;"/><small class="text-muted clearfix">Last updated 3 mins ago</small></td>
+								<td><h5 class="mt-0">${item.title}</h5>
+								<h6 style="margin-bottom:0">${item.intro}</h6>
+								<small><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></td>
 							</tr>
 						</table>
 					</li>
-					<li class="list-group-item">
-						<table>
-							<tr>
-								<td><img class="rounded float-left" src="holder.js/75x75?theme=simple"/></td>
-								<td style="width:1rem"></td>
-								<td>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio<br style="margin:0;"/><small class="text-muted clearfix">Last updated 3 mins ago</small></td>
-							</tr>
-						</table>
-					</li>
-					<li class="list-group-item">
-						<table>
-							<tr>
-								<td><img class="rounded float-left" src="holder.js/75x75?theme=simple"/></td>
-								<td style="width:1rem"></td>
-								<td>Cras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odioCras justo odio<br style="margin:0;"/><small class="text-muted clearfix">Last updated 3 mins ago</small></td>
-							</tr>
-						</table>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
 		<br/>
-		 -->
+		</c:if>
 		<div class="row">
 			<div class="col col-12">
 				<div class="card-group">

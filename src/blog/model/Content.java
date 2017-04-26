@@ -18,6 +18,12 @@ public class Content extends BaseModel {
 	
 	private Integer replyCount = 0;
 
+	/**
+	 * 0 正常
+	 * long 置顶
+	 */
+	private Long top = 0L;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -79,6 +85,13 @@ public class Content extends BaseModel {
 
 	public void setReplyCount(Integer replyCount) {
 		this.replyCount = replyCount;
+	}
+	public Long getTop() {
+		return top;
+	}
+
+	public void setTop(Long top) {
+		this.top = top;
 	}
 	
 }

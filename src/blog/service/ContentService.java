@@ -19,9 +19,12 @@ import blog.dao.ReplyDao;
 import blog.dao.UserDao;
 import blog.model.Content;
 import blog.model.Draft;
+import blog.model.Manager;
 import blog.model.Reply;
 import blog.model.User;
 import blog.startup.Config;
+import blog.startup.TCache;
+import blog.startup.Tools;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Service
@@ -209,13 +212,52 @@ public class ContentService {
 	}
 	
 	/**
-	 * 
+	 * 获取留言列表
 	 * @param okey
 	 * @return
 	 */
 	public List<Reply> getReplyList(String okey)
 	{
 		List<Reply> list = this.replyDao.getReplyList(okey);
+		return list;
+	}
+	
+	///////////////////////////置顶相关//////////////////////////////////////////////
+	/**
+	 * 把改变帖子置顶状态
+	 * @param bmid
+	 * @return
+	 */
+	public int changeContentToTop(User user, String topic, String bmid)
+	{
+		//验证是否有权限去操作
+		Manager manager = TCache.getCache().getTitleCache().get(topic).getManager().get(user.getBM_ID());
+		if(manager == null)
+		{
+			return -1;
+		}
+		Content c = this.contentDao.getContentByBMID(bmid);
+		if(c==null)
+		{
+			return -2;
+		}
+		long top = 0L;
+		if(c.getTop()==null||c.getTop()==0L)
+		{
+			top = Tools.getServerTime();
+		}
+		this.contentDao.updateContentTop(bmid, top);
+		return 0;
+	}
+	
+	/**
+	 * 查找置顶贴
+	 * @param topic
+	 * @return
+	 */
+	public List<Content> getContentTopListByTopic(String topic)
+	{
+		List<Content> list = this.contentDao.getContentTopListByTopic(topic);
 		return list;
 	}
 }
