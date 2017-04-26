@@ -4,7 +4,7 @@
 	<div class="col col-12">
 		<c:if test="${empty memAuth}">
 		<div class="card">
-			<img class="card-img-top" src="holder.js/100px200?theme=simple&text=Hello" alt="Card image cap">
+			<img class="card-img-top" src="holder.js/100px200?theme=simple&text=Hello&random=yes">
 			<div class="card-block">
 				<form method="post" action="${config.rootPath}/memloginsubmit">
 					<div class="form-group">
