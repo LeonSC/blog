@@ -40,7 +40,7 @@ public class TopicService {
 		t.getManager().put(u.getBM_ID(), m);
 		this.topicDao.updateTopicManagerByBMID(t);
 		//重新设置缓存
-		TCache.getCache().titleCache = this.topicDao.findTopicList();
+		TCache.getCache().initTitleCache();
 		return 0;
 	}
 }

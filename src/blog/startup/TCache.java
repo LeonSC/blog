@@ -1,6 +1,6 @@
 package blog.startup;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.mongodb.morphia.query.FindOptions;
@@ -30,20 +30,24 @@ public class TCache {
 	/**
 	 * 标题列表
 	 */
-	public List<Topic> titleCache = null;
+	public LinkedHashMap<String,Topic> titleCache = null;
 	
-	private int initTitleCache()
+	public int initTitleCache()
 	{
 		if(TCache.getCache().titleCache ==null)
 		{
-			TCache.getCache().titleCache = new ArrayList<Topic>();
+			TCache.getCache().titleCache = new LinkedHashMap<>();
 		}
-		TCache.getCache().titleCache = MongoDBConnector.datastore.find(Topic.class).order("order").asList();
 		
+		List<Topic> list = MongoDBConnector.datastore.find(Topic.class).order("order").asList();
+		for(Topic topic : list)
+		{
+			TCache.getCache().titleCache.put(topic.getBM_ID(), topic);
+		}
 		return 0;
 	}
 
-	public List<Topic> getTitleCache() {
+	public LinkedHashMap<String,Topic> getTitleCache() {
 		return titleCache;
 	}
 	
