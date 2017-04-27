@@ -1,7 +1,5 @@
 package blog.dao;
 
-import java.util.UUID;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
