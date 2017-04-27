@@ -43,7 +43,10 @@ public class Config {
 	public static String dbPassword;
 	public static String dbIP;
 	public static Integer dbPort;
-	//
+	//邮件设置
+	public static String efrom;
+	public static String epw;
+	public static String esmtp;
 	
 	public String getUpdateTime() {
 		return updateTime;
@@ -74,7 +77,14 @@ public class Config {
 			} catch (NumberFormatException e) {}
 		}
 		
-		//解析图片路径
+		//邮件发送参数
+		Config.efrom = prop.getProperty("efrom");
+		Config.epw = prop.getProperty("epw");
+		Config.esmtp = prop.getProperty("esmtp");
+		if(Config.esmtp == null)
+		{
+			Config.esmtp = "smtp."+Config.efrom.split("@")[1];
+		}
 	}
 	
 	/**
