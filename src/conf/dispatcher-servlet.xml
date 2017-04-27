@@ -46,6 +46,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**" />
+			<mvc:mapping path="/deposit/**" />
 			<bean class="blog.interceptor.AdminInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
