@@ -99,6 +99,10 @@ public class DepositDao {
 	public DepositCard getOneDepositCard(String okey)
 	{
 		DepositCard dc = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(okey).field("BM_DEL").notEqual(1).get();
+		Query<DepositCard> updateQuery = MongoDBConnector.datastore.createQuery(DepositCard.class).field("BM_ID").equal(dc.getBM_ID());
+		UpdateOperations<DepositCard> ops=MongoDBConnector.datastore.createUpdateOperations(DepositCard.class);
+		ops.set("BM_DEL",1);
+		MongoDBConnector.datastore.update(updateQuery, ops);
 		return dc;
 	}
 }
