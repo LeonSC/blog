@@ -49,7 +49,7 @@
 							<td>${item.frequency}</td>
 							<td>${item.frequency * item.count}</td>
 							<td>0</td>
-							<td>发行</td>
+							<td><a href="${config.rootPath}/admin/deposit/depositcreate?bmid=${item.BM_ID}">发行</a></td>
 						</tr>
 						</c:forEach>
 					</tbody>

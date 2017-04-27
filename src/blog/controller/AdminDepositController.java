@@ -28,4 +28,16 @@ public class AdminDepositController {
 		this.depositService.saveDepositTopic(title, count, price);
 		return "redirect:/admin/deposit";
 	}
+	
+	/**
+	 * 生成卡
+	 * @param bmid
+	 * @return
+	 */
+	@RequestMapping("/depositcreate")
+	public String depositCreate(@RequestParam(value = "bmid", required = false) String bmid)
+	{
+		this.depositService.createDepositCard(bmid);
+		return "redirect:/admin/deposit";
+	}
 }

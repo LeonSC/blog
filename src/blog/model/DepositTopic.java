@@ -11,7 +11,7 @@ public class DepositTopic extends BaseModel {
 	private Integer price = 1;//基于元
 	private Integer frequency=0;//生成次数
 	@NotSaved
-	private Integer rest = 0;
+	private long rest = 0;
 	public String getTitle() {
 		return title;
 	}
@@ -36,10 +36,10 @@ public class DepositTopic extends BaseModel {
 	public void setFrequency(Integer frequency) {
 		this.frequency = frequency;
 	}
-	public Integer getRest() {
+	public long getRest() {
 		return rest;
 	}
-	public void setRest(Integer rest) {
+	public void setRest(long rest) {
 		this.rest = rest;
 	}
 }
