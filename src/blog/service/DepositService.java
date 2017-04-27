@@ -64,10 +64,11 @@ public class DepositService {
 		{
 			DepositCard dc = new DepositCard();
 			dc.setOkey(dt.getBM_ID());
-			dc.setUuid(UUID.randomUUID().toString());
+			dc.setUuid(UUID.randomUUID().toString().toUpperCase());
 			dc.setPrice(dt.getPrice());
 			this.depositDao.save(dc);
 		}
+		this.depositDao.updateDepositTopicFrequencyByBMID(dt.getBM_ID());
 		return 0;
 	}
 }

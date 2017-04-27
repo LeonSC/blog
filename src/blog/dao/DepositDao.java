@@ -3,6 +3,8 @@ package blog.dao;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.stereotype.Repository;
 
 import blog.model.DepositCard;
@@ -49,6 +51,19 @@ public class DepositDao {
 		return dt;
 	}
 	
+	public int updateDepositTopicFrequencyByBMID(String bmid)
+	{
+		if(bmid==null)
+		{
+			return -1;
+		}
+		Query<DepositTopic> updateQuery = MongoDBConnector.datastore.createQuery(DepositTopic.class).field("BM_ID").equal(bmid);
+		UpdateOperations<DepositTopic> ops=MongoDBConnector.datastore.createUpdateOperations(DepositTopic.class);
+		ops.inc("frequency");
+		MongoDBConnector.datastore.update(updateQuery, ops);
+		return 0;
+	}
+	
 	/**
 	 * 查找余卡数量
 	 * @param bmid
@@ -56,12 +71,12 @@ public class DepositDao {
 	 */
 	public long getDepositCardCount(String bmid)
 	{
-		long count = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(bmid).count();
+		long count = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(bmid).field("BM_DEL").notEqual(1).count();
 		return count;
 	}
 	
 	/**
-	 * 
+	 * 发行卡
 	 * @param dc
 	 * @return
 	 */
@@ -74,5 +89,16 @@ public class DepositDao {
 		MongoDBConnector.datastore.save(dc);
 		ObjectId id = dc.getId();
 		return MongoDBConnector.datastore.get(DepositCard.class,id);
+	}
+	
+	/**
+	 * 获取一张卡并把他设置成删除状态
+	 * @param okey
+	 * @return
+	 */
+	public DepositCard getOneDepositCard(String okey)
+	{
+		DepositCard dc = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(okey).field("BM_DEL").notEqual(1).get();
+		return dc;
 	}
 }

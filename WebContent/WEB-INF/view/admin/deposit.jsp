@@ -48,8 +48,11 @@
 							<td>${item.price}</td>
 							<td>${item.frequency}</td>
 							<td>${item.frequency * item.count}</td>
-							<td>0</td>
-							<td><a href="${config.rootPath}/admin/deposit/depositcreate?bmid=${item.BM_ID}">发行</a></td>
+							<td>${item.rest}</td>
+							<td>
+								<c:if test="${item.rest eq 0}"><a href="${config.rootPath}/admin/deposit/depositcreate?bmid=${item.BM_ID}">发行</a></c:if>
+								<c:if test="${item.rest != 0}"><a href="${config.rootPath}/admin/deposit/depositcard?bmid=${item.BM_ID}">获取一张</a></c:if>
+							</td>
 						</tr>
 						</c:forEach>
 					</tbody>
