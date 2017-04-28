@@ -58,4 +58,18 @@ public class PersonalController {
 		request.getSession().setAttribute(Config.memAuth, u);
 		return "redirect:/personal/index";
 	}
+	
+	/**
+	 * 发送验证邮箱的EMAIL
+	 * @param request
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping("/email/send")
+	public String sendConfirmEmail(HttpServletRequest request,@RequestParam(value = "email", required = false) String email)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.userService.sendConfirmEmail(u.getBM_ID(), email);
+		return "redirect:/personal/index";
+	}
 }

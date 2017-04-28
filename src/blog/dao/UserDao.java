@@ -148,6 +148,10 @@ public class UserDao {
 		{
 			u.setSign(user.getSign());
 		}
+		if(user.getEmail()!=null&&!user.getEmail().isEmpty())
+		{
+			u.setEmail(user.getEmail());
+		}
 		
 		
 		MongoDBConnector.datastore.updateFirst(MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()), u,false);

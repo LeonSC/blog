@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -98,6 +99,12 @@ public class IndexController {
 		return "redirect:/index";
 	}
 	
+	@RequestMapping("/email/check/{code}")
+	public String checkConfirmEmail(@PathVariable String code)
+	{
+		this.userService.checkConfirmEmail(code);
+		return "redirect:/index";
+	}
 	
 	///////////////////////////管理员登录页////////////////////////////////////////
 	@RequestMapping("/adminindex")

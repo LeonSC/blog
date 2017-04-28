@@ -11,6 +11,7 @@ import blog.dao.UserDao;
 import blog.model.Confirm;
 import blog.model.Page;
 import blog.model.User;
+import blog.startup.Config;
 import blog.startup.Tools;
 
 
@@ -226,17 +227,37 @@ public class UserService {
 	public int sendConfirmEmail(String user, String email)
 	{
 		Confirm c = this.confirmDao.findConfirmByEmail(email);
-		if(c!=null)
+		if(c==null)
+		{
+			c = new Confirm();
+			c.setUser(user);
+			c.setEmail(email);
+			c.setCode(Tools.getUUIDUpperCase());
+			c.setUntil(Tools.getServerTime()+1000*60*60*24);
+			c = this.confirmDao.save(c);
+		}
+		this.mailComponent.sendComfirmEmail(c.getEmail(),"请在浏览器中使用以下链接进行验证 "+Config.rootPath+"/email/check/"+c.getCode());
+		return 0;
+	}
+	
+	/**
+	 * 验证码
+	 * @param user
+	 * @param code
+	 * @return
+	 */
+	public int checkConfirmEmail(String code)
+	{
+		Confirm c = this.confirmDao.findConfirmByCode(code);
+		if(!c.getCode().equals(code))
 		{
 			return -1;
 		}
-		c = new Confirm();
-		c.setUser(user);
-		c.setEmail(email);
-		c.setCode(Tools.getUUIDUpperCase());
-		c.setUntil(Tools.getServerTime()+1000*60*60*24);
-		c = this.confirmDao.save(c);
-		this.mailComponent.sendComfirmEmail(c.getEmail(),"您的验证码是 "+c.getCode());
+		User u = new User();
+		u.setBM_ID(c.getUser());
+		u.setEmail(c.getEmail());
+		this.userDao.editUser(u);
+		this.confirmDao.deleteConfirmByCode(c.getBM_ID());
 		return 0;
 	}
 }
