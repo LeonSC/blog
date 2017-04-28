@@ -57,10 +57,26 @@
 						<tr>
 							<td colspan="8">
 								<form class="form-inline" method="POST" action="${config.rootPath}/admin/deposit/senddepositcard">
-									<div class="input-group mb-2 mr-sm-2 mb-sm-0 has-danger">
-										<div class="input-group-addon">用户未绑定邮箱</div>
-										<input type="text" class="form-control" placeholder="email" name="email">
-									</div>
+									<c:choose>
+										<c:when test="${error == -1}">
+										<div class="input-group mb-2 mr-sm-2 mb-sm-0 has-danger">
+											<div class="input-group-addon">没有用户</div>
+											<input type="text" class="form-control" placeholder="email" name="email">
+										</div>
+										</c:when>
+										<c:when test="${error == -2}">
+										<div class="input-group mb-2 mr-sm-2 mb-sm-0 has-danger">
+											<div class="input-group-addon">没有绑定邮箱</div>
+											<input type="text" class="form-control" placeholder="email" name="email">
+										</div>
+										</c:when>
+										<c:otherwise>
+										<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+											<div class="input-group-addon">发送给</div>
+											<input type="text" class="form-control" placeholder="email" name="email">
+										</div>
+										</c:otherwise>
+									</c:choose>
 									<button type="submit" class="btn btn-primary">提交</button>
 								</form>
 							</td>

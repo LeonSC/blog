@@ -16,8 +16,9 @@ public class AdminDepositController {
 	private DepositService depositService;
 
 	@RequestMapping("")
-	public String index(HttpServletRequest request) {
+	public String index(HttpServletRequest request, @RequestParam(value = "error", required = false) String error) {
 		request.setAttribute("dtlist", this.depositService.getDepositTopicList());
+		request.setAttribute("error", error);
 		return "admin/deposit";
 	}
 
@@ -55,6 +56,7 @@ public class AdminDepositController {
 	 * @param depoisttopicid
 	 * @return
 	 */
+	@RequestMapping("/senddepositcard")
 	public String sendDepositCard(@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "depoisttopicid", required = false) String depoisttopicid) {
 		Integer error = this.depositService.sendDepositCard(email, depoisttopicid);
