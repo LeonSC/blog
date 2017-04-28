@@ -22,6 +22,8 @@ public class User extends BaseModel{
 	private String sign = "";
 	private String email = "";
 	
+	private Integer deposit=0;//余额
+	
 	public String getUsername() {
 		return username;
 	}
@@ -92,5 +94,13 @@ public class User extends BaseModel{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(Integer deposit) {
+		this.deposit = deposit;
 	}
 }

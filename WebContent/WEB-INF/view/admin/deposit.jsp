@@ -51,7 +51,27 @@
 							<td>${item.rest}</td>
 							<td>
 								<c:if test="${item.rest eq 0}"><a href="${config.rootPath}/admin/deposit/depositcreate?bmid=${item.BM_ID}">发行</a></c:if>
-								<c:if test="${item.rest != 0}"><a href="${config.rootPath}/admin/deposit/depositcard?bmid=${item.BM_ID}">获取一张</a></c:if>
+								<a href="#">删除</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="8">
+								<form class="form-inline" method="POST" action="${config.rootPath}/admin/deposit/senddepositcard">
+									<div class="input-group mb-2 mr-sm-2 mb-sm-0 has-danger">
+										<div class="input-group-addon">用户未绑定邮箱</div>
+										<input type="text" class="form-control" placeholder="email" name="email">
+									</div>
+									<button type="submit" class="btn btn-primary">提交</button>
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="8">
+								已发送未兑换: 
+								<c:forEach var="sen" items="${item.sent}" varStatus="s">
+									<c:if test="${s.first}">${sen.account}</c:if>
+									<c:if test="${not s.first}"> , ${sen.account}</c:if>
+								</c:forEach>
 							</td>
 						</tr>
 						</c:forEach>

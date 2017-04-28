@@ -76,6 +76,16 @@ public class DepositDao {
 	}
 	
 	/**
+	 * 查找已发送待兑换的
+	 * @param bmid
+	 * @return
+	 */
+	public List<DepositCard> getDepositCardSent(String bmid)
+	{
+		return MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(bmid).field("BM_DEL").equal(1).asList();
+	}
+	
+	/**
 	 * 发行卡
 	 * @param dc
 	 * @return
@@ -94,14 +104,16 @@ public class DepositDao {
 	/**
 	 * 获取一张卡并把他设置成删除状态
 	 * @param okey
+	 * @param account
 	 * @return
 	 */
-	public DepositCard getOneDepositCard(String okey)
+	public DepositCard getOneDepositCard(String okey, String account)
 	{
 		DepositCard dc = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(okey).field("BM_DEL").notEqual(1).get();
 		Query<DepositCard> updateQuery = MongoDBConnector.datastore.createQuery(DepositCard.class).field("BM_ID").equal(dc.getBM_ID());
 		UpdateOperations<DepositCard> ops=MongoDBConnector.datastore.createUpdateOperations(DepositCard.class);
 		ops.set("BM_DEL",1);
+		ops.set("account",account);
 		MongoDBConnector.datastore.update(updateQuery, ops);
 		return dc;
 	}

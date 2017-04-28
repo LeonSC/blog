@@ -34,4 +34,18 @@ public class MailComponent {
 		}
 		return 0;
 	}
+	
+	public int sendDepositCardEmail(String email, String code)
+	{
+		try {
+			SimpleEmail client = this.getSimpleEmail();
+			client.addTo(email);
+			client.setSubject("兑换卷");// 主题
+			client.setMsg("请登录后在个人面板中兑换. 兑换卷为 "+code); // 内容
+			client.send();
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

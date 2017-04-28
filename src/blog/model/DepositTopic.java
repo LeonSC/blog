@@ -1,5 +1,7 @@
 package blog.model;
 
+import java.util.List;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.NotSaved;
 
@@ -12,6 +14,14 @@ public class DepositTopic extends BaseModel {
 	private Integer frequency=0;//生成次数
 	@NotSaved
 	private long rest = 0;
+	@NotSaved
+	private List<DepositCard> sent;
+	public List<DepositCard> getSent() {
+		return sent;
+	}
+	public void setSent(List<DepositCard> sent) {
+		this.sent = sent;
+	}
 	public String getTitle() {
 		return title;
 	}

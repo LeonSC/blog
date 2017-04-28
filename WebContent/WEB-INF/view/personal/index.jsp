@@ -71,6 +71,18 @@
 				<div class="row">
 					<div class="col col-12">绑定邮箱 <i class="fa fa-address-card" aria-hidden="true"></i> ${memAuth.email}</div>
 				</div>
+				<br />
+				<div class="row">
+					<div class="col col-12">
+						<form method="post" action="${config.rootPath}/">
+							<div class="form-group">
+								<label>兑换代金券</label> 
+								<input type="text" class="form-control" name="code" value=""> 
+							</div>
+							<button type="submit" class="btn btn-primary">兑换</button>
+						</form>
+					</div>
+				</div>
 				</c:if>
 				<c:if test="${empty memAuth.email}">
 				<br />
