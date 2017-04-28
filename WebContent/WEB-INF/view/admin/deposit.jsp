@@ -77,6 +77,7 @@
 										</div>
 										</c:otherwise>
 									</c:choose>
+									<input type="hidden" value="${item.BM_ID}" name="depoisttopicid"/>
 									<button type="submit" class="btn btn-primary">提交</button>
 								</form>
 							</td>
