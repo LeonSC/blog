@@ -21,12 +21,12 @@ public class MailComponent {
 		return email;
 	}
 	
-	public int sendComfirmEmail(String email)
+	public int sendComfirmEmail(String email, String content)
 	{
 		try {
 			SimpleEmail client = this.getSimpleEmail();
 			client.setSubject("邮箱验证");// 主题
-			client.setMsg("这里是邮件内容"); // 内容
+			client.setMsg(content); // 内容
 			client.send();
 		} catch (EmailException e) {
 			e.printStackTrace();

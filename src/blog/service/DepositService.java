@@ -1,7 +1,6 @@
 package blog.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import blog.dao.DepositDao;
 import blog.model.DepositCard;
 import blog.model.DepositTopic;
+import blog.startup.Tools;
 
 @Service
 public class DepositService {
@@ -64,7 +64,7 @@ public class DepositService {
 		{
 			DepositCard dc = new DepositCard();
 			dc.setOkey(dt.getBM_ID());
-			dc.setUuid(UUID.randomUUID().toString().toUpperCase());
+			dc.setUuid(Tools.getUUIDUpperCase());
 			dc.setPrice(dt.getPrice());
 			this.depositDao.save(dc);
 		}

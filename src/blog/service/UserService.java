@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import blog.component.MailComponent;
+import blog.dao.ConfirmDao;
 import blog.dao.UserDao;
+import blog.model.Confirm;
 import blog.model.Page;
 import blog.model.User;
 import blog.startup.Tools;
@@ -20,6 +23,10 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ConfirmDao confirmDao;
+	@Autowired
+	private MailComponent mailComponent;
 	
 	/**
 	 * 同时还要查找这个用户的管理员属性
@@ -188,7 +195,7 @@ public class UserService {
 	}
 	
 	/**
-	 * 
+	 * 设置会员信息
 	 * @param bmid
 	 * @param nickname
 	 * @param gender
@@ -212,5 +219,24 @@ public class UserService {
 		u.setSign(sign);
 		u = this.userDao.editUser(u);
 		return u;
+	}
+	
+	
+	///////////////////////////////email confirm/////////////////////////////////////////////////
+	public int sendConfirmEmail(String user, String email)
+	{
+		Confirm c = this.confirmDao.findConfirmByEmail(email);
+		if(c!=null)
+		{
+			return -1;
+		}
+		c = new Confirm();
+		c.setUser(user);
+		c.setEmail(email);
+		c.setCode(Tools.getUUIDUpperCase());
+		c.setUntil(Tools.getServerTime()+1000*60*60*24);
+		c = this.confirmDao.save(c);
+		this.mailComponent.sendComfirmEmail(c.getEmail(),"您的验证码是 "+c.getCode());
+		return 0;
 	}
 }

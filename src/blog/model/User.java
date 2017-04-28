@@ -2,7 +2,6 @@ package blog.model;
 
 import org.mongodb.morphia.annotations.Entity;
 
-
 @Entity("user")
 public class User extends BaseModel{
 
@@ -21,6 +20,7 @@ public class User extends BaseModel{
 	private Integer gender;//0, 保密, 1, 男, 2, 女
 	
 	private String sign = "";
+	private String email = "";
 	
 	public String getUsername() {
 		return username;
@@ -84,5 +84,13 @@ public class User extends BaseModel{
 
 	public void setSign(String sign) {
 		this.sign = sign;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

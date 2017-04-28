@@ -3,6 +3,7 @@ package blog.startup;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class Tools {
 
@@ -102,8 +103,22 @@ public class Tools {
 		return new String(res);    
     }
 	
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 */
 	public static String replaceHTML(String str)
 	{
 		return str.replaceAll("\\&[a-zA-Z]{1,10};", "").replaceAll("<.*?>", "");
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String getUUIDUpperCase()
+	{
+		return UUID.randomUUID().toString().toUpperCase();
 	}
 }
