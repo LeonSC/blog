@@ -36,6 +36,7 @@
 				<h4 class="card-title">${memAuth.nickname}</h4>
 				<h6 class="card-title"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${memAuth.username}</h6>
 				<h6 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> ${memAuth.lv}</h6>
+				<h6 class="card-title"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> ${memAuth.deposit}</h6>
 				<p class="card-text">${memAuth.sign}</p>
 			</div>
 			<div class="card-footer">

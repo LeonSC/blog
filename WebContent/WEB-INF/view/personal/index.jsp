@@ -74,7 +74,7 @@
 				<br />
 				<div class="row">
 					<div class="col col-12">
-						<form method="post" action="${config.rootPath}/">
+						<form method="post" action="${config.rootPath}/personal/recharge">
 							<div class="form-group">
 								<label>兑换代金券</label> 
 								<input type="text" class="form-control" name="code" value=""> 

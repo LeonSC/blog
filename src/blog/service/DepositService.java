@@ -98,7 +98,7 @@ public class DepositService {
 		{
 			return -2;
 		}
-		DepositCard card = this.depositDao.getOneDepositCard(depoisttopicid, email);
+		DepositCard card = this.depositDao.getOneDepositCard(depoisttopicid, u.getBM_ID(), u.getUsername());
 		this.mailComponent.sendDepositCardEmail(u.getEmail(), card.getUuid());
 		return 0;
 	}

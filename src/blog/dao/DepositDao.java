@@ -51,6 +51,11 @@ public class DepositDao {
 		return dt;
 	}
 	
+	/**
+	 * 发行+1
+	 * @param bmid
+	 * @return
+	 */
 	public int updateDepositTopicFrequencyByBMID(String bmid)
 	{
 		if(bmid==null)
@@ -107,14 +112,40 @@ public class DepositDao {
 	 * @param account
 	 * @return
 	 */
-	public DepositCard getOneDepositCard(String okey, String account)
+	public DepositCard getOneDepositCard(String okey, String bmid, String account)
 	{
 		DepositCard dc = MongoDBConnector.datastore.createQuery(DepositCard.class).field("okey").equal(okey).field("BM_DEL").notEqual(1).get();
 		Query<DepositCard> updateQuery = MongoDBConnector.datastore.createQuery(DepositCard.class).field("BM_ID").equal(dc.getBM_ID());
 		UpdateOperations<DepositCard> ops=MongoDBConnector.datastore.createUpdateOperations(DepositCard.class);
 		ops.set("BM_DEL",1);
+		ops.set("user", bmid);
 		ops.set("account",account);
 		MongoDBConnector.datastore.update(updateQuery, ops);
 		return dc;
 	}
+	
+	/**
+	 * 通过三个获得一个卡
+	 * @param bmid
+	 * @param account
+	 * @param code
+	 * @return
+	 */
+	public DepositCard findDepositCard(String bmid, String account, String code)
+	{
+		return MongoDBConnector.datastore.createQuery(DepositCard.class).field("user").equal(bmid).field("account").equal(account).field("uuid").equal(code).get();
+	}
+	
+	/**
+	 * 删除一个用过的卡
+	 * @param bmid
+	 * @return
+	 */
+	public int deleteDepositCard(String bmid)
+	{
+		Query<DepositCard> query=MongoDBConnector.datastore.createQuery(DepositCard.class).field("BM_ID").equal(bmid).field("BM_DEL").equal(1);
+		MongoDBConnector.datastore.delete(query);
+		return 0;
+	}
+	
 }

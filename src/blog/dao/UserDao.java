@@ -3,6 +3,7 @@ package blog.dao;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 import org.springframework.stereotype.Repository;
 
@@ -170,6 +171,32 @@ public class UserDao {
 		UpdateResults re = MongoDBConnector.datastore.updateFirst(updateQuery, u,false);
 		re.getUpdatedCount();
 		return MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID()).get();
+	}
+	
+	/**
+	 * 修改用户余额, 在原基础上加
+	 * @param u
+	 * @return
+	 */
+	public int rechargeUserDeposit(User u)
+	{
+		if(u==null)
+		{
+			return -1;
+		}
+		if(u.getBM_ID()==null)
+		{
+			return -2;
+		}
+		if(u.getDeposit()==null)
+		{
+			return -3;
+		}
+		Query<User> updateQuery = MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(u.getBM_ID());
+		UpdateOperations<User> ops=MongoDBConnector.datastore.createUpdateOperations(User.class);
+		ops.inc("deposit",u.getDeposit());
+		UpdateResults re = MongoDBConnector.datastore.update(updateQuery, ops);
+		return re.getUpdatedCount();
 	}
 	
 	/***********************************find****************************************************/

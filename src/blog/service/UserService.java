@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import blog.component.MailComponent;
 import blog.dao.ConfirmDao;
+import blog.dao.DepositDao;
 import blog.dao.UserDao;
 import blog.model.Confirm;
+import blog.model.DepositCard;
 import blog.model.Page;
 import blog.model.User;
 import blog.startup.Config;
@@ -28,6 +30,8 @@ public class UserService {
 	private ConfirmDao confirmDao;
 	@Autowired
 	private MailComponent mailComponent;
+	@Autowired
+	private DepositDao depositDao;
 	
 	/**
 	 * 同时还要查找这个用户的管理员属性
@@ -220,6 +224,31 @@ public class UserService {
 		u.setSign(sign);
 		u = this.userDao.editUser(u);
 		return u;
+	}
+	
+	/**
+	 * 用户充值
+	 * @param bmid 用户ID
+	 * @param account  username
+	 * @param code  uuid
+	 * @return
+	 */
+	public int rechargeUserDeposit(String bmid, String account, String code)
+	{
+		DepositCard dc = this.depositDao.findDepositCard(bmid, account, code);
+		if(dc==null)
+		{
+			return -1;
+		}
+		User u = new User();
+		u.setBM_ID(dc.getUser());
+		u.setDeposit(dc.getPrice());
+		int re = this.userDao.rechargeUserDeposit(u);
+		if(re==1)
+		{
+			this.depositDao.deleteDepositCard(dc.getBM_ID());
+		}
+		return re;
 	}
 	
 	

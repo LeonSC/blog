@@ -72,4 +72,19 @@ public class PersonalController {
 		this.userService.sendConfirmEmail(u.getBM_ID(), email);
 		return "redirect:/personal/index";
 	}
+	
+	/**
+	 * 账户充值
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("/recharge")
+	public String rechargeAccount(HttpServletRequest request, @RequestParam(value = "code", required = false) String code)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.userService.rechargeUserDeposit(u.getBM_ID(), u.getUsername(), code);
+		u = this.userService.findUserByBMID(u.getBM_ID());
+		request.getSession().setAttribute(Config.memAuth, u);
+		return "redirect:/personal/index";
+	}
 }

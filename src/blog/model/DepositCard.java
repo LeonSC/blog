@@ -9,6 +9,7 @@ public class DepositCard extends BaseModel {
 	private String uuid = "";
 	private Integer price = 1; //金额, 基于元
 	private String account = "";
+	private String user = "";
 	public String getOkey() {
 		return okey;
 	}
@@ -32,5 +33,11 @@ public class DepositCard extends BaseModel {
 	}
 	public void setAccount(String account) {
 		this.account = account;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 }

@@ -54,6 +54,7 @@
 								<a href="#">删除</a>
 							</td>
 						</tr>
+						<c:if test="${item.rest!=0}">
 						<tr>
 							<td colspan="8">
 								<form class="form-inline" method="POST" action="${config.rootPath}/admin/deposit/senddepositcard">
@@ -91,6 +92,7 @@
 								</c:forEach>
 							</td>
 						</tr>
+						</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
