@@ -40,8 +40,8 @@ public class MailComponent {
 		try {
 			SimpleEmail client = this.getSimpleEmail();
 			client.addTo(email);
-			client.setSubject("兑换卷");// 主题
-			client.setMsg("请登录后在个人面板中兑换. 兑换卷为 "+code); // 内容
+			client.setSubject("宅次元");// 主题
+			client.setMsg("请登录后在个人面板中兑换."+code); // 内容
 			client.send();
 		} catch (EmailException e) {
 			e.printStackTrace();
