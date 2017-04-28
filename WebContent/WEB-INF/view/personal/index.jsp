@@ -66,6 +66,26 @@
 						</form>
 					</div>
 				</div>
+				<c:if test="${not empty memAuth.email}">
+				<br />
+				<div class="row">
+					<div class="col col-12">绑定邮箱 <i class="fa fa-address-card" aria-hidden="true"></i> ${memAuth.email}</div>
+				</div>
+				</c:if>
+				<c:if test="${empty memAuth.email}">
+				<br />
+				<div class="row">
+					<div class="col col-12">
+						<form method="post" action="${config.rootPath}/personal/email/send">
+							<div class="form-group">
+								<label>绑定邮箱</label> 
+								<input type="text" class="form-control" name="email" value="${memAuth.username}"> 
+							</div>
+							<button type="submit" class="btn btn-primary">发送验证邮件</button>
+						</form>
+					</div>
+				</div>
+				</c:if>
 			</div>
 			<div class="col col-3">
 				<%@ include file="../static/myself.jsp"%>

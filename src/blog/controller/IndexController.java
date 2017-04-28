@@ -100,9 +100,14 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/email/check/{code}")
-	public String checkConfirmEmail(@PathVariable String code)
+	public String checkConfirmEmail(HttpServletRequest request,@PathVariable String code)
 	{
-		this.userService.checkConfirmEmail(code);
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		String email = this.userService.checkConfirmEmail(code);
+		if(u!=null)
+		{
+			u.setEmail(email);
+		}
 		return "redirect:/index";
 	}
 	

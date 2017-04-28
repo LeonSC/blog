@@ -2,10 +2,12 @@ package blog.dao;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
+import org.springframework.stereotype.Repository;
 
 import blog.model.Confirm;
 import blog.startup.MongoDBConnector;
 
+@Repository
 public class ConfirmDao {
 
 	/**

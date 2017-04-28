@@ -246,18 +246,18 @@ public class UserService {
 	 * @param code
 	 * @return
 	 */
-	public int checkConfirmEmail(String code)
+	public String checkConfirmEmail(String code)
 	{
 		Confirm c = this.confirmDao.findConfirmByCode(code);
 		if(!c.getCode().equals(code))
 		{
-			return -1;
+			return null;
 		}
 		User u = new User();
 		u.setBM_ID(c.getUser());
 		u.setEmail(c.getEmail());
 		this.userDao.editUser(u);
 		this.confirmDao.deleteConfirmByCode(c.getBM_ID());
-		return 0;
+		return c.getEmail();
 	}
 }

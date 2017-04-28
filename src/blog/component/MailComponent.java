@@ -25,6 +25,7 @@ public class MailComponent {
 	{
 		try {
 			SimpleEmail client = this.getSimpleEmail();
+			client.addTo(email);
 			client.setSubject("邮箱验证");// 主题
 			client.setMsg(content); // 内容
 			client.send();
