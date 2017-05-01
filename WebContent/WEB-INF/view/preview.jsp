@@ -19,7 +19,7 @@
 								<label class="mr-sm-2">发布到</label>
 								<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="topic">
 									<c:forEach var="item" items="${cache.titleCache}">
-										<option value="${item.BM_ID}">${item.name}</option>
+										<option value="${item.value.BM_ID}">${item.value.name}</option>
 									</c:forEach>
 								</select>
 							</div>
