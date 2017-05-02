@@ -33,10 +33,13 @@ public class Content extends BaseModel {
 	private Integer price = 0;
 	/**
 	 * String 付款人BMID
-	 * INTEGER 付款多少.
-	 * 支持打赏
+	 * UserPayment 付款信息.
 	 */
-	private Map<String,Integer> payer = new HashMap<>();
+	private Map<String,Payment> payer = new HashMap<>();
+	/**
+	 * 打赏内容
+	 */
+	private Map<String, Payment> reward = new HashMap<>();
 	
 	public String getTitle() {
 		return title;
@@ -116,12 +119,20 @@ public class Content extends BaseModel {
 		this.price = price;
 	}
 
-	public Map<String,Integer> getPayer() {
+	public Map<String,Payment> getPayer() {
 		return payer;
 	}
 
-	public void setPayer(Map<String,Integer> payer) {
+	public void setPayer(Map<String,Payment> payer) {
 		this.payer = payer;
+	}
+
+	public Map<String, Payment> getReward() {
+		return reward;
+	}
+
+	public void setReward(Map<String, Payment> reward) {
+		this.reward = reward;
 	}
 	
 }
