@@ -44,11 +44,14 @@ public class TopicController {
 		if (c == null) {
 			return "redirect:/error/noart";
 		}
+		//当文章附带价格时候, 未登录不允许浏览, 未付费不允许浏览
 		if (c.getPrice() != null || c.getPrice() != 0) {
+			//判断未登录
 			User u = (User) request.getSession().getAttribute(Config.memAuth);
 			if (u == null) {
 				return "redirect:/error/nologin";
 			}
+			//不是作者, 未购买, 不允许查看
 			if (!u.getBM_ID().equals(c.getUser().getBM_ID()) && c.getPayer().get(u.getBM_ID()) == null) {
 				return "redirect:/pay/art/" + c.getBM_ID();
 			}
