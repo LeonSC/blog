@@ -114,11 +114,21 @@ public class WriteController {
 		return "preview";
 	}
 
+	/**
+	 * 草稿发布
+	 * @param request
+	 * @param topic
+	 * @param price
+	 * @param bmid
+	 * @return
+	 */
 	@RequestMapping("/publish")
-	public String publish(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic,
+	public String publish(HttpServletRequest request, 
+			@RequestParam(value = "topic", required = false) String topic,
+			@RequestParam(value = "price", required = false) Integer price,
 			@RequestParam(value = "draft", required = false) String bmid) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.publishContent(u.getBM_ID(), topic);
+		this.contentService.publishContent(u.getBM_ID(), topic, price);
 		return "redirect:/topic/" + topic;
 	}
 

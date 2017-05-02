@@ -148,11 +148,15 @@ public class ContentService {
 	 * @param topic
 	 * @return
 	 */
-	public Content publishContent(String userid, String topic)
+	public Content publishContent(String userid, String topic, Integer price)
 	{
 		if(topic==null||topic.isEmpty())
 		{
 			return null;
+		}
+		if(price == null||price < 0)
+		{
+			price=0;
 		}
 		Draft d = this.draftDao.getDraftByUser(userid);
 		User u = this.userDao.findUserByBMID(userid);
@@ -165,6 +169,7 @@ public class ContentService {
 		c.setCover(d.getCover());
 		c.setIntro(d.getIntro());
 		c.setContent(d.getContent());
+		c.setPrice(price);
 		c = this.contentDao.save(c);
 		//删除草稿
 		this.draftDao.deleteDraftByUser(userid);

@@ -21,7 +21,7 @@
 							<tr>
 								<td><img class="rounded float-left custom-max-75-75" src="${item.cover}" data-src="holder.js/75x75?theme=simple&text=TOP&random=yes"/></td>
 								<td style="width:1rem"></td>
-								<td><h5 class="mt-0">${item.title}</h5>
+								<td><h5 class="mt-0">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h5>
 								<h6 style="margin-bottom:0">${item.intro}</h6>
 								<small><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></td>
 							</tr>
@@ -40,7 +40,7 @@
 					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple&text=I&random=yes">
 						<div class="card-block">
-							<h4 class="card-title">${item.title}</h4>
+							<h4 class="card-title">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h4>
 							<p class="card-text">${item.intro}</p>
 							<p class="card-text"><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
 						</div>
@@ -59,7 +59,9 @@
 							<tr>
 								<td><img class="rounded float-left custom-max-70-70" src="${item.cover}" data-src="holder.js/70x70?theme=simple&text=S&random=yes"/></td>
 								<td style="width:1rem"></td>
-								<td><h5 class="mt-0">${item.title}</h5>
+								<td><h5 class="mt-0">${item.title}
+								<c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if>
+								</h5>
 								<h6 style="margin-bottom:0">${item.intro}</h6>
 								<small><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></td>
 							</tr>

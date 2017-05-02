@@ -15,13 +15,21 @@
 					<div class="col col-12">
 						<hr/>
 						<form  method="post" action="${config.rootPath}/write/publish">
-							<div class="form-group">
-								<label class="mr-sm-2">发布到</label>
-								<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="topic">
+							<div class="form-group row">
+								<label class="col-2 col-form-label">发布到</label>
+								<div class="col-6">
+								<select class="form-control" name="topic">
 									<c:forEach var="item" items="${cache.titleCache}">
 										<option value="${item.value.BM_ID}">${item.value.name}</option>
 									</c:forEach>
 								</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-2 col-form-label">价格</label>
+								<div class="col-6">
+									<input class="form-control" type="number" name="price">
+								</div>
 							</div>
 							<input type="hidden" name="draft" value="${draft.BM_ID}"/>
 							<!-- <fieldset class="form-group row">

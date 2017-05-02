@@ -1,5 +1,8 @@
 package blog.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mongodb.morphia.annotations.Entity;
 
 @Entity("content")
@@ -20,9 +23,20 @@ public class Content extends BaseModel {
 
 	/**
 	 * 0 正常
-	 * long 置顶
+	 * long 置顶, 置顶时间, 用于排序
 	 */
 	private Long top = 0L;
+	
+	/**
+	 * 售卖价格, 0, 表示免费
+	 */
+	private Integer price = 0;
+	/**
+	 * String 付款人BMID
+	 * INTEGER 付款多少.
+	 * 支持打赏
+	 */
+	private Map<String,Integer> payer = new HashMap<>();
 	
 	public String getTitle() {
 		return title;
@@ -92,6 +106,22 @@ public class Content extends BaseModel {
 
 	public void setTop(Long top) {
 		this.top = top;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Map<String,Integer> getPayer() {
+		return payer;
+	}
+
+	public void setPayer(Map<String,Integer> payer) {
+		this.payer = payer;
 	}
 	
 }
