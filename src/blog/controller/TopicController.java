@@ -36,6 +36,14 @@ public class TopicController {
 	public String art(HttpServletRequest request,@PathVariable String bmid)
 	{
 		Content c = this.contentService.getContentByBMID(bmid);
+		if(c==null)
+		{
+			return "redirect:/error/noart";
+		}
+		if(c.getPrice()!=null||c.getPrice()!=0)
+		{
+			return "redirect:/pay/art/"+c.getBM_ID();
+		}
 		request.setAttribute("c", c);
 		List<Reply> list = this.contentService.getReplyList(bmid);
 		request.setAttribute("replylist", list);
