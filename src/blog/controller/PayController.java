@@ -43,6 +43,9 @@ public class PayController {
 		if (bmid == null) {
 			return "redirect:/error/noart";
 		}
+		if (bmid.equals("-1")) {
+			return "redirect:/error/noenough";
+		}
 		return "redirect:/topic/art/" + bmid;
 	}
 }

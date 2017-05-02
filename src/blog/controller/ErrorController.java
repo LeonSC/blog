@@ -24,6 +24,11 @@ public class ErrorController {
 	{
 		return "error/nologin";
 	}
+	@RequestMapping("/noenough")
+	public String noEnough()
+	{
+		return "error/noenough";
+	}
 	
 	@RequestMapping("")
 	public String error()

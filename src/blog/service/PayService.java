@@ -50,6 +50,10 @@ public class PayService {
 		{
 			return null;
 		}
+		if(user.getDeposit()<c.getPrice())
+		{
+			return "-1";
+		}
 		if(secret==null||secret!=1)
 		{
 			secret=0;
