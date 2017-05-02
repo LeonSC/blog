@@ -13,10 +13,10 @@
 						<ul class="nav nav-tabs card-header-tabs">
 							<c:forEach var="item" items="${cache.titleCache}" varStatus="i">
 								<c:if test="${i.first}">
-									<li class="nav-item"><a class="nav-link active" href="#tab${item.BM_ID}" data-toggle="tab" role="tab">${item.name}</a></li>
+									<li class="nav-item"><a class="nav-link active" href="#tab${item.value.BM_ID}" data-toggle="tab" role="tab">${item.value.name}</a></li>
 								</c:if>
 								<c:if test="${not i.first}">
-									<li class="nav-item"><a class="nav-link" href="#tab${item.BM_ID}" data-toggle="tab" role="tab">${item.name}</a></li>
+									<li class="nav-item"><a class="nav-link" href="#tab${item.value.BM_ID}" data-toggle="tab" role="tab">${item.value.name}</a></li>
 								</c:if>
 							</c:forEach>
 						</ul>
@@ -24,11 +24,11 @@
 					<div class="tab-content">
 						<c:forEach var="item" items="${cache.titleCache}" varStatus="i">
 							<c:if test="${i.first}">
-								<div class="tab-pane fade show active" id="tab${item.BM_ID}" role="tabpanel">
+								<div class="tab-pane fade show active" id="tab${item.value.BM_ID}" role="tabpanel">
 									<div class="card-block">
 										<p class="card-text">已有管理员</p>
 										<p class="card-text">
-											<c:forEach var="manager" items="${item.manager}" varStatus="ii">
+											<c:forEach var="manager" items="${item.value.manager}" varStatus="ii">
 												<c:if test="${ii.first}">
 												${manager.value.username}
 												</c:if>
@@ -41,22 +41,22 @@
 											<div class="form-group row">
 												<label class="col-2 col-form-label">账户</label>
 												<div class="col-10">
-													<input type="hidden" name="bmid" value="${item.BM_ID}"/>
+													<input type="hidden" name="bmid" value="${item.value.BM_ID}"/>
 													<input class="form-control" type="email" name="email" />
 												</div>
 											</div>
 											<button type="submit" class="btn btn-primary btn-sm">提交</button>
 										</form>
-										<p class="card-text">${item.intro}</p>
+										<p class="card-text">${item.value.intro}</p>
 									</div>
 								</div>
 							</c:if>
 							<c:if test="${not i.first}">
-								<div class="tab-pane fade" id="tab${item.BM_ID}" role="tabpanel">
+								<div class="tab-pane fade" id="tab${item.value.BM_ID}" role="tabpanel">
 									<div class="card-block">
 										<p class="card-text">已有管理员</p>
 										<p class="card-text">
-											<c:forEach var="manager" items="${item.manager}" varStatus="ii">
+											<c:forEach var="manager" items="${item.value.manager}" varStatus="ii">
 												<c:if test="${ii.first}">
 												${manager.value.username}
 												</c:if>
@@ -69,13 +69,13 @@
 											<div class="form-group row">
 												<label class="col-2 col-form-label">账户</label>
 												<div class="col-10">
-													<input type="hidden" name="bmid" value="${item.BM_ID}"/>
+													<input type="hidden" name="bmid" value="${item.value.BM_ID}"/>
 													<input class="form-control" type="email" name="email" />
 												</div>
 											</div>
 											<button type="submit" class="btn btn-primary btn-sm">提交</button>
 										</form>
-										<p class="card-text">${item.intro}</p>
+										<p class="card-text">${item.value.intro}</p>
 									</div>
 								</div>
 							</c:if>
