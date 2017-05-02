@@ -45,7 +45,7 @@ public class TopicController {
 			return "redirect:/error/noart";
 		}
 		//当文章附带价格时候, 未登录不允许浏览, 未付费不允许浏览
-		if (c.getPrice() != null || c.getPrice() != 0) {
+		if (c.getPrice() != null && c.getPrice() != 0) {
 			//判断未登录
 			User u = (User) request.getSession().getAttribute(Config.memAuth);
 			if (u == null) {
