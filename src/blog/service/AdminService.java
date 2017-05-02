@@ -147,6 +147,7 @@ public class AdminService {
 		}
 		if(u.getAdmin()!=null)
 		{
+			u.getAdmin().setPassword(u.getPw());
 			if(adminlv!=null){u.getAdmin().setLv(adminlv);}
 			if(adminvisible!=null){u.getAdmin().setVisible(adminvisible);}
 			if(admincreate!=null){u.getAdmin().setCreate(admincreate);}
