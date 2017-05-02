@@ -199,6 +199,30 @@ public class UserDao {
 		return re.getUpdatedCount();
 	}
 	
+	/**
+	 * 修改用户余额, 在原基础上减
+	 * @param user bmid
+	 * @param des 减去的价值
+	 * @return
+	 */
+	public int decUserDeposit(String bmid, Integer des)
+	{
+
+		if(bmid==null)
+		{
+			return -2;
+		}
+		if(des==null)
+		{
+			return -3;
+		}
+		Query<User> updateQuery = MongoDBConnector.datastore.createQuery(User.class).field("BM_ID").equal(bmid);
+		UpdateOperations<User> ops=MongoDBConnector.datastore.createUpdateOperations(User.class);
+		ops.dec("deposit",des);
+		UpdateResults re = MongoDBConnector.datastore.update(updateQuery, ops);
+		return re.getUpdatedCount();
+	}
+	
 	/***********************************find****************************************************/
 	//验证用户
 	public User findByUserName(String email)

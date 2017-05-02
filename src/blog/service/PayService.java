@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import blog.dao.ContentDao;
+import blog.dao.UserDao;
 import blog.model.Content;
 import blog.model.Payment;
 import blog.model.User;
@@ -16,6 +17,8 @@ public class PayService {
 
 	@Autowired
 	private ContentDao contentDao;
+	@Autowired
+	private UserDao userDao;
 	
 	/**
 	 * 对文章进行支付
@@ -69,7 +72,16 @@ public class PayService {
 			p.setPayerheadericon(user.getHeaderIcon());
 			p.setPayment(p.getPayment()+c.getPrice());
 		}
-		this.contentDao.addPayerToContent(c.getBM_ID(), c.getPayer());
+		int re = this.contentDao.addPayerToContent(c.getBM_ID(), c.getPayer());
+		if(re>0)
+		{
+			//对用户进行减款
+			re = this.userDao.decUserDeposit(user.getBM_ID(), c.getPrice());
+			if(re>0)
+			{
+				user.setDeposit(user.getDeposit()-c.getPrice());
+			}
+		}
 		return c.getBM_ID();
 	}
 }

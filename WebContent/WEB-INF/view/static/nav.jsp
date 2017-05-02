@@ -10,8 +10,7 @@
 		<a class="navbar-brand" href="${config.rootPath}">宅次元</a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="#">签到</a>
-				</li>
+				<!-- <li class="nav-item"><a class="nav-link" href="#">签到</a></li> -->
 			</ul>
 		</div>
 	</div>

@@ -19,6 +19,12 @@ public class ErrorController {
 		return "error/noauth";
 	}
 	
+	@RequestMapping("/nologin")
+	public String noLogin()
+	{
+		return "error/nologin";
+	}
+	
 	@RequestMapping("")
 	public String error()
 	{

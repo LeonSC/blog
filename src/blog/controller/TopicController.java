@@ -49,7 +49,7 @@ public class TopicController {
 			if (u == null) {
 				return "redirect:/error/nologin";
 			}
-			if (c.getPayer().get(u.getBM_ID()) == null) {
+			if (!u.getBM_ID().equals(c.getUser().getBM_ID()) && c.getPayer().get(u.getBM_ID()) == null) {
 				return "redirect:/pay/art/" + c.getBM_ID();
 			}
 		}
