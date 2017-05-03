@@ -64,6 +64,7 @@
 												</div>
 											</fieldset>
 										</div>
+										<!-- 
 										<div class="form-group row">
 											<label class="col-2 col-form-label">可阅读最低等级</label>
 											<div class="col-10">
@@ -76,6 +77,7 @@
 												<input class="form-control" type="number" name="visible" min=0 max="${adminAuth.admin.visible}" value="${item.value.auth.visible}"/>
 											</div>
 										</div>
+										 -->
 										<button type="submit" class="btn btn-primary btn-sm">提交</button>
 									</form>
 								</div>

@@ -10,7 +10,16 @@
 		<ul class="nav">
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}">首页</a></li>
 			<c:forEach var="item" items="${cache.titleCache}">
-				<li class="nav-item"><a class="nav-link" href="${config.rootPath}/topic/${item.key}">${item.value.name}</a></li>
+				<c:choose>
+					<c:when test="${item.value.auth.loginVisible==1}">
+						<c:if test="${not empty memAuth}">
+							<li class="nav-item"><a class="nav-link" href="${config.rootPath}/topic/${item.key}">${item.value.name}</a></li>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="${config.rootPath}/topic/${item.key}">${item.value.name}</a></li>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
 		</ul>
 	</div>
