@@ -170,6 +170,9 @@ public class ContentService {
 		c.setIntro(d.getIntro());
 		c.setContent(d.getContent());
 		c.setPrice(price);
+		c.getNeed().setLv(0);
+		c.getNeed().setVisible(0);
+		c.getNeed().setLoginVisible(0);
 		c = this.contentDao.save(c);
 		//删除草稿
 		this.draftDao.deleteDraftByUser(userid);

@@ -43,4 +43,42 @@ public class TopicService {
 		TCache.getCache().initTitleCache();
 		return 0;
 	}
+	
+	/**
+	 * 修改主题的权限
+	 * @param topicid
+	 * @param u
+	 * @param loginvisible
+	 * @param lv
+	 * @param visible
+	 * @return
+	 */
+	public int updateTopicAuth(String topicid, User u, Integer loginvisible, Integer lv, Integer visible)
+	{
+		if(loginvisible==null||loginvisible!=1)
+		{
+			loginvisible=0;
+		}
+		else
+		{
+			loginvisible=1;
+		}
+		if(lv==null||lv<0)
+		{
+			lv=0;
+		}
+		if(lv>=u.getAdmin().getLv())
+		{
+			lv=u.getAdmin().getLv();
+		}
+		if(visible==null||visible<0)
+		{
+			visible=0;
+		}
+		if(visible>=u.getAdmin().getVisible())
+		{
+			visible=u.getAdmin().getVisible();
+		}
+		return 0;
+	}
 }
