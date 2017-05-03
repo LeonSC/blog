@@ -79,6 +79,20 @@ public class TopicService {
 		{
 			visible=u.getAdmin().getVisible();
 		}
+		Topic topic =new Topic();
+		topic.setBM_ID(topicid);
+		Auth auth=new Auth();
+		auth.setLoginVisible(loginvisible);
+		auth.setLv(lv);
+		auth.setVisible(visible);
+		auth.setCreate(null);
+		auth.setDelete(null);
+		auth.setModify(null);
+		auth.setFind(null);
+		topic.setAuth(auth);
+		this.topicDao.updateTopicAuthByBMID(topic);
+		//重新设置缓存
+		TCache.getCache().initTitleCache();
 		return 0;
 	}
 }
