@@ -80,7 +80,6 @@ public class WriteController {
 	@ResponseBody
 	public String fileDelete(@RequestParam(value = "file", required = false) String path) {
 		String re = this.imgService.delImgPhysicalPath(path);
-
 		return re;
 	}
 
@@ -116,6 +115,7 @@ public class WriteController {
 
 	/**
 	 * 草稿发布
+	 * 
 	 * @param request
 	 * @param topic
 	 * @param price
@@ -123,8 +123,7 @@ public class WriteController {
 	 * @return
 	 */
 	@RequestMapping("/publish")
-	public String publish(HttpServletRequest request, 
-			@RequestParam(value = "topic", required = false) String topic,
+	public String publish(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic,
 			@RequestParam(value = "price", required = false) Integer price,
 			@RequestParam(value = "draft", required = false) String bmid) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
@@ -146,5 +145,37 @@ public class WriteController {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		this.contentService.setReplyForContent(u, contentid, reply);
 		return "redirect:/topic/art/" + contentid;
+	}
+
+	///////////////////////////// layui editor///////////////////////////////////////
+	@RequestMapping("/layui")
+	public String layuiWrite(HttpServletRequest request) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
+		request.setAttribute("draft", draft);
+		return "editor/layui";
+	}
+	
+	@RequestMapping("/imguploadforlayui")
+	@ResponseBody
+	public String imgUploadForLayUI(HttpServletRequest request,
+			@RequestParam(value = "file", required = false) MultipartFile file) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		if (u == null) {
+			return "";
+		}
+		String[] array = { "" };
+		// 判断文件是否为空
+		if (file != null && !file.isEmpty()) {
+			try {
+				array = this.imgService.getImgPhysicalPathForLayUI(u.getBM_ID(), file.getOriginalFilename());
+				// 转存文件
+				file.transferTo(new File(array[1]));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 重定向
+		return array[0];
 	}
 }

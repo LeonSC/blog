@@ -35,38 +35,28 @@ public class ImgService {
 		String suffix = tmp[tmp.length - 1];
 		String newPicName = new StringBuffer(Tools.getID()).append(".").append(suffix).toString();
 		String timePath = Tools.longTransDateyyyyMMdd(Tools.getServerTime());
-
 		// 拼接需要返回的字符串信息
 		StringBuffer rePath = new StringBuffer(Config.getImgPhysicalPath()).append(bmid).append(File.separator).append(timePath);
-		
 		//目录不存在就创建
 		File file = new File(rePath.toString());
 		if(!file.exists())
 		{
 			file.mkdirs();
 		}
-		
 		rePath.append(File.separator).append(newPicName);
-
 		//访问路径
-		String visitPath = new StringBuffer(Config.getImgWebPath()).append(bmid).append("/")
-				.append(timePath).append("/").append(newPicName).toString();
-		
+		String visitPath = new StringBuffer(Config.getImgWebPath()).append(bmid).append("/").append(timePath).append("/").append(newPicName).toString();
 		//拼装需要返回给JS的字符串
 		Map<String,String> map = new HashMap<>();
 		map.put("name", newPicName);
 		map.put("url", visitPath);
 		map.put("delete_url", new StringBuffer(Config.rootPath+"/write/imgDelete?file=").append(File.separator).append(timePath).append(File.separator).append(newPicName).toString());
 		map.put("delete_type", "DELETE");
-		
 		List<Map<String,String>> list = new ArrayList<>();
 		list.add(map);
-		
 		Map<String,List<Map<String,String>>> re = new HashMap<>();
 		re.put("files", list);
-		
 		String[] reArray = {JSON.toJSONString(re),rePath.toString()};
-		
 		return reArray;
 	}
 	
@@ -80,7 +70,6 @@ public class ImgService {
 		if (path.startsWith("data")) {
 			return "";
 		}
-
 		// 拼装需要返回给JS的字符串
 		Map<String, Boolean> map = new HashMap<>();
 		map.put(path, true);
@@ -89,9 +78,7 @@ public class ImgService {
 		Map<String, List<Map<String, Boolean>>> re = new HashMap<>();
 		re.put("files", list);
 		String tmp = JSON.toJSONString(re);
-
 		String del = path.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
-
 		del = del.replaceAll("/", File.separator);
 		File file = new File(del);
 		if(file.exists())
@@ -155,5 +142,39 @@ public class ImgService {
 		re[0] = rePath.toString();
 		re[1] = visitPath;
 		return re;
+	}
+	
+	/**
+	 * layui返回格式
+	 * @param bmid
+	 * @param name
+	 * @return
+	 */
+	public String[] getImgPhysicalPathForLayUI(String bmid, String name) 
+	{
+		String[] tmp = name.split("\\.");
+		String suffix = tmp[tmp.length - 1];
+		String newPicName = new StringBuffer(Tools.getID()).append(".").append(suffix).toString();
+		String timePath = Tools.longTransDateyyyyMMdd(Tools.getServerTime());
+		// 拼接需要返回的字符串信息
+		StringBuffer rePath = new StringBuffer(Config.getImgPhysicalPath()).append(bmid).append(File.separator).append(timePath);
+		//目录不存在就创建
+		File file = new File(rePath.toString());
+		if(!file.exists())
+		{
+			file.mkdirs();
+		}
+		rePath.append(File.separator).append(newPicName);
+		//访问路径
+		String visitPath = new StringBuffer(Config.getImgWebPath()).append(bmid).append("/").append(timePath).append("/").append(newPicName).toString();
+		//拼装需要返回给JS的字符串
+		Map<String,Object> map = new HashMap<>();
+		map.put("code", "0");
+		map.put("msg", "上传成功");
+		Map<String,String> data = new HashMap<>();
+		data.put("src", visitPath);
+		map.put("data", data);
+		String[] reArray = {JSON.toJSONString(map),rePath.toString()};
+		return reArray;
 	}
 }
