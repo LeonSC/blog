@@ -16,13 +16,8 @@
 				<form id="layuiform">
 					<div class="form-group row">
 						<label class="col-2 col-form-label">发布到</label>
-						<div class="col-6">
-						<select class="form-control" name="topic">
-							<c:forEach var="item" items="${cache.titleCache}">
-								<option value="${item.value.BM_ID}" <c:if test="${item.value.BM_ID eq onviewtopic}">selected="selected"</c:if>>${item.value.name}</option>
-							</c:forEach>
-						</select>
-						</div>
+						<label class="col-6 col-form-label h4">${topic.name}</label>
+						<input type="hidden" name="topic" value="${topic.BM_ID}">
 					</div>
 					<div class="form-group row">
 						<label class="col-2 col-form-label">价格</label>

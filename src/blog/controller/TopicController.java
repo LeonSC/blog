@@ -26,7 +26,6 @@ public class TopicController {
 
 	@RequestMapping("/{topic}")
 	public String topic(HttpServletRequest request, @PathVariable String topic) {
-		request.getSession().setAttribute("onviewtopic", topic);
 		// 未登录不允许浏览判定
 		Topic t = TCache.getCache().titleCache.get(topic);
 		if (t.getAuth().getLoginVisible() != null && t.getAuth().getLoginVisible() == 1) {
@@ -39,6 +38,7 @@ public class TopicController {
 		request.setAttribute("toplist", toplist);
 		List<Content> list = this.contentService.getContentListByTopic(topic);
 		request.setAttribute("list", list);
+		request.setAttribute("topic", topic);
 		return "topic";
 	}
 

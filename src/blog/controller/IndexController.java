@@ -21,8 +21,7 @@ public class IndexController {
 	private AdminService adminService;
 	
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request) {
-		request.getSession().setAttribute("onviewtopic", null);
+	public String index() {
 		return "index";
 	}
 
@@ -123,14 +122,11 @@ public class IndexController {
 	public String adminLoginSubmit(HttpServletRequest request, @RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "pw", required = false) String pw) {
 		User u = this.adminService.checkAdmin(email, pw);
-
 		if (u == null) {
 			request.getSession().setAttribute("error_wrongpw", "wrongpw");
 			return "redirect:/adminindex";
 		}
-
 		request.getSession().setAttribute(Config.adminAuth, u);
-
 		return "redirect:/admin/index";
 	}
 }

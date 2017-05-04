@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import blog.model.Draft;
+import blog.model.Topic;
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
 import blog.startup.Config;
+import blog.startup.TCache;
 
 /**
  * 控制文章相关的东西
@@ -153,10 +155,13 @@ public class WriteController {
 
 	///////////////////////////// layui editor///////////////////////////////////////
 	@RequestMapping("/layui")
-	public String layuiWrite(HttpServletRequest request) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
-		request.setAttribute("draft", draft);
+	public String layuiWrite(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic) {
+		if(topic==null)
+		{
+			return "redirect:/index";
+		}
+		Topic t = TCache.getCache().titleCache.get(topic);
+		request.setAttribute("topic", t);
 		return "editor/layui";
 	}
 	

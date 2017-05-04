@@ -11,6 +11,9 @@
 		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 		<div class="col col-9">
+		<div class="row" style="margin-bottom:.3rem">
+			<div class="col col-12"><a type="button" class="btn btn-info btn-sm" href="${config.rootPath}/write/layui?topic=${topic}">写点什么</a></div>
+		</div>
 		<c:if test="${not empty toplist}">
 		<div class="row">
 			<div class="col col-12">
@@ -38,7 +41,7 @@
 				<div class="card-group">
 					<c:forEach var="item" items="${list}" begin="0" end="3">
 					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
-						<img class="card-img-top" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple&text=I&random=yes">
+						<img class="card-img-top img-fluid" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple&text=I&random=yes">
 						<div class="card-block">
 							<h4 class="card-title">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h4>
 							<p class="card-text">${item.intro}</p>
