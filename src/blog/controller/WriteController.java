@@ -109,6 +109,10 @@ public class WriteController {
 	public String preView(HttpServletRequest request) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
+		if(draft==null)
+		{
+			return "redirect:/write/layui";
+		}
 		request.setAttribute("draft", draft);
 		return "preview";
 	}

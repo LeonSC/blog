@@ -13,6 +13,24 @@
 		<br />
 		<div class="row">
 			<div class="col col-12">
+				<form id="layuiform">
+					<div class="form-group row">
+						<label class="col-2 col-form-label">发布到</label>
+						<div class="col-6">
+						<select class="form-control" name="topic">
+							<c:forEach var="item" items="${cache.titleCache}">
+								<option value="${item.value.BM_ID}" <c:if test="${item.value.BM_ID eq onviewtopic}">selected="selected"</c:if>>${item.value.name}</option>
+							</c:forEach>
+						</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-2 col-form-label">价格</label>
+						<div class="col-6">
+							<input class="form-control" type="number" name="price">
+						</div>
+					</div>
+				</form>
 				<h3>草稿</h3>
 				<hr />
 				<h4 class="card-title" contenteditable="true" id="editorTitle">
@@ -30,7 +48,7 @@
 		<br />
 		<div class="row">
 			<div class="col col-12">
-				<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a> <a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
+				<a href="#" class="btn btn-primary" id="writeSave">保存并发布</a>
 			</div>
 		</div>
 	</div>
@@ -50,7 +68,7 @@
 				e.preventDefault();
 				$('#postModal').modal('show');
 				var elContent = layedit.getContent(index);
-				$.post("${config.rootPath}/write/savedraft", {
+				$.post("${config.rootPath}/write/publishlayui", {
 					title : $("#editorTitle").html(),
 					content : elContent
 				}, function(data) {

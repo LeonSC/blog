@@ -22,6 +22,7 @@ public class IndexController {
 	
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
+		request.getSession().setAttribute("onviewtopic", null);
 		return "index";
 	}
 
@@ -31,21 +32,17 @@ public class IndexController {
 			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "pw", required = false) String pw) {
 		User u = this.userService.checkUser(email, pw);
-
 		if (u == null) {
 			request.getSession().setAttribute("error_wrongpw", "wrongpw");
 			return "redirect:/index";
 		}
-
 		request.getSession().setAttribute(Config.memAuth, u);
-
 		// 如果为非首页需求登录
 		Object path = request.getSession().getAttribute("recentView");
 		request.getSession().setAttribute("recentView", "");// 用完后清理
 		if (path != null && !path.toString().isEmpty()) {
 			return "redirect:" + Config.getConfig().getRootPath() + path.toString();
 		}
-
 		return "redirect:/index";
 	}
 	
