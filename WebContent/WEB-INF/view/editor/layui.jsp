@@ -17,12 +17,11 @@
 					<div class="form-group row">
 						<label class="col-2 col-form-label">发布到</label>
 						<label class="col-6 col-form-label h4">${topic.name}</label>
-						<input type="hidden" name="topic" value="${topic.BM_ID}">
 					</div>
 					<div class="form-group row">
 						<label class="col-2 col-form-label">价格</label>
 						<div class="col-6">
-							<input class="form-control" type="number" name="price">
+							<input class="form-control" type="number" name="price" id="layuiformprice">
 						</div>
 					</div>
 				</form>
@@ -65,10 +64,12 @@
 				var elContent = layedit.getContent(index);
 				$.post("${config.rootPath}/write/publishlayui", {
 					title : $("#editorTitle").html(),
-					content : elContent
+					content : elContent,
+					topic : "${topic.BM_ID}",
+					price : $("#layuiformprice").val()
 				}, function(data) {
 					if (data.status == "0") {
-						location.href = '${config.rootPath}/write/preview';
+						location.href = '${config.rootPath}/topic/${topic.BM_ID}';
 					} else {
 						alert(data.info);
 					}

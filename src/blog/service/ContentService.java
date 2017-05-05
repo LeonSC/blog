@@ -53,7 +53,7 @@ public class ContentService {
 			map.put("status", "-1");
 			map.put("info", "title is empty");
 		}
-		title= title.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
+		title= this.titleFix(title);
 		if(title.length()>50)
 		{
 			map.put("status", "-2");
@@ -72,6 +72,58 @@ public class ContentService {
 		}
 		//解析第一张图片
 		String cover = this.getFirstImg(content);
+		//解析intro
+		String intro = this.getIntroFromContent(content);
+		Draft draft = new Draft();
+		draft.setWrite(user);
+		draft.setTitle(title);
+		draft.setCover(cover);
+		draft.setIntro(intro);
+		draft.setContent(content);
+		this.draftDao.saveOrUpdate(draft);
+		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 把title多于的字符全部去掉
+	 * @param title
+	 * @return
+	 */
+	private String titleFix(String title)
+	{
+		return title.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
+	}
+	
+	/**
+	 * 过滤非法字符
+	 * @param content
+	 * @return
+	 */
+	private String contentFilter(String content)
+	{
+		return content.trim();
+	}
+	
+	/**
+	 * 从正文中拿去第一张图片
+	 * @param content
+	 * @return
+	 */
+	private String getFirstImg(String content)
+	{
+		String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
+		Pattern p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
+		Matcher m_image = p_image.matcher(content);
+		if(!m_image.find()){
+			return "";
+		}
+		String img = m_image.group();
+		Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
+		if(!m.find())
+		{
+			return "";
+		}
+		String cover = m.group(1).trim();
 		if(!cover.equals(""))
 		{
 			String coverpath = cover.replace(Config.getImgWebPath(), Config.getImgPhysicalPath());
@@ -88,44 +140,23 @@ public class ContentService {
 				}
 			}
 		}
-		//解析intro
+		return cover;
+	}
+	
+	/**
+	 * 通过正文获取intro
+	 * @param content
+	 * @return
+	 */
+	private String getIntroFromContent(String content)
+	{
 		String intro = content.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").trim();
 		if(intro.length()>100)
 		{
 			intro=intro.substring(0,100);
 		}
-		Draft draft = new Draft();
-		draft.setWrite(user);
-		draft.setTitle(title);
-		draft.setCover(cover);
-		draft.setIntro(intro);
-		draft.setContent(content);
-		this.draftDao.saveOrUpdate(draft);
-		return JSON.toJSONString(map);
+		return intro;
 	}
-	
-	private String contentFilter(String content)
-	{
-		return content;
-	}
-	
-	private String getFirstImg(String content)
-	{
-		String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
-		Pattern p_image = Pattern.compile(regEx_img, Pattern.CASE_INSENSITIVE);
-		Matcher m_image = p_image.matcher(content);
-		if(!m_image.find()){
-			return "";
-		}
-		String img = m_image.group();
-		Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
-		if(!m.find())
-		{
-			return "";
-		}
-		return m.group(1);
-	}
-	
 	
 	/**
 	 * 通过用户ID查找
@@ -177,6 +208,78 @@ public class ContentService {
 		//删除草稿
 		this.draftDao.deleteDraftByUser(userid);
 		return c;
+	}
+	
+	/**
+	 * 直接发布
+	 * @param userid
+	 * @param topic
+	 * @param price
+	 * @param title
+	 * @param content
+	 * @return
+	 */
+	public String layuiPublishContent(String userid, String topic, Integer price, String title, String content)
+	{
+		Map<String,String> map = new HashMap<>();
+		map.put("status", "0");
+		map.put("info", "succ");
+		if(topic==null||topic.isEmpty())
+		{
+			map.put("status", "-6");
+			map.put("info", "topic is empty");
+			return JSON.toJSONString(map);
+		}
+		if(price == null||price < 0)
+		{
+			price=0;
+		}
+		if(title==null||title.isEmpty())
+		{
+			map.put("status", "-1");
+			map.put("info", "title is empty");
+			return JSON.toJSONString(map);
+		}
+		title= this.titleFix(title);
+		if(title.length()>50)
+		{
+			map.put("status", "-2");
+			map.put("info", "title is too long");
+			return JSON.toJSONString(map);
+		}
+		if(content==null||content.isEmpty())
+		{
+			map.put("status", "-3");
+			map.put("info", "content is empty");
+			return JSON.toJSONString(map);
+		}
+		content = this.contentFilter(content);
+		if(content.length()<10)
+		{
+			map.put("status", "-4");
+			map.put("info", "content is too short");
+			return JSON.toJSONString(map);
+		}
+		//解析第一张图片
+		String cover = this.getFirstImg(content);
+		//解析intro
+		String intro = this.getIntroFromContent(content);
+		User u = this.userDao.findUserByBMID(userid);
+		u.setAdmin(null);
+		u.setPw(null);
+		Content c= new Content();
+		c.setTopic(topic);
+		c.setUser(u);
+		c.setTitle(title);
+		c.setCover(cover);
+		c.setIntro(intro);
+		c.setContent(content);
+		c.setPrice(price);
+		c.getNeed().setLv(0);
+		c.getNeed().setVisible(0);
+		c.getNeed().setLoginVisible(0);
+		c = this.contentDao.save(c);
+		return JSON.toJSONString(map);
 	}
 	
 	

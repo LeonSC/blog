@@ -187,4 +187,24 @@ public class WriteController {
 		// 重定向
 		return array[0];
 	}
+	
+	/**
+	 * layui保存
+	 * 
+	 * @param request
+	 * @param title
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping("/publishlayui")
+	@ResponseBody
+	public String publishLayUI(HttpServletRequest request,
+			@RequestParam(value = "topic", required = false) String topic,
+			@RequestParam(value = "price", required = false) Integer price,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "content", required = false) String content) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, price, title, content);
+		return re;
+	}
 }
