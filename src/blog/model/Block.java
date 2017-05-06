@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.NotSaved;
 
 /**
  * 用于存放论坛结构
@@ -29,6 +30,7 @@ public class Block extends BaseModel{
 	private Auth auth = new Auth();//这个节点的必须要的权限, 只有大于这个权限才能操作, 不可视一定不可操作
 	
 	//子域
+	@NotSaved
 	private LinkedHashMap<String,Block> block;
 
 	public String getOkey() {

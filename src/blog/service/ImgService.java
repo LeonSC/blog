@@ -174,7 +174,7 @@ public class ImgService {
 		Map<String,String> data = new HashMap<>();
 		data.put("src", visitPath);
 		map.put("data", data);
-		String[] reArray = {JSON.toJSONString(map),rePath.toString()};
+		String[] reArray = {JSON.toJSONString(map),rePath.toString(),visitPath};
 		return reArray;
 	}
 }
