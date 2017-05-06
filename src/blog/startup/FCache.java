@@ -29,7 +29,6 @@ public class FCache {
 
 	/**
 	 * 初始化列表,只支持两级
-	 * 
 	 * @return
 	 */
 	public int initBlockCache() {
