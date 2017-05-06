@@ -159,6 +159,19 @@ public class ContentService {
 	}
 	
 	/**
+	 * 过滤USER把不需要信息过滤掉
+	 * @param user
+	 * @return
+	 */
+	private User filterUser(User user)
+	{
+		user.setAdmin(null);
+		user.setPw(null);
+		user.setDeposit(null);
+		return user;
+	}
+	
+	/**
 	 * 通过用户ID查找
 	 * @param bmid
 	 * @return
@@ -191,8 +204,7 @@ public class ContentService {
 		}
 		Draft d = this.draftDao.getDraftByUser(userid);
 		User u = this.userDao.findUserByBMID(userid);
-		u.setAdmin(null);
-		u.setPw(null);
+		u = this.filterUser(u);
 		Content c= new Content();
 		c.setTopic(topic);
 		c.setUser(u);
@@ -265,8 +277,7 @@ public class ContentService {
 		//解析intro
 		String intro = this.getIntroFromContent(content);
 		User u = this.userDao.findUserByBMID(userid);
-		u.setAdmin(null);
-		u.setPw(null);
+		u = this.filterUser(u);
 		Content c= new Content();
 		c.setTopic(topic);
 		c.setUser(u);
@@ -302,20 +313,19 @@ public class ContentService {
 	
 	/**
 	 * 
-	 * @param user
+	 * @param userid
 	 * @param contentid
 	 * @param reply
 	 * @return
 	 */
-	public int setReplyForContent(User user, String contentid, String reply)
+	public int setReplyForContent(String userid, String contentid, String reply)
 	{
 		reply= reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
 		Reply r = new Reply();
 		r.setOkey(contentid);
-		r.setUsername(user.getUsername());
-		r.setNickname(user.getNickname());
-		r.setWrite(user.getBM_ID());
-		r.setHeadericon(user.getHeaderIcon());
+		User u = this.userDao.findUserByBMID(userid);
+		this.filterUser(u);
+		r.setUser(u);
 		r.setContent(reply);
 		this.replyDao.save(r);
 		this.contentDao.incContentReplyOne(contentid);

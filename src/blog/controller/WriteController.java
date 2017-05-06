@@ -149,7 +149,7 @@ public class WriteController {
 			@RequestParam(value = "contentid", required = false) String contentid,
 			@RequestParam(value = "reply", required = false) String reply) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.setReplyForContent(u, contentid, reply);
+		this.contentService.setReplyForContent(u.getBM_ID(), contentid, reply);
 		return "redirect:/topic/art/" + contentid;
 	}
 

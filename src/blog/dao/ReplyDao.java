@@ -14,7 +14,7 @@ public class ReplyDao {
 
 	public Reply save(Reply reply)
 	{
-		if(reply==null||reply.getWrite()==null||reply.getContent()==null)
+		if(reply==null||reply.getUser()==null||reply.getContent()==null)
 		{
 			return null;
 		}

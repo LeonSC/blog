@@ -31,9 +31,9 @@
 				<div class="row">
 					<div class="col col-12">
 						<div class="media">
-							<img class="d-flex mr-3 custom-max-75-75" src="${item.headericon}" data-src="holder.js/75x75?theme=simple">
+							<img class="d-flex mr-3 custom-max-75-75" src="${item.user.headerIcon}" data-src="holder.js/75x75?theme=simple">
 							<div class="media-body">
-								<h6>${item.nickname}<small>(${item.username} <c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" />)</small></h6>
+								<h6>${item.user.nickname}<small>(${item.user.username} <c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" />)</small></h6>
 								${item.content}
 							</div>
 						</div>
