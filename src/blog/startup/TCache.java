@@ -38,7 +38,7 @@ public class TCache {
 		{
 			TCache.getCache().titleCache = new LinkedHashMap<>();
 		}
-		
+		TCache.getCache().titleCache.clear();
 		List<Topic> list = MongoDBConnector.datastore.find(Topic.class).order("order").asList();
 		for(Topic topic : list)
 		{
