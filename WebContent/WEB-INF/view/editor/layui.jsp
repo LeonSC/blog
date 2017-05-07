@@ -21,7 +21,7 @@
 					<div class="form-group row">
 						<label class="col-2 col-form-label">价格</label>
 						<div class="col-6">
-							<input class="form-control" type="number" name="price" id="layuiformprice">
+							<input class="form-control" type="number" name="price" id="layuiformprice" max="10000" min="0">
 						</div>
 					</div>
 				</form>
