@@ -21,6 +21,7 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/forum">论坛</a></li>
 		</ul>
 	</div>
 </div>
