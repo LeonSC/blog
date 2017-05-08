@@ -55,7 +55,7 @@ public class AdminForumController {
 				e.printStackTrace();
 			}
 		}
-		this.forumService.saveBlock(bmid, name, intro, array[2], order, loginvisible);
+		this.forumService.saveOrUpdateBlock(bmid, okey, name, intro, array[2], order, loginvisible);
 		return "redirect:/admin/forum";
 	}
 }

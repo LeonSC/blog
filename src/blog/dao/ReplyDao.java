@@ -24,13 +24,13 @@ public class ReplyDao {
 	}
 	
 	/**
-	 * 
+	 * 获取评论列表
 	 * @param okey
 	 * @return
 	 */
 	public List<Reply> getReplyList(String okey)
 	{
-		List<Reply> list = MongoDBConnector.datastore.createQuery(Reply.class).field("okey").equal(okey).order("-BM_TIME").asList(new FindOptions().limit(15));
+		List<Reply> list = MongoDBConnector.datastore.createQuery(Reply.class).field("okey").equal(okey).order("BM_TIME").asList(new FindOptions().limit(15));
 		return list;
 	}
 }

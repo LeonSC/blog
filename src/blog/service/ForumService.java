@@ -24,13 +24,14 @@ public class ForumService {
 	 * @param loginVisible
 	 * @return
 	 */
-	public Block saveBlock(String okey, String name,String intro, String icon, Integer order, Integer loginVisible)
+	public int saveOrUpdateBlock(String bmid, String okey, String name,String intro, String icon, Integer order, Integer loginVisible)
 	{
 		if(name==null)
 		{
-			return null;
+			return -1;
 		}
 		Block b = new Block();
+		b.setBM_ID(bmid);
 		Auth need = new Auth();
 		need.setLoginVisible(loginVisible==null?0:loginVisible);
 		b.setAuth(need);
@@ -39,8 +40,16 @@ public class ForumService {
 		b.setIntro(intro==null?"":intro);
 		b.setIcon(icon==null?"":icon);
 		b.setOrder(order==null?0:order);
+		if(b.getBM_ID()==null)
+		{
+			this.blockDao.save(b);//新增
+		}
+		else
+		{
+			this.blockDao.update(b);
+		}
 		//刷新
 		FCache.getCache().initBlockCache();
-		return this.blockDao.save(b);
+		return 0;
 	}
 }

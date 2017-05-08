@@ -23,11 +23,30 @@
 					</div>
 				</div>
 			</div>
+			<br/>
 			<div class="row">
-			<div class="col col-12">
-				<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting?okey=${item.value.BM_ID}">新增分区块</a>
+				<c:forEach var="sub" items="${item.value.block}">
+				<div class="col col-6">
+					<div class="media">
+						<img class="d-flex align-self-center mr-3" src="${sub.value.icon}" style="height:5rem;width:5rem"/>
+						<div class="media-body">
+							<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting?bmid=${sub.value.BM_ID}" style="line-height:0;padding:0">${sub.value.name}</a>
+							<c:if test="${not empty sub.value.intro}">
+							<br style="margin:0"/>
+							<small>${sub.value.intro}</small>
+							</c:if>
+							<hr style="margin:.2rem 0 0"/>
+							<small style="line-height:0;padding:0;margin:0"><i class="fa fa-user" aria-hidden="true"></i> </small>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col col-12">
+					<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting?okey=${item.value.BM_ID}">新增分区块</a>
+				</div>
+			</div>
 			<hr />
 		</c:forEach>
 		<div class="row">

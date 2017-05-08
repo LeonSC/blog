@@ -11,7 +11,6 @@
 			<div class="col col-12">
 				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/forum/submit">
 					<input type="hidden" name="bmid" value="${bmid}"/>
-					<input type="hidden" name="bmid" value="${okey}"/>
 					<div class="form-group">
 						<label>标题</label> <input type="text" class="form-control" name="name" placeholder="总标题" value="${forum.blockmap[bmid].name}"/>
 					</div>
@@ -25,7 +24,7 @@
 						<label>图标</label> <input type="file" class="form-control-file" name="file"/>
 					</div>
 					<div class="form-group">
-						<label>排序</label> <input type="number" class="form-control" name="order" value="0" value="${forum.blockmap[bmid].order}"/>
+						<label>排序</label> <input type="number" class="form-control" name="order" value="${forum.blockmap[bmid].order}"/>
 					</div>
 					<fieldset class="form-group">
 						<legend>可见设置</legend>
@@ -49,7 +48,7 @@
 		<div class="row">
 			<div class="col col-12">
 				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/forum/submit">
-					<input type="hidden" name="bmid" value="${okey}"/>
+					<input type="hidden" name="okey" value="${okey}"/>
 					<div class="form-group">
 						<label>标题</label> <input type="text" class="form-control" name="name" placeholder="总标题"/>
 					</div>
