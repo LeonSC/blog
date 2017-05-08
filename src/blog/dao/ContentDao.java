@@ -41,7 +41,7 @@ public class ContentDao {
 	}
 	
 	/**
-	 * 更具ID找文章
+	 * 根据ID找文章
 	 * @param bmid
 	 * @return
 	 */
