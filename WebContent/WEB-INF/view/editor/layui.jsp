@@ -60,13 +60,19 @@
 			
 			$("#writeSave").click(function(e) {
 				e.preventDefault();
+				var price = $("#layuiformprice").val();
+				//校验区
+				if(price<0||price>10000)
+				{
+					return 0;
+				}
 				$('#postModal').modal('show');
 				var elContent = layedit.getContent(index);
 				$.post("${config.rootPath}/write/publishlayui", {
 					title : $("#editorTitle").html(),
 					content : elContent,
 					topic : "${topic.BM_ID}",
-					price : $("#layuiformprice").val()
+					price : price
 				}, function(data) {
 					if (data.status == "0") {
 						location.href = '${config.rootPath}/topic/${topic.BM_ID}';
