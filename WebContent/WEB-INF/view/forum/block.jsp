@@ -12,7 +12,7 @@
 		<c:if test="${not empty memAuth}">
 			<div class="row" style="margin-bottom: .3rem; margin-top: .3rem;">
 				<div class="col col-12">
-					<a type="button" class="btn btn-info btn-sm" href="${config.rootPath}/write/layui?topic=${topic}">写点什么</a>
+					<a type="button" class="btn btn-info btn-sm" href="${config.rootPath}/write/layuiforum?block=${node.BM_ID}">写点什么</a>
 				</div>
 			</div>
 		</c:if>

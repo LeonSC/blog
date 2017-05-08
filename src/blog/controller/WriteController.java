@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import blog.model.Block;
 import blog.model.Draft;
 import blog.model.Topic;
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
 import blog.startup.Config;
+import blog.startup.FCache;
 import blog.startup.TCache;
 
 /**
@@ -206,5 +208,19 @@ public class WriteController {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, price, title, content);
 		return re;
+	}
+	
+	/**
+	 * 进入写入论坛BLOCK
+	 * @param request
+	 * @param block
+	 * @return
+	 */
+	@RequestMapping("/layuiforum")
+	public String writeForum(HttpServletRequest request, @RequestParam(value = "block", required = false) String block)
+	{
+		Block node = FCache.getCache().getBlockmap().get(block);
+		request.setAttribute("node", node);
+		return "forum/layui";
 	}
 }
