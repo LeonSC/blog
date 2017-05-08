@@ -46,7 +46,7 @@ public class StartUpLoader extends HttpServlet{
 		
 		System.out.println("===============================论坛缓存设置=================================");
 		application.setAttribute("forum", FCache.getCache());
-		System.out.println("论坛目录结构=>"+ JSON.toJSONString(FCache.getCache().block));
+		System.out.println("论坛目录结构=>"+ JSON.toJSONString(FCache.getCache().getBlock()));
 		System.out.println("===============================论坛缓存设置结束=================================");
 	}
 

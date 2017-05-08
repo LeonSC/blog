@@ -34,7 +34,7 @@ public class ForumService {
 		Auth need = new Auth();
 		need.setLoginVisible(loginVisible==null?0:loginVisible);
 		b.setAuth(need);
-		b.setOkey(okey==null?"0":okey);
+		b.setOkey(okey==null||okey.equals("")?"0":okey);
 		b.setName(name);
 		b.setIntro(intro==null?"":intro);
 		b.setIcon(icon==null?"":icon);

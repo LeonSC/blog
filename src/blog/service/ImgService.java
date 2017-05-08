@@ -177,4 +177,37 @@ public class ImgService {
 		String[] reArray = {JSON.toJSONString(map),rePath.toString(),visitPath};
 		return reArray;
 	}
+	
+	/**
+	 * forum block
+	 * @param bmid
+	 * @param name
+	 * @return
+	 */
+	public String[] getImgPhysicalPathForForumBlock(String name) 
+	{
+		String[] tmp = name.split("\\.");
+		String suffix = tmp[tmp.length - 1];
+		String newPicName = new StringBuffer(Tools.getID()).append(".").append(suffix).toString();
+		// 拼接需要返回的字符串信息
+		StringBuffer rePath = new StringBuffer(Config.getImgPhysicalPath()).append("forum").append(File.separator);
+		//目录不存在就创建
+		File file = new File(rePath.toString());
+		if(!file.exists())
+		{
+			file.mkdirs();
+		}
+		rePath.append(File.separator).append(newPicName);
+		//访问路径
+		String visitPath = new StringBuffer(Config.getImgWebPath()).append("forum").append("/").append(newPicName).toString();
+		//拼装需要返回给JS的字符串
+		Map<String,Object> map = new HashMap<>();
+		map.put("code", "0");
+		map.put("msg", "上传成功");
+		Map<String,String> data = new HashMap<>();
+		data.put("src", visitPath);
+		map.put("data", data);
+		String[] reArray = {JSON.toJSONString(map),rePath.toString(),visitPath};
+		return reArray;
+	}
 }

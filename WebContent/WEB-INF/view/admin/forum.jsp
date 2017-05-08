@@ -7,70 +7,32 @@
 	<div class="container-fluid">
 		<%@ include file="nav.jsp"%>
 		<c:forEach var="item" items="${forum.block}">
-		<div class="row">
+			<div class="row">
+				<div class="col col-6">
+					<div class="media">
+						<img class="d-flex align-self-center mr-3" src="${item.value.icon}" style="height:5rem;width:5rem"/>
+						<div class="media-body">
+							<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting?bmid=${item.value.BM_ID}" style="line-height:0;padding:0">${item.value.name}</a>
+							<c:if test="${not empty item.value.intro}">
+							<br style="margin:0"/>
+							<small>${item.value.intro}</small>
+							</c:if>
+							<hr style="margin:.2rem 0 0"/>
+							<small style="line-height:0;padding:0;margin:0"><i class="fa fa-user" aria-hidden="true"></i> </small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
 			<div class="col col-12">
-				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/forum/submit">
-					<input type="hidden" name="bmid" value="${item.value.BM_ID}"/>
-					<div class="form-group">
-						<label>标题</label> <input type="text" class="form-control" name="name" placeholder="总标题" value="${item.value.name}"/>
-					</div>
-					<div class="form-group">
-						<label>简介</label> <input type="text" class="form-control" name="intro" placeholder="" value="${item.value.intro}"/>
-					</div>
-					<div class="form-group">
-						<label>图标</label> <input type="file" class="form-control-file" name="file"/>
-					</div>
-					<div class="form-group">
-						<label>排序</label> <input type="number" class="form-control" name="order" value="0" value="${item.value.order}"/>
-					</div>
-					<fieldset class="form-group">
-						<legend>可见设置</legend>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="loginvisible" value="0" checked> 任意可见
-							</label>
-						</div>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="loginvisible" value="1"> 登录可见
-							</label>
-						</div>
-					</fieldset>
-					<button type="submit" class="btn btn-primary">提交</button>
-				</form>
+				<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting?okey=${item.value.BM_ID}">新增分区块</a>
 			</div>
 		</div>
+			<hr />
 		</c:forEach>
 		<div class="row">
 			<div class="col col-12">
-				<form enctype="multipart/form-data" method="post" action="${config.rootPath}/admin/forum/submit">
-					<div class="form-group">
-						<label>标题</label> <input type="text" class="form-control" name="name" placeholder="总标题" />
-					</div>
-					<div class="form-group">
-						<label>简介</label> <input type="text" class="form-control" name="intro" placeholder="" />
-					</div>
-					<div class="form-group">
-						<label>图标</label> <input type="file" class="form-control-file" name="file"/>
-					</div>
-					<div class="form-group">
-						<label>排序</label> <input type="number" class="form-control" name="order" value="0" />
-					</div>
-					<fieldset class="form-group">
-						<legend>可见设置</legend>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="loginvisible" value="0" checked> 任意可见
-							</label>
-						</div>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="loginvisible" value="1"> 登录可见
-							</label>
-						</div>
-					</fieldset>
-					<button type="submit" class="btn btn-primary">提交</button>
-				</form>
+				<a class="btn btn-link" href="${config.rootPath}/admin/forum/forumsetting">新增总区块</a>
 			</div>
 		</div>
 	</div>

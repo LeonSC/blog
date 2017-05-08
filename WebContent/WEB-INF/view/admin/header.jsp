@@ -6,6 +6,7 @@
 <title>BLOG ADMIN</title>
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>

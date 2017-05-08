@@ -24,11 +24,11 @@ public class FCache {
 	/**
 	 * 顶级BLOCK列表, 底下包含子分类
 	 */
-	public LinkedHashMap<String, Block> block = null;
+	private LinkedHashMap<String, Block> block = null;
 	public LinkedHashMap<String, Block> getBlock() {
 		return block;
 	}
-	public HashMap<String, Block> blockmap = null;
+	private HashMap<String, Block> blockmap = null;
 	public HashMap<String, Block> getBlockmap() {
 		return blockmap;
 	}

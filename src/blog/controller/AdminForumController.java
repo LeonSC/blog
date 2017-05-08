@@ -2,6 +2,8 @@ package blog.controller;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,18 @@ public class AdminForumController {
 		return "admin/forum";
 	}
 	
+	@RequestMapping("/forumsetting")
+	public String forumSetting(HttpServletRequest request,
+			@RequestParam(value = "bmid", required = false) String bmid,
+			@RequestParam(value = "okey", required = false) String okey) {
+		request.setAttribute("bmid", bmid);
+		request.setAttribute("okey", okey);
+		return "admin/forumsetting";
+	}
+	
 	@RequestMapping("/submit")
 	public String forumSave(@RequestParam(value = "bmid", required = false) String bmid,
+			@RequestParam(value = "okey", required = false) String okey,
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "intro", required = false) String intro,
 			@RequestParam(value = "file", required = false) MultipartFile file,
@@ -36,7 +48,7 @@ public class AdminForumController {
 		// 判断文件是否为空
 		if (file != null && !file.isEmpty()) {
 			try {
-				array = this.imgService.getImgPhysicalPathForLayUI("forum", file.getOriginalFilename());
+				array = this.imgService.getImgPhysicalPathForForumBlock(file.getOriginalFilename());
 				// 转存文件
 				file.transferTo(new File(array[1]));
 			} catch (Exception e) {
