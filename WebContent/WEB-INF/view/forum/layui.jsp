@@ -42,11 +42,10 @@
 				e.preventDefault();
 				$('#postModal').modal('show');
 				var elContent = layedit.getContent(index);
-				$.post("${config.rootPath}/write/publishlayui", {
+				$.post("${config.rootPath}/write/forumsubmitlayui", {
 					title : $("#editorTitle").html(),
 					content : elContent,
-					topic : "${topic.BM_ID}",
-					price : price
+					topic : "${node.BM_ID}"
 				}, function(data) {
 					if (data.status == "0") {
 						location.href = '${config.rootPath}/forum/${node.BM_ID}';

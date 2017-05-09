@@ -32,7 +32,7 @@
 								<div class="media">
 									<img class="d-flex align-self-center mr-3" src="${sub.value.icon}" style="height: 5rem; width: 5rem" />
 									<div class="media-body">
-										<a class="btn btn-link" href="${config.rootPath}/forum/${sub.value.BM_ID}" style="line-height: 0; padding: 0">${sub.value.name}</a>
+										<a class="btn btn-link" href="${config.rootPath}/forum/node/${sub.value.BM_ID}" style="line-height: 0; padding: 0">${sub.value.name}</a>
 										<c:if test="${not empty sub.value.intro}">
 											<br style="margin: 0" />
 											<small>${sub.value.intro}</small>

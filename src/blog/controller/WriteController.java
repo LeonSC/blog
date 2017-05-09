@@ -223,4 +223,15 @@ public class WriteController {
 		request.setAttribute("node", node);
 		return "forum/layui";
 	}
+	
+	@RequestMapping("/forumsubmitlayui")
+	@ResponseBody
+	public String publishForumLayUI(HttpServletRequest request,
+			@RequestParam(value = "topic", required = false) String topic,
+			@RequestParam(value = "title", required = false) String title,
+			@RequestParam(value = "content", required = false) String content) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, 0, title, content);
+		return re;
+	}
 }
