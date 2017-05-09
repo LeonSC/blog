@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${config.rootPath}/public/medium-editor-insert-plugin-2.4.0/medium-editor-insert-plugin-frontend.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
+* {word-break:break-all}
 .custom-max { width:100%}
 .custom-max-70-70 { width:70px;height:70px;}
 .custom-height-22 { height:1.5rem;overflow:hidden}

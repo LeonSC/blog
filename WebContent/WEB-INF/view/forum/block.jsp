@@ -20,7 +20,7 @@
 			<div class="col col-9">
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}">
-						<li class="list-group-item d-flex justify-content-between align-items-center">${item.title} <span class="badge badge-default badge-pill">14</span></li>
+						<li class="list-group-item d-flex justify-content-between align-items-center" data-href="${config.rootPath}/forum/point/${item.BM_ID}">${item.title} <span class="badge badge-default badge-pill">${item.replyCount}</span></li>
 					</c:forEach>
 				</ul>
 			</div>

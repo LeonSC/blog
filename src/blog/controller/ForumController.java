@@ -35,4 +35,14 @@ public class ForumController {
 		request.setAttribute("list", list);
 		return "forum/block";
 	}
+	
+	@RequestMapping("/point/{bmid}")
+	public String point(HttpServletRequest request, @PathVariable String bmid)
+	{
+		Content c=this.contentService.getContentByBMID(bmid);
+		request.setAttribute("point", c);
+		List<Content> list = this.contentService.getContentListByTopic(bmid);
+		request.setAttribute("list", list);
+		return "forum/point";
+	}
 }
