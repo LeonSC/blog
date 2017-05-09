@@ -9,50 +9,27 @@
 		<br />
 		<div class="row">
 			<div class="col col-9">
-				<div class="card-group">
-					<div class="card">
-						<img class="card-img-top" src="" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"/>
-						<div class="card-block">
-							<h4 class="card-title">Card title</h4>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
-						</div>
-					</div>
-					<div class="card">
-						<img class="card-img-top" src="" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"/>
-						<div class="card-block">
-							<h4 class="card-title">Card title</h4>
-							<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="card-group">
-					<div class="card">
-						<img class="card-img-top" src="" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"/>
-						<div class="card-block">
-							<h4 class="card-title">Card title</h4>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
-						</div>
-					</div>
-					<div class="card">
-						<img class="card-img-top" src="" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"/>
-						<div class="card-block">
-							<h4 class="card-title">Card title</h4>
-							<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
-						</div>
-					</div>
-				</div>
+				<table>
+					<tr>
+						<td style="width: 25%">
+							<div class="card">
+								<img class="card-img-top" src="${memAuth.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes">
+								<div class="card-block">
+									<h4 class="card-title">${point.user.nickname}</h4>
+									<h6 class="card-title"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${point.user.username}</h6>
+									<h6 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> ${point.user.lv}</h6>
+								</div>
+							</div>
+						</td>
+						<td style="width: 1%"></td>
+						<td valign ="top">
+							<div class="border">
+							<h4>${point.title}</h4>
+							<p>${point.content}</p>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="col col-3">
 				<%@ include file="../static/myself.jsp"%>
