@@ -76,6 +76,22 @@
 				</ul>
 			</div>
 		</div>
+		<c:if test="${page.totalPages != 1}">
+		<br/>
+		<div class="row">
+			<div class="col col-12">
+				<nav>
+					<ul class="pagination pagination-sm">
+						<li class="page-item <c:if test="${page.nowPage eq 1}">disabled</c:if>"><a class="page-link" href="${config.rootPath}/topic/${topic}?p=${page.nowPage-1}" tabindex="-1">Previous</a></li>
+						<c:forEach var="i" begin="1" end="${page.totalPages}">
+						<li class="page-item"><a class="page-link" href="${config.rootPath}/topic/${topic}?p=${i}">${i}</a></li>
+						</c:forEach>
+						<li class="page-item <c:if test="${page.nowPage eq page.totalPages}">disabled</c:if>"><a class="page-link" href="${config.rootPath}/topic/${topic}?p=${page.nowPage+1}">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		</c:if>
 		</div>
 		<div class="col col-3">
 		<%@ include file="static/myself.jsp"%>
