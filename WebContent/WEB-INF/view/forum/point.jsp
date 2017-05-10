@@ -6,12 +6,16 @@
 <body>
 	<%@ include file="../static/nav.jsp"%>
 	<div class="container">
-		<br />
+		<div class="row">
+			<div class="col col-12">
+				<a class="btn btn-link btn-sm" href="${config.rootPath}/forum">论坛首页</a> / <a class="btn btn-link btn-sm" href="${config.rootPath}/forum/node/${point.topic}">${forum.blockmap[point.topic].name}</a>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col col-9">
 				<table style="width: 100%">
 					<tr>
-						<td class="custom-td" style="width: 25%;"><img class="img-fluid rounded" src="${point.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
+						<td class="custom-td" style="width: 25%;"><img class="" src="${point.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
 							<div class="col-12">
 								<h4>${point.user.nickname}</h4>
 								<h6>
@@ -31,10 +35,10 @@
 					<c:if test="${not empty list}">
 						<c:forEach var="item" items="${list}">
 							<tr>
-								<td colspan="3"> </td>
+								<td colspan="3"></td>
 							</tr>
 							<tr>
-								<td class="custom-td" style="width: 25%;"><img class="img-fluid rounded" src="${item.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
+								<td class="custom-td" style="width: 25%;"><img class="" src="${item.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
 									<div class="col-12">
 										<h4>${item.user.nickname}</h4>
 										<h6>

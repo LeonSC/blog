@@ -48,7 +48,7 @@
 					topic : "${node.BM_ID}"
 				}, function(data) {
 					if (data.status == "0") {
-						location.href = '${config.rootPath}/forum/${node.BM_ID}';
+						location.href = '${config.rootPath}/forum/node/${node.BM_ID}';
 					} else {
 						alert(data.info);
 					}

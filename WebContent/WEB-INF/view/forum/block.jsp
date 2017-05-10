@@ -7,12 +7,17 @@
 	<%@ include file="../static/nav.jsp"%>
 	<div class="container">
 		<c:if test="${empty memAuth}">
-			<br />
+			<div class="row">
+				<div class="col col-12">
+					<a class="btn btn-link btn-sm" href="${config.rootPath}/forum">论坛首页</a>
+				</div>
+			</div>
 		</c:if>
 		<c:if test="${not empty memAuth}">
 			<div class="row" style="margin-bottom: .3rem; margin-top: .3rem;">
 				<div class="col col-12">
 					<a type="button" class="btn btn-info btn-sm" href="${config.rootPath}/write/layuiforum?block=${node.BM_ID}">写点什么</a>
+					<a class="btn btn-link btn-sm" href="${config.rootPath}/forum">论坛首页</a>
 				</div>
 			</div>
 		</c:if>
@@ -20,7 +25,7 @@
 			<div class="col col-9">
 				<ul class="list-group">
 					<c:forEach var="item" items="${list}">
-						<li class="list-group-item d-flex justify-content-between align-items-center" data-href="${config.rootPath}/forum/point/${item.BM_ID}">${item.title} <span class="badge badge-default badge-pill">${item.replyCount}</span></li>
+						<li class="list-group-item d-flex justify-content-between align-items-center" data-href="${config.rootPath}/forum/point/${item.BM_ID}">${item.title}<span class="badge badge-default badge-pill">${item.replyCount}</span></li>
 					</c:forEach>
 				</ul>
 			</div>
