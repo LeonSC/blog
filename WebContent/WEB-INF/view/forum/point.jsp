@@ -9,27 +9,62 @@
 		<br />
 		<div class="row">
 			<div class="col col-9">
-				<table>
+				<table style="width: 100%">
 					<tr>
-						<td style="width: 25%">
-							<div class="card">
-								<img class="card-img-top" src="${memAuth.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes">
-								<div class="card-block">
-									<h4 class="card-title">${point.user.nickname}</h4>
-									<h6 class="card-title"><i class="fa fa-id-card-o" aria-hidden="true"></i> ${point.user.username}</h6>
-									<h6 class="card-title"><i class="fa fa-trophy" aria-hidden="true"></i> ${point.user.lv}</h6>
-								</div>
-							</div>
-						</td>
+						<td class="custom-td" style="width: 25%;"><img class="img-fluid rounded" src="${point.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
+							<div class="col-12">
+								<h4>${point.user.nickname}</h4>
+								<h6>
+									<i class="fa fa-id-card-o" aria-hidden="true"></i> ${point.user.username}
+								</h6>
+								<h6>
+									<i class="fa fa-trophy" aria-hidden="true"></i> ${point.user.lv}
+								</h6>
+							</div></td>
 						<td style="width: 1%"></td>
-						<td valign ="top">
-							<div class="border">
+						<td class="custom-td" style="padding: 1.25rem;">
 							<h4>${point.title}</h4>
+							<hr />
 							<p>${point.content}</p>
-							</div>
 						</td>
 					</tr>
+					<c:if test="${not empty list}">
+						<c:forEach var="item" items="${list}">
+							<tr>
+								<td colspan="3"> </td>
+							</tr>
+							<tr>
+								<td class="custom-td" style="width: 25%;"><img class="img-fluid rounded" src="${item.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
+									<div class="col-12">
+										<h4>${item.user.nickname}</h4>
+										<h6>
+											<i class="fa fa-id-card-o" aria-hidden="true"></i> ${item.user.username}
+										</h6>
+										<h6>
+											<i class="fa fa-trophy" aria-hidden="true"></i> ${item.user.lv}
+										</h6>
+									</div></td>
+								<td style="width: 1%"></td>
+								<td class="custom-td" style="padding: 1.25rem;">
+									<p>${item.content}</p>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</table>
+				<c:if test="${not empty memAuth}">
+					<div class="row">
+						<div class="col col-12">
+							<form method="post" action="${config.rootPath}/write/forumreply">
+								<div class="form-group">
+									<small class="form-text text-muted">快速回复</small> <input type="hidden" name="contentid" value="${point.BM_ID}">
+									<textarea class="form-control" name="reply" rows="3"></textarea>
+								</div>
+								<button type="submit" class="btn btn-outline-primary btn-sm">提交</button>
+							</form>
+						</div>
+					</div>
+				</c:if>
 			</div>
 			<div class="col col-3">
 				<%@ include file="../static/myself.jsp"%>

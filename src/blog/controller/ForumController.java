@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import blog.model.Block;
 import blog.model.Content;
+import blog.model.Reply;
 import blog.service.ContentService;
 import blog.startup.FCache;
 
@@ -41,7 +42,7 @@ public class ForumController {
 	{
 		Content c=this.contentService.getContentByBMID(bmid);
 		request.setAttribute("point", c);
-		List<Content> list = this.contentService.getContentListByTopic(bmid);
+		List<Reply> list = this.contentService.getReplyList(bmid);
 		request.setAttribute("list", list);
 		return "forum/point";
 	}

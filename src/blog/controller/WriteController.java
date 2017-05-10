@@ -234,4 +234,20 @@ public class WriteController {
 		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, 0, title, content);
 		return re;
 	}
+	
+	/**
+	 * 用户回复
+	 * 
+	 * @param request
+	 * @param topic
+	 * @return
+	 */
+	@RequestMapping("/forumreply")
+	public String forumReply(HttpServletRequest request,
+			@RequestParam(value = "contentid", required = false) String contentid,
+			@RequestParam(value = "reply", required = false) String reply) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		this.contentService.setReplyForContent(u.getBM_ID(), contentid, reply);
+		return "redirect:/forum/point/" + contentid;
+	}
 }

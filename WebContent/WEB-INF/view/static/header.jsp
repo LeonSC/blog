@@ -18,6 +18,8 @@ p {overflow:hidden}
 .custom-height-22 { height:1.5rem;overflow:hidden}
 .custom-height-66 { height:9.1rem;overflow:hidden}
 .custom-max-75-75 { width:75px;height:75px;}
+.custom-table {}
+.custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);}
 </style>
 <script>
 $(document).ready(function() {
