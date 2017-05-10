@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.FindOptions;
+import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Repository;
 
+import blog.model.Page;
 import blog.model.Reply;
 import blog.startup.MongoDBConnector;
 
@@ -28,9 +30,16 @@ public class ReplyDao {
 	 * @param okey
 	 * @return
 	 */
-	public List<Reply> getReplyList(String okey)
+	public Page<Reply> getReplyList(String okey, int nowPage, int numInPage)
 	{
-		List<Reply> list = MongoDBConnector.datastore.createQuery(Reply.class).field("okey").equal(okey).order("BM_TIME").asList(new FindOptions().limit(15));
-		return list;
+		Query<Reply> query = MongoDBConnector.datastore.createQuery(Reply.class).field("okey").equal(okey);
+		Page<Reply> page = new Page<>();
+		page.setTotal(query.count());
+		page.setNowPage(nowPage);
+		page.setTotalInPage(numInPage);
+		page.getPage();
+		List<Reply> list = query.order("BM_TIME").asList(new FindOptions().skip(page.getSkip()).limit(page.getTotalInPage()));
+		page.setList(list);
+		return page;
 	}
 }

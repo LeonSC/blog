@@ -76,7 +76,7 @@
 				</ul>
 			</div>
 		</div>
-		<c:if test="${page.totalPages != 1}">
+		<c:if test="${page.totalPages > 1}">
 		<br/>
 		<div class="row">
 			<div class="col col-12">

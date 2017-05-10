@@ -1,7 +1,5 @@
 package blog.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +40,14 @@ public class ForumController {
 	}
 	
 	@RequestMapping("/point/{bmid}")
-	public String point(HttpServletRequest request, @PathVariable String bmid)
+	public String point(HttpServletRequest request, @PathVariable String bmid, 
+			@RequestParam(value = "p", required = false) Integer p,
+			@RequestParam(value = "i", required = false) Integer i)
 	{
 		Content c=this.contentService.getContentByBMID(bmid);
 		request.setAttribute("point", c);
-		List<Reply> list = this.contentService.getReplyList(bmid);
-		request.setAttribute("list", list);
+		Page<Reply> page = this.contentService.getReplyList(bmid,p,i);
+		request.setAttribute("page", page);
 		return "forum/point";
 	}
 }

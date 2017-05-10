@@ -54,7 +54,9 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping("/art/{bmid}")
-	public String art(HttpServletRequest request, @PathVariable String bmid) {
+	public String art(HttpServletRequest request, @PathVariable String bmid, 
+			@RequestParam(value = "p", required = false) Integer p,
+			@RequestParam(value = "i", required = false) Integer i) {
 		Content c = this.contentService.getContentByBMID(bmid);
 		if (c == null) {
 			return "redirect:/error/noart";
@@ -80,8 +82,8 @@ public class TopicController {
 			}
 		}
 		request.setAttribute("c", c);
-		List<Reply> list = this.contentService.getReplyList(bmid);
-		request.setAttribute("replylist", list);
+		Page<Reply> page = this.contentService.getReplyList(bmid,p,i);
+		request.setAttribute("replyPage", page);
 		return "show";
 	}
 

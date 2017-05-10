@@ -32,8 +32,8 @@
 							<p>${point.content}</p>
 						</td>
 					</tr>
-					<c:if test="${not empty list}">
-						<c:forEach var="item" items="${list}">
+					<c:if test="${not empty page.list}">
+						<c:forEach var="item" items="${page.list}">
 							<tr>
 								<td colspan="3"></td>
 							</tr>
@@ -56,6 +56,22 @@
 						</c:forEach>
 					</c:if>
 				</table>
+				<c:if test="${page.totalPages > 1}">
+					<br />
+					<div class="row">
+						<div class="col col-12">
+							<nav>
+								<ul class="pagination pagination-sm">
+									<li class="page-item <c:if test="${page.nowPage eq 1}">disabled</c:if>"><a class="page-link" href="${config.rootPath}/forum/point/${point.BM_ID}?p=${page.nowPage-1}" tabindex="-1">Previous</a></li>
+									<c:forEach var="i" begin="1" end="${page.totalPages}">
+										<li class="page-item"><a class="page-link" href="${config.rootPath}/forum/point/${point.BM_ID}?p=${i}">${i}</a></li>
+									</c:forEach>
+									<li class="page-item <c:if test="${page.nowPage eq page.totalPages}">disabled</c:if>"><a class="page-link" href="${config.rootPath}/forum/point/${point.BM_ID}?p=${page.nowPage+1}">Next</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</c:if>
 				<c:if test="${not empty memAuth}">
 					<div class="row">
 						<div class="col col-12">

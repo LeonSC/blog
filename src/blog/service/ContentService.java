@@ -311,8 +311,7 @@ public class ContentService {
 	 * @return
 	 */
 	public int setReplyForContent(String userid, String contentid, String reply) {
-		reply = reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "")
-				.trim();
+		reply = reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
 		Reply r = new Reply();
 		r.setOkey(contentid);
 		User u = this.userDao.findUserByBMID(userid);
@@ -330,9 +329,15 @@ public class ContentService {
 	 * @param okey
 	 * @return
 	 */
-	public List<Reply> getReplyList(String okey) {
-		List<Reply> list = this.replyDao.getReplyList(okey);
-		return list;
+	public Page<Reply> getReplyList(String okey, Integer nowPage, Integer numInPage) {
+		if (nowPage == null) {
+			nowPage = 1;
+		}
+		if (numInPage == null) {
+			numInPage = 15;
+		}
+		Page<Reply> page = this.replyDao.getReplyList(okey, nowPage, numInPage);
+		return page;
 	}
 
 	/////////////////////////// 置顶相关//////////////////////////////////////////////
