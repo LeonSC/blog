@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import blog.model.Content;
+import blog.model.Page;
 import blog.model.Reply;
 import blog.model.Topic;
 import blog.model.User;
@@ -25,7 +27,9 @@ public class TopicController {
 	private ContentService contentService;
 
 	@RequestMapping("/{topic}")
-	public String topic(HttpServletRequest request, @PathVariable String topic) {
+	public String topic(HttpServletRequest request, @PathVariable String topic, 
+			@RequestParam(value = "p", required = false) Integer p,
+			@RequestParam(value = "i", required = false) Integer i) {
 		// 未登录不允许浏览判定
 		Topic t = TCache.getCache().titleCache.get(topic);
 		if (t.getAuth().getLoginVisible() != null && t.getAuth().getLoginVisible() == 1) {
@@ -36,8 +40,8 @@ public class TopicController {
 		}
 		List<Content> toplist = this.contentService.getContentTopListByTopic(topic);
 		request.setAttribute("toplist", toplist);
-		List<Content> list = this.contentService.getContentListByTopic(topic);
-		request.setAttribute("list", list);
+		Page<Content> page = this.contentService.getContentListByTopic(topic,p,i);
+		request.setAttribute("page", page);
 		request.setAttribute("topic", topic);
 		return "topic";
 	}

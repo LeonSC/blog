@@ -41,9 +41,9 @@
 		<div class="row">
 			<div class="col col-12">
 				<div class="card-group">
-					<c:forEach var="item" items="${list}" begin="0" end="3">
+					<c:forEach var="item" items="${page.list}" begin="0" end="3">
 					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
-						<img class="card-img-top img-fluid" src="${item.cover}" class="img-fluid custom-max" data-src="holder.js/100px160?theme=simple&text=I&random=yes">
+						<img class="card-img-top img-fluid custom-height-180" src="${item.cover}" data-src="holder.js/100px180?theme=simple&text=I&random=yes">
 						<div class="card-block">
 							<h4 class="card-title">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h4>
 							<p class="card-text">${item.intro}</p>
@@ -58,7 +58,7 @@
 		<div class="row">
 			<div class="col col-12">
 				<ul class="list-group">
-					<c:forEach var="item" items="${list}" begin="4">
+					<c:forEach var="item" items="${page.list}" begin="4">
 					<li class="list-group-item" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 						<table>
 							<tr>

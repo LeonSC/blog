@@ -11,6 +11,7 @@ import org.mongodb.morphia.query.UpdateResults;
 import org.springframework.stereotype.Repository;
 
 import blog.model.Content;
+import blog.model.Page;
 import blog.model.Payment;
 import blog.startup.MongoDBConnector;
 
@@ -34,10 +35,17 @@ public class ContentDao {
 	 * @param topic
 	 * @return
 	 */
-	public List<Content> getContentListByTopic(String topic)
+	public Page<Content> getContentListByTopic(String topic, int nowPage, int numInPage)
 	{
-		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).order("-BM_TIME").asList(new FindOptions().limit(15));
-		return list;
+		Query<Content> query = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic);
+		Page<Content> page = new Page<>();
+		page.setTotal(query.count());
+		page.setNowPage(nowPage);
+		page.setTotalInPage(numInPage);
+		page.getPage();
+		List<Content> list = query.order("-BM_TIME").asList(new FindOptions().skip(page.getSkip()).limit(page.getTotalInPage()));
+		page.setList(list);
+		return page;
 	}
 	
 	/**

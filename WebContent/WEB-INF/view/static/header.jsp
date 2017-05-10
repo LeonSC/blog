@@ -13,10 +13,11 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 p {overflow:hidden}
-.custom-max { width:100%}
+.custom-max { width:100%;}
 .custom-max-70-70 { width:70px;height:70px;}
 .custom-height-22 { height:1.5rem;overflow:hidden}
 .custom-height-66 { height:9.1rem;overflow:hidden}
+.custom-height-180 { height:11.25rem;}
 .custom-max-75-75 { width:75px;height:75px;}
 .custom-table {}
 .custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);}
