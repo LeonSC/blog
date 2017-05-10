@@ -28,6 +28,10 @@ $(document).ready(function() {
 	$("*[data-href]").click(function(){
 		location.href = $(this).attr("data-href");
 	});
+	
+	$('a[href="#"]').click(function(e){
+		e.preventDefault();
+	});
 });
 </script>
 </head>
