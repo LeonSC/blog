@@ -20,7 +20,7 @@ p {overflow:hidden}
 .custom-height-180 { height:11.25rem;}
 .custom-max-75-75 { width:75px;height:75px;}
 .custom-table {}
-.custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);}
+.custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);overflow:hidden;}
 </style>
 <script>
 $(document).ready(function() {

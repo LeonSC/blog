@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="timeValues" class="java.util.Date"/>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="../static/header.jsp"%>
@@ -13,49 +15,36 @@
 		</div>
 		<div class="row">
 			<div class="col col-9">
-				<table style="width: 100%">
-					<tr>
-						<td class="custom-td" style="width: 25%;"><img class="" src="${point.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
-							<div class="col-12">
-								<h4>${point.user.nickname}</h4>
-								<h6>
-									<i class="fa fa-id-card-o" aria-hidden="true"></i> ${point.user.username}
-								</h6>
-								<h6>
-									<i class="fa fa-trophy" aria-hidden="true"></i> ${point.user.lv}
-								</h6>
-							</div></td>
-						<td style="width: 1%"></td>
-						<td class="custom-td" style="padding: 1.25rem;">
-							<h4>${point.title}</h4>
-							<hr />
-							<p>${point.content}</p>
-						</td>
-					</tr>
-					<c:if test="${not empty page.list}">
+				<div class="media">
+					<img class="d-flex mr-3" src="${point.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes" width="120rem"/>
+					<div class="media-body" style="overflow:hidden">
+						<small class="text-muted">
+							<i class="fa fa-id-card-o" aria-hidden="true"></i> ${point.user.nickname} 
+							<i class="fa fa-trophy" aria-hidden="true"></i> ${point.user.lv}
+							发布于 : <c:set target="${timeValues}" value="${point.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" />
+						</small>
+						<hr/>
+						<h5 class="mt-0">${point.title}</h5>
+						${point.content}
+					</div>
+				</div>
+				<c:if test="${not empty page.list}">
 						<c:forEach var="item" items="${page.list}">
-							<tr>
-								<td colspan="3"></td>
-							</tr>
-							<tr>
-								<td class="custom-td" style="width: 25%;"><img class="" src="${item.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes"> <br />
-									<div class="col-12">
-										<h4>${item.user.nickname}</h4>
-										<h6>
-											<i class="fa fa-id-card-o" aria-hidden="true"></i> ${item.user.username}
-										</h6>
-										<h6>
-											<i class="fa fa-trophy" aria-hidden="true"></i> ${item.user.lv}
-										</h6>
-									</div></td>
-								<td style="width: 1%"></td>
-								<td class="custom-td" style="padding: 1.25rem;">
-									<p>${item.content}</p>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</table>
+						<hr/>
+						<div class="media">
+							<img class="d-flex mr-3" src="${item.user.headerIcon}" data-src="holder.js/100px200?theme=simple&text=Hello&random=yes" width="120rem"/>
+							<div class="media-body" style="overflow:hidden">
+								<small class="text-muted"> 
+									<i class="fa fa-id-card-o" aria-hidden="true"></i> ${item.user.nickname} 
+									<i class="fa fa-trophy" aria-hidden="true"></i> ${item.user.lv} 
+									发布于 : <c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" />
+								</small>
+								<hr/>
+								${item.content}
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
 				<c:if test="${page.totalPages > 1}">
 					<br />
 					<div class="row">
