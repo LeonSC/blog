@@ -9,6 +9,7 @@ import static org.mongodb.morphia.query.Sort.*;
 
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.mongodb.morphia.aggregation.Group.*;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,12 @@ public class TallyDao {
 		Long re = query.order("-BM_TIME").field("BM_TIME").greaterThanOrEq(start).field("BM_TIME").lessThan(end)
 				.count();
 		return re;
+	}
+	
+	public List<Tally> lastSevenDays()
+	{
+		List<Tally> list = MongoDBConnector.datastore.createQuery(Tally.class).field("userid").equal("").field("dateString").greaterThanOrEq("20170510").order("dateString").asList();
+		return list;
 	}
 
 	public static void main(String[] args) {
