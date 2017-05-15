@@ -1,5 +1,6 @@
 package blog.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +41,10 @@ public class Content extends BaseModel {
 	 * 打赏内容
 	 */
 	private Map<String, Payment> reward = new HashMap<>();
+	/**
+	 * ISODATE
+	 */
+	private Date date = new Date();
 	
 	public String getTitle() {
 		return title;
@@ -133,6 +138,14 @@ public class Content extends BaseModel {
 
 	public void setReward(Map<String, Payment> reward) {
 		this.reward = reward;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 }

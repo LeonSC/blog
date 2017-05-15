@@ -3,6 +3,7 @@ package blog.startup;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class Tools {
@@ -61,6 +62,12 @@ public class Tools {
 			System.out.println(Tools.getID());
 			
 		}
+	}
+	
+	private static SimpleDateFormat sdf_yyyyMMdd= new SimpleDateFormat("yyyyMMdd");
+	public static String dateTransDateyyyyMMddWithoutMinus(Date date)
+	{
+		return Tools.sdf_yyyyMMdd.format(date);
 	}
 	
 	
