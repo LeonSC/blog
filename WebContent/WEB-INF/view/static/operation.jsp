@@ -14,7 +14,7 @@
 		</a>
 		</small>
 	</c:if>
-	<c:if test="${(not empty cache.titleCache[c.topic].manager[memAuth.BM_ID]) or c.user.BM_ID == memAuth.BM_ID}">
+	<c:if test="${(not empty cache.titleCache[c.topic].manager[memAuth.BM_ID]) or (c.user.BM_ID == memAuth.BM_ID)}">
 		<small class="text-muted">
 		<a href="${config.rootPath}/topic/delete/${c.BM_ID}">删除</a>
 		</small>

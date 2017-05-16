@@ -17,6 +17,9 @@
 					<a type="button" class="btn btn-primary" href="${config.rootPath}/pay/sure">支付</a>
 					<a type="button" class="btn btn-primary" href="${config.rootPath}/pay/sure?secret=1">匿名支付</a>
 					<a type="button" class="btn btn-link" href="${config.rootPath}/topic/${c.topic}">取消</a>
+					<c:if test="${(not empty cache.titleCache[c.topic].manager[memAuth.BM_ID]) or (c.user.BM_ID == memAuth.BM_ID)}">
+					<a type="button" class="btn btn-link" href="${config.rootPath}/topic/delete/${c.BM_ID}">删除</a>
+					</c:if>
 					</div>
 				</div>
 			</div>

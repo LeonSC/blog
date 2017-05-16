@@ -5,6 +5,7 @@ import org.mongodb.morphia.annotations.NotSaved;
 @NotSaved
 public class Manager {
 
+	private String nickname = "";
 	private String username = "";
 	private String BM_ID = "";
 	private Auth auth = new Auth();
@@ -25,5 +26,11 @@ public class Manager {
 	}
 	public void setAuth(Auth auth) {
 		this.auth = auth;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }

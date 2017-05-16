@@ -17,6 +17,11 @@
 			<a type="button" class="btn btn-info btn-sm" href="${config.rootPath}/write/layui?topic=${topic}">写点什么</a>
 			</c:if>
 			<button type="button" class="btn btn-outline-success btn-sm">${cache.titleCache[topic].name}</button>
+			<div class="btn-group btn-group-sm">
+				<c:forEach var="item" items="${cache.titleCache[topic].manager}">
+				<button type="button" class="btn btn-secondary">${empty item.value.nickname ? "匿名大佬": item.value.nickname}</button>
+				</c:forEach>
+			</div>
 			</div>
 		</div>
 		<c:if test="${not empty toplist}">

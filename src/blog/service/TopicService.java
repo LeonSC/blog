@@ -31,6 +31,7 @@ public class TopicService {
 		Topic t = this.topicDao.findTopicByBMID(topicid);
 		Manager m = new Manager();
 		m.setBM_ID(u.getBM_ID());
+		m.setNickname(u.getNickname());
 		m.setUsername(u.getUsername());
 		m.setAuth(new Auth());
 		if(t.getManager()==null)
