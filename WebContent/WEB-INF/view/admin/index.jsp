@@ -8,8 +8,9 @@
 		<%@ include file="nav.jsp"%>
 		<div class="row">
 			<div class="col col-12">
-			<canvas id="myChart" width="90%" height="20"></canvas>
+			<canvas id="infoChart" width="90%" height="20"></canvas>
 			<script>
+			/**
 			var data = {
 				    labels: ["January", "February", "March", "April", "May", "June", "July"],
 				    datasets: [
@@ -20,7 +21,9 @@
 				        }
 				    ]
 				};
-			var ctx = document.getElementById("myChart");
+			**/
+			var data = ${data};
+			var ctx = document.getElementById("infoChart");
 			var myLineChart = Chart.Line(ctx, {
 			    data: data
 			});

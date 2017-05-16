@@ -32,8 +32,9 @@ public class AdminController {
 	private TallyService tallyService;
 
 	@RequestMapping("/index")
-	public String index() {
-		this.tallyService.getPastSevenDaysDataForChartJS();
+	public String index(HttpServletRequest request) {
+		String re = this.tallyService.getPastSevenDaysDataForChartJS();
+		request.setAttribute("data", re);
 		return "admin/index";
 	}
 
@@ -99,6 +100,11 @@ public class AdminController {
 	@RequestMapping("/account")
 	public String account(HttpServletRequest request, @RequestParam(value = "email", required = false) String email) {
 		User u = this.userService.findUserByEmail(email);
+		if(u!=null)
+		{
+			String re = this.tallyService.getPastSevenDaysDataForChartJS(u.getBM_ID());
+			request.setAttribute("data", re);
+		}
 		request.setAttribute("user", u);
 		return "admin/account";
 	}

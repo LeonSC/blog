@@ -8,8 +8,10 @@ import static org.mongodb.morphia.aggregation.Projection.projection;
 import static org.mongodb.morphia.query.Sort.*;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import static org.mongodb.morphia.aggregation.Group.*;
 import org.springframework.stereotype.Repository;
@@ -44,12 +46,39 @@ public class TallyDao {
 		return re;
 	}
 	
-	public List<Tally> lastSevenDays()
+	/**
+	 * 
+	 * @param timeStr 格式必须为20170515
+	 * @return
+	 */
+	public Map<String,Tally> lastNDays(String timeStr)
 	{
-		List<Tally> list = MongoDBConnector.datastore.createQuery(Tally.class).field("userid").equal("").field("dateString").greaterThanOrEq("20170510").order("dateString").asList();
-		return list;
+		List<Tally> list = MongoDBConnector.datastore.createQuery(Tally.class).field("userid").equal("").field("dateString").greaterThanOrEq(timeStr).order("dateString").asList();
+		Map<String,Tally> map = new HashMap<>();
+		for(Tally t : list)
+		{
+			map.put(t.getDateString(), t);
+		}
+		return map;
 	}
-
+	
+	/**
+	 * 
+	 * @param timeStr 格式必须为20170515
+	 * @param userid 用户BMID
+	 * @return
+	 */
+	public Map<String,Tally> lastNDays(String timeStr, String userid)
+	{
+		List<Tally> list = MongoDBConnector.datastore.createQuery(Tally.class).field("userid").equal(userid).field("dateString").greaterThanOrEq(timeStr).order("dateString").asList();
+		Map<String,Tally> map = new HashMap<>();
+		for(Tally t : list)
+		{
+			map.put(t.getDateString(), t);
+		}
+		return map;
+	}
+	
 	public static void main(String[] args) {
 		Config.getConfig();
 		MongoDBConnector.getMongoDBConnector();
