@@ -2,6 +2,7 @@ package blog.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -304,7 +305,7 @@ public class ContentService {
 	}
 
 	/**
-	 * 
+	 * 回复一个帖子
 	 * @param userid
 	 * @param contentid
 	 * @param reply
@@ -374,5 +375,32 @@ public class ContentService {
 	public List<Content> getContentTopListByTopic(String topic) {
 		List<Content> list = this.contentDao.getContentTopListByTopic(topic);
 		return list;
+	}
+	
+	
+	////////////////////////////////删除相关////////////////////////////////////////////////
+	/**
+	 * 把一个帖子删除
+	 * @param user 操作者 
+	 * @param bmid 被操作对象
+	 * @return
+	 */
+	public int deleteContent(User user, String bmid)
+	{
+		if(user == null)
+		{
+			return -1;
+		}
+		Content c = this.contentDao.getContentByBMID(bmid);
+		//可操作列表
+		List<String> list = new ArrayList<>();
+		list.add(c.getUser().getBM_ID());
+		list.addAll(TCache.getCache().titleCache.get(c.getTopic()).getManager().keySet());//管理员操作
+		//原作者可以删除
+		if(!list.contains(user.getBM_ID()))
+		{
+			return -2;
+		}
+		return 0;
 	}
 }

@@ -76,6 +76,9 @@ public class TCache {
 		return 0;
 	}
 	
+	/**
+	 * 首页通知栏
+	 */
 	public List<Notice> indexPageNoticeList = null;
 	public List<Notice> getIndexPageNoticeList() {
 		return indexPageNoticeList;
@@ -94,7 +97,7 @@ public class TCache {
 	
 	public int initIndexPageContentList()
 	{
-		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).field("topic").not().startsWith("f").order("-replyCount,-BM_TIME").asList(new FindOptions().limit(15));
+		TCache.getCache().indexPageContentList = MongoDBConnector.datastore.find(Content.class).field("BM_DEL").equal(0).field("topic").not().startsWith("f").order("-replyCount,-BM_TIME").asList(new FindOptions().limit(15));
 		return 0;
 	}
 	

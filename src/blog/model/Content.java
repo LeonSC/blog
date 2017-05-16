@@ -18,7 +18,7 @@ public class Content extends BaseModel {
 	
 	private Auth need =new Auth();
 	
-	private User user;
+	private User user;//作者
 	
 	private Integer replyCount = 0;
 

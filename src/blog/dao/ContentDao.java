@@ -37,7 +37,7 @@ public class ContentDao {
 	 */
 	public Page<Content> getContentListByTopic(String topic, int nowPage, int numInPage)
 	{
-		Query<Content> query = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic);
+		Query<Content> query = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("topic").equal(topic);
 		Page<Content> page = new Page<>();
 		page.setTotal(query.count());
 		page.setNowPage(nowPage);
@@ -55,7 +55,7 @@ public class ContentDao {
 	 */
 	public Content getContentByBMID(String bmid)
 	{
-		Content c = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid).get();
+		Content c = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("BM_ID").equal(bmid).get();
 		return c;
 	}
 	
@@ -66,7 +66,7 @@ public class ContentDao {
 	 */
 	public int incContentReplyOne(String bmid)
 	{
-		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("BM_ID").equal(bmid);
 		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
 		ops.inc("replyCount");
 		MongoDBConnector.datastore.update(updateQuery, ops);
@@ -81,7 +81,7 @@ public class ContentDao {
 	 */
 	public int updateContentTop(String bmid, long top)
 	{
-		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("BM_ID").equal(bmid);
 		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
 		ops.set("top",top);
 		MongoDBConnector.datastore.update(updateQuery, ops);
@@ -95,7 +95,7 @@ public class ContentDao {
 	 */
 	public List<Content> getContentTopListByTopic(String topic)
 	{
-		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(topic).field("top").exists().field("top").notEqual(0L).order("-top").asList(new FindOptions().limit(3));
+		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("topic").equal(topic).field("top").exists().field("top").notEqual(0L).order("-top").asList(new FindOptions().limit(3));
 		return list;
 	}
 	
@@ -111,6 +111,34 @@ public class ContentDao {
 		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
 		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
 		ops.set("payer",payment);
+		UpdateResults re = MongoDBConnector.datastore.update(updateQuery, ops);
+		return re.getUpdatedCount();
+	}
+	
+	/**
+	 * 伪删除
+	 * @param bmid
+	 * @return
+	 */
+	public int deleteContent(String bmid)
+	{
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.set("BM_DEL",1);
+		UpdateResults re = MongoDBConnector.datastore.update(updateQuery, ops);
+		return re.getUpdatedCount();
+	}
+	
+	/**
+	 * 删除恢复
+	 * @param bmid
+	 * @return
+	 */
+	public int redoDeleteContent(String bmid)
+	{
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_ID").equal(bmid);
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.set("BM_DEL",0);
 		UpdateResults re = MongoDBConnector.datastore.update(updateQuery, ops);
 		return re.getUpdatedCount();
 	}
