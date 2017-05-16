@@ -83,14 +83,16 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/memregistersubmit")
-	public String memRegisterSubmit(HttpServletRequest request, @RequestParam(value = "email", required = false) String email,
+	public String memRegisterSubmit(HttpServletRequest request, 
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "nickname", required = false) String nickname,
 			@RequestParam(value = "pw", required = false) String pw) {
 		if(request.getSession().getAttribute("register")==null)
 		{
 			return "redirect:/index";
 		}
 		request.getSession().setAttribute("register", null);
-		this.userService.registerUser(email, pw);
+		this.userService.registerUser(email, pw, nickname);
 		return "redirect:/index";
 	}
 	

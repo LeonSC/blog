@@ -15,6 +15,11 @@
 						<small class="form-text text-muted">请填写您的邮件.</small>
 					</div>
 					<div class="form-group">
+						<label for="inputEmail">Nick Name</label>
+						<input type="text" class="form-control" placeholder="匿名大佬" name="nickname"/>
+						<small class="form-text text-muted">请填写您的昵称.</small>
+					</div>
+					<div class="form-group">
 						<label for="inputPassword">Password</label>
 						<input type="password" class="form-control" id="inputPassword" name="pw"/>
 					</div>

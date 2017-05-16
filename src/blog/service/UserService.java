@@ -68,7 +68,7 @@ public class UserService {
 	 * @param pw
 	 * @return
 	 */
-	public User registerUser(String email,String pw)
+	public User registerUser(String email,String pw, String nickname)
 	{
 		//验证邮件的正确性
 		if(email==null||email.isEmpty())
@@ -116,6 +116,10 @@ public class UserService {
 			return new User();
 		}
 		//---验证邮件的正确性---
+		if(nickname!=null)
+		{
+			nickname = nickname.trim();
+		}
 		
 		User u=this.userDao.findByUserName(email);
 		
@@ -124,7 +128,7 @@ public class UserService {
 			User us=new User();
 			
 			us.setUsername(email);
-			us.setNickname(email);
+			us.setNickname(nickname==null||nickname.isEmpty()?email:nickname);
 			us.setPw(pw);
 			us.setLv(1);
 			
