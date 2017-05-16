@@ -87,10 +87,30 @@ public class TopicController {
 		return "show";
 	}
 
-	@RequestMapping("/switchtop/{topic}/{bmid}")
-	public String switchArtTop(HttpServletRequest request, @PathVariable String topic, @PathVariable String bmid) {
+	/**
+	 * 文章置顶
+	 * @param request
+	 * @param bmid
+	 * @return
+	 */
+	@RequestMapping("/switchtop/{bmid}")
+	public String switchArtTop(HttpServletRequest request, @PathVariable String bmid) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.changeContentToTop(u, topic, bmid);
+		this.contentService.changeContentToTop(u, bmid);
 		return "redirect:/topic/art/" + bmid;
+	}
+	
+	/**
+	 * 删除一篇文章
+	 * @param request
+	 * @param bmid
+	 * @return
+	 */
+	@RequestMapping("/delete/{bmid}")
+	public String deleteArt(HttpServletRequest request, @PathVariable String bmid)
+	{
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		String topic = this.contentService.deleteContent(u, bmid);
+		return "redirect:/topic/" + topic;
 	}
 }

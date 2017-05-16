@@ -42,10 +42,10 @@
 			<div class="col col-12">
 				<div class="card-group">
 					<c:forEach var="item" items="${page.list}" begin="0" end="3">
-					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
+					<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}" style="max-width:25%">
 						<img class="card-img-top img-fluid custom-height-180" src="${item.cover}" data-src="holder.js/100px180?theme=simple&text=I&random=yes">
 						<div class="card-block">
-							<h4 class="card-title">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h4>
+							<h4 class="card-title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.title} <c:if test="${item.price!=0&&not empty item.price}"><small><i class="fa fa-cc-visa fa-1" aria-hidden="true"></i></small></c:if></h4>
 							<p class="card-text">${item.intro}</p>
 							<p class="card-text"><small class="text-muted"><c:set target="${timeValues}" value="${item.BM_TIME}" property="time" /><fmt:formatDate value="${timeValues}" type="both" /></small></p>
 						</div>

@@ -348,15 +348,16 @@ public class ContentService {
 	 * @param bmid
 	 * @return
 	 */
-	public int changeContentToTop(User user, String topic, String bmid) {
+	public int changeContentToTop(User user, String bmid) {
+		Content c = this.contentDao.getContentByBMID(bmid);
+		if (c == null) {
+			return -2;
+		}
+		String topic = c.getTopic();
 		// 验证是否有权限去操作
 		Manager manager = TCache.getCache().getTitleCache().get(topic).getManager().get(user.getBM_ID());
 		if (manager == null) {
 			return -1;
-		}
-		Content c = this.contentDao.getContentByBMID(bmid);
-		if (c == null) {
-			return -2;
 		}
 		long top = 0L;
 		if (c.getTop() == null || c.getTop() == 0L) {
@@ -385,11 +386,11 @@ public class ContentService {
 	 * @param bmid 被操作对象
 	 * @return
 	 */
-	public int deleteContent(User user, String bmid)
+	public String deleteContent(User user, String bmid)
 	{
 		if(user == null)
 		{
-			return -1;
+			return null;
 		}
 		Content c = this.contentDao.getContentByBMID(bmid);
 		//可操作列表
@@ -399,8 +400,9 @@ public class ContentService {
 		//原作者可以删除
 		if(!list.contains(user.getBM_ID()))
 		{
-			return -2;
+			return null;
 		}
-		return 0;
+		this.contentDao.deleteContent(bmid);
+		return c.getTopic();
 	}
 }

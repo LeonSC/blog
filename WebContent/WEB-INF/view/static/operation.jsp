@@ -3,7 +3,7 @@
 <c:if test="${not empty memAuth}">
 	<c:if test="${not empty cache.titleCache[c.topic].manager[memAuth.BM_ID]}">
 		<small class="text-muted">
-		<a href="${config.rootPath}/topic/switchtop/${c.topic}/${c.BM_ID}"> 
+		<a href="${config.rootPath}/topic/switchtop/${c.BM_ID}"> 
 		<c:if test="${empty c.top}">
 			置顶
 		</c:if> <c:if test="${c.top == 0}">
@@ -12,6 +12,11 @@
 			取消置顶
 		</c:if>
 		</a>
+		</small>
+	</c:if>
+	<c:if test="${(not empty cache.titleCache[c.topic].manager[memAuth.BM_ID]) or c.user.BM_ID == memAuth.BM_ID}">
+		<small class="text-muted">
+		<a href="${config.rootPath}/topic/delete/${c.BM_ID}">删除</a>
 		</small>
 	</c:if>
 </c:if>
