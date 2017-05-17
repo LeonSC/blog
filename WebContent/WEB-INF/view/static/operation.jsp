@@ -18,5 +18,8 @@
 		<small class="text-muted">
 		<a href="${config.rootPath}/topic/delete/${c.BM_ID}">删除</a>
 		</small>
+		<small class="text-muted">
+		<a href="${config.rootPath}/write/layuiedit/${c.BM_ID}">修改</a>
+		</small>
 	</c:if>
 </c:if>

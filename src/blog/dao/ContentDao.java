@@ -89,6 +89,29 @@ public class ContentDao {
 	}
 	
 	/**
+	 * 更新内容
+	 * @param bmid
+	 * @param content
+	 * @param intro
+	 * @param cover
+	 * @return
+	 */
+	public int updateContentByBMID(Content c)
+	{
+		if(c==null)
+		{
+			return -1;
+		}
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("BM_ID").equal(c.getBM_ID());
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.set("intro",c.getIntro());
+		ops.set("cover",c.getCover());
+		ops.set("content",c.getContent());
+		MongoDBConnector.datastore.update(updateQuery, ops);
+		return 0;
+	}
+	
+	/**
 	 * 查询置顶帖子
 	 * @param topic
 	 * @return

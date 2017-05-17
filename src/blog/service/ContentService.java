@@ -281,6 +281,43 @@ public class ContentService {
 		c = this.contentDao.save(c);
 		return JSON.toJSONString(map);
 	}
+	
+	/**
+	 * 修改/编辑文章内容
+	 * @param bmid
+	 * @param content
+	 * @return
+	 */
+	public String layuiEditContent(User user, String bmid, String content) {
+		Content c = this.checkAuthForContent(user, bmid);
+		if(c==null)
+		{
+			return null;
+		}
+		Map<String, String> map = new HashMap<>();
+		map.put("status", "0");
+		map.put("info", "succ");
+		if (content == null || content.isEmpty()) {
+			map.put("status", "-3");
+			map.put("info", "content is empty");
+			return JSON.toJSONString(map);
+		}
+		content = this.contentFilter(content);
+		if (content.length() < 10) {
+			map.put("status", "-4");
+			map.put("info", "content is too short");
+			return JSON.toJSONString(map);
+		}
+		// 解析第一张图片
+		String cover = this.getFirstImg(content);
+		// 解析intro
+		String intro = this.getIntroFromContent(content);
+		c.setCover(cover);
+		c.setIntro(intro);
+		c.setContent(content);
+		this.contentDao.updateContentByBMID(c);
+		return JSON.toJSONString(map);
+	}
 
 	/**
 	 * 通过topic查找列表
@@ -388,6 +425,17 @@ public class ContentService {
 	 */
 	public String deleteContent(User user, String bmid)
 	{
+		Content c = this.checkAuthForContent(user, bmid);
+		if(c==null)
+		{
+			return null;
+		}
+		this.contentDao.deleteContent(bmid);
+		return c.getTopic();
+	}
+	
+	private Content checkAuthForContent(User user, String bmid)
+	{
 		if(user == null)
 		{
 			return null;
@@ -402,7 +450,6 @@ public class ContentService {
 		{
 			return null;
 		}
-		this.contentDao.deleteContent(bmid);
-		return c.getTopic();
+		return c;
 	}
 }

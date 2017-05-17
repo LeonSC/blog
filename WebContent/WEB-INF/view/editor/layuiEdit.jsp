@@ -15,34 +15,28 @@
 			<div class="col col-12">
 				<form id="layuiform">
 					<div class="form-group row">
-						<label class="col-2 col-form-label">发布到</label>
-						<label class="col-6 col-form-label h4">${topic.name}</label>
-					</div>
-					<div class="form-group row">
-						<label class="col-2 col-form-label">价格</label>
-						<div class="col-6">
-							<input class="form-control" type="number" name="price" id="layuiformprice" max="10000" min="0">
-						</div>
+						<label class="col-2 col-form-label">所在</label>
+						<label class="col-6 col-form-label h4">${cache.titleCache[c.topic].name}</label>
 					</div>
 				</form>
 				<h3>草稿</h3>
 				<hr />
 				<h4 class="card-title" contenteditable="true" id="editorTitle">
-					<c:if test="${empty draft.title}">输入标题</c:if>
-					<c:if test="${not empty draft.title}">${draft.title}</c:if>
+					<c:if test="${empty c.title}">输入标题</c:if>
+					<c:if test="${not empty c.title}">${c.title}</c:if>
 				</h4>
 				<textarea class="layui-textarea" id="layuieditor">
-					<c:if test="${empty draft.content}">
+					<c:if test="${empty c.content}">
 						<p>输入内容.</p>
 					</c:if>
-					<c:if test="${not empty draft.content}">${draft.content}</c:if>
+					<c:if test="${not empty c.content}">${c.content}</c:if>
 				</textarea>
 			</div>
 		</div>
 		<br />
 		<div class="row">
 			<div class="col col-12">
-				<a href="#" class="btn btn-primary" id="writeSave">保存并发布</a>
+				<a href="#" class="btn btn-primary" id="editSave">修改</a>
 			</div>
 		</div>
 	</div>
@@ -59,24 +53,22 @@
 			//注意：layedit.set 一定要放在 build 前面，否则配置全局接口将无效。
 			var index = layedit.build("layuieditor"); //建立编辑器
 			
-			$("#writeSave").click(function(e) {
+			$("#editSave").click(function(e) {
 				e.preventDefault();
-				var price = $("#layuiformprice").val();
+				//var price = $("#layuiformprice").val();
 				//校验区
-				if(price<0||price>10000)
-				{
-					return 0;
-				}
+				//if(price<0||price>10000)
+				//{
+					//return 0;
+				//}
 				$('#postModal').modal('show');
 				var elContent = layedit.getContent(index);
-				$.post("${config.rootPath}/write/publishlayui", {
-					title : $("#editorTitle").html(),
+				$.post("${config.rootPath}/write/editlayui", {
 					content : elContent,
-					topic : "${topic.BM_ID}",
-					price : price
+					bmid : "${c.BM_ID}"
 				}, function(data) {
 					if (data.status == "0") {
-						location.href = '${config.rootPath}/topic/${topic.BM_ID}';
+						location.href = '${config.rootPath}/topic/art/${c.BM_ID}';
 					} else {
 						alert(data.info);
 					}

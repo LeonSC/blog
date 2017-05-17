@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import blog.model.Block;
+import blog.model.Content;
 import blog.model.Draft;
 import blog.model.Topic;
 import blog.model.User;
@@ -210,6 +212,40 @@ public class WriteController {
 		return re;
 	}
 	
+	/////////////////////////////内容修改//////////////////////////////////
+	/**
+	 * 进入内容修改页
+	 * @param request
+	 * @param bmid
+	 * @return
+	 */
+	@RequestMapping("/layuiedit/{bmid}")
+	public String layuiEdit(HttpServletRequest request, @PathVariable String bmid) {
+		Content c = this.contentService.getContentByBMID(bmid);
+		request.setAttribute("c", c);
+		return "editor/layuiEdit";
+	}
+	
+	/**
+	 * layui编辑保存
+	 * 
+	 * @param request
+	 * @param title
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping("/editlayui")
+	@ResponseBody
+	public String editLayUI(HttpServletRequest request,
+			@RequestParam(value = "bmid", required = false) String bmid,
+			@RequestParam(value = "content", required = false) String content) {
+		User u = (User) request.getSession().getAttribute(Config.memAuth);
+		String re = this.contentService.layuiEditContent(u, bmid, content);
+		return re;
+	}
+	
+	
+	//////////////////////论坛写入/////////////////////////////////
 	/**
 	 * 进入写入论坛BLOCK
 	 * @param request

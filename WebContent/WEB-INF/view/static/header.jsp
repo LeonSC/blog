@@ -21,6 +21,7 @@ p {overflow:hidden}
 .custom-max-75-75 { width:75px;height:75px;}
 .custom-table {}
 .custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);overflow:hidden;}
+*{outline:0 none !important; blr:expression(this.onFocus=this.blur());} 
 </style>
 <script>
 $(document).ready(function() {
