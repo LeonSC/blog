@@ -21,7 +21,7 @@
 					<div class="form-group row">
 						<label class="col-2 col-form-label">价格</label>
 						<div class="col-6">
-							<input class="form-control" type="number" name="price" id="layuiformprice" max="10000" min="0">
+							<input class="form-control" type="number" name="price" id="layuiformprice" max="9999" min="0">
 						</div>
 					</div>
 				</form>
@@ -63,9 +63,9 @@
 				e.preventDefault();
 				var price = $("#layuiformprice").val();
 				//校验区
-				if(price<0||price>10000)
+				if(price*1<0||price*1>=10000)
 				{
-					return 0;
+					return false;
 				}
 				$('#postModal').modal('show');
 				var elContent = layedit.getContent(index);

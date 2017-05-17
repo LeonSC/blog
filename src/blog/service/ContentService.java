@@ -239,6 +239,11 @@ public class ContentService {
 		if (price == null || price < 0) {
 			price = 0;
 		}
+		if (price > 9999) {
+			map.put("status", "-7");
+			map.put("info", "price is too large");
+			return JSON.toJSONString(map);
+		}
 		if (title == null || title.isEmpty()) {
 			map.put("status", "-1");
 			map.put("info", "title is empty");
@@ -281,17 +286,17 @@ public class ContentService {
 		c = this.contentDao.save(c);
 		return JSON.toJSONString(map);
 	}
-	
+
 	/**
 	 * 修改/编辑文章内容
+	 * 
 	 * @param bmid
 	 * @param content
 	 * @return
 	 */
 	public String layuiEditContent(User user, String bmid, String content) {
 		Content c = this.checkAuthForContent(user, bmid);
-		if(c==null)
-		{
+		if (c == null) {
 			return null;
 		}
 		Map<String, String> map = new HashMap<>();
@@ -343,13 +348,15 @@ public class ContentService {
 
 	/**
 	 * 回复一个帖子
+	 * 
 	 * @param userid
 	 * @param contentid
 	 * @param reply
 	 * @return
 	 */
 	public int setReplyForContent(String userid, String contentid, String reply) {
-		reply = reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "").trim();
+		reply = reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "")
+				.trim();
 		Reply r = new Reply();
 		r.setOkey(contentid);
 		User u = this.userDao.findUserByBMID(userid);
@@ -414,40 +421,37 @@ public class ContentService {
 		List<Content> list = this.contentDao.getContentTopListByTopic(topic);
 		return list;
 	}
-	
-	
-	////////////////////////////////删除相关////////////////////////////////////////////////
+
+	//////////////////////////////// 删除相关////////////////////////////////////////////////
 	/**
 	 * 把一个帖子删除
-	 * @param user 操作者 
-	 * @param bmid 被操作对象
+	 * 
+	 * @param user
+	 *            操作者
+	 * @param bmid
+	 *            被操作对象
 	 * @return
 	 */
-	public String deleteContent(User user, String bmid)
-	{
+	public String deleteContent(User user, String bmid) {
 		Content c = this.checkAuthForContent(user, bmid);
-		if(c==null)
-		{
+		if (c == null) {
 			return null;
 		}
 		this.contentDao.deleteContent(bmid);
 		return c.getTopic();
 	}
-	
-	private Content checkAuthForContent(User user, String bmid)
-	{
-		if(user == null)
-		{
+
+	private Content checkAuthForContent(User user, String bmid) {
+		if (user == null) {
 			return null;
 		}
 		Content c = this.contentDao.getContentByBMID(bmid);
-		//可操作列表
+		// 可操作列表
 		List<String> list = new ArrayList<>();
 		list.add(c.getUser().getBM_ID());
-		list.addAll(TCache.getCache().titleCache.get(c.getTopic()).getManager().keySet());//管理员操作
-		//原作者可以删除
-		if(!list.contains(user.getBM_ID()))
-		{
+		list.addAll(TCache.getCache().titleCache.get(c.getTopic()).getManager().keySet());// 管理员操作
+		// 原作者可以删除
+		if (!list.contains(user.getBM_ID())) {
 			return null;
 		}
 		return c;
