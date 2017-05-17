@@ -17,6 +17,7 @@
 
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler /><!-- 处理静态资源访问 -->
+	<task:annotation-driven />
 	<!-- 扫描web包，应用Spring的注解 -->
 	<context:component-scan base-package="blog.controller" />
 	<context:component-scan base-package="blog.dao" />
@@ -28,8 +29,6 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/view/"
 		p:suffix=".jsp" />
-
-	<task:annotation-driven />
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

@@ -97,7 +97,7 @@ public class TallyDao {
 		end.set(Calendar.SECOND, 0);
 		System.out.println(end.getTime());
 
-		Query<Content> m = MongoDBConnector.datastore.createQuery(Content.class)
+		Query<Content> m = MongoDBConnector.datastore.createQuery(Content.class).field("BM_TIME").greaterThanOrEq(start.getTimeInMillis())
 				.field("BM_TIME").lessThan(end.getTimeInMillis());
 
 		Iterator<Tally> aggregate = MongoDBConnector.datastore.createAggregation(Content.class)
@@ -128,6 +128,8 @@ public class TallyDao {
 			Tally t = aggregate.next();
 			t.setUserid("");
 			t.setDateString(Tools.dateTransDateyyyyMMddWithoutMinus(t.getDate()));
+			System.out.println(t.getDateString());
+			System.out.println(t.getCount());
 			MongoDBConnector.datastore.save(t);
 		}
 	}
