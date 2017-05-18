@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import blog.model.Content;
 import blog.model.Tally;
+import blog.startup.Config;
 import blog.startup.MongoDBConnector;
 import blog.startup.Tools;
 
@@ -34,6 +35,7 @@ public class TallyDailyContent {
 		end.set(Calendar.HOUR_OF_DAY, 0);
 		end.set(Calendar.MINUTE, 0);
 		end.set(Calendar.SECOND, 0);
+		System.out.println("统计从 "+start.getTime()+" 到 "+end.getTime() +" 数据");
 		Query<Content> m = MongoDBConnector.datastore.createQuery(Content.class).field("BM_TIME").greaterThanOrEq(start.getTimeInMillis())
 				.field("BM_TIME").lessThan(end.getTimeInMillis());
 		//统计当日以用户角度统计
@@ -66,5 +68,13 @@ public class TallyDailyContent {
 			t.setDateString(Tools.dateTransDateyyyyMMddWithoutMinus(t.getDate()));
 			MongoDBConnector.datastore.save(t);
 		}
+	}
+	
+	public static void main(String[] args) {
+		Config.getConfig();
+		MongoDBConnector.getMongoDBConnector();
+		
+		TallyDailyContent tdc = new TallyDailyContent();
+		tdc.refreshTallyDailyContent();
 	}
 }
