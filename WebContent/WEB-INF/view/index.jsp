@@ -7,6 +7,7 @@
 <%@ include file="static/header.jsp"%>
 <body>
 	<%@ include file="static/nav.jsp"%>
+	<img src="http://otakula.com/imgBlogFolder/1110x130.png" data-src="holder.js/100px130?theme=simple" class="img-fluid custom-max">
 	<div class="container">
 		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
