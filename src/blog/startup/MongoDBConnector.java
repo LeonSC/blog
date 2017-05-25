@@ -23,10 +23,8 @@ public final class MongoDBConnector {
 		if(MongoDBConnector.mbdc==null)
 		{
 			MongoDBConnector.mbdc=new MongoDBConnector();
-			
 			//mongodb
 			MongoDBConnector.mbdc.getDB();
-			
 			return MongoDBConnector.mbdc;
 		}
 		
@@ -41,19 +39,12 @@ public final class MongoDBConnector {
 					.threadsAllowedToBlockForConnectionMultiplier(10)
 					.readPreference(ReadPreference.nearest())
 					.build();
-			
 			MongoCredential credential = MongoCredential.createCredential(Config.dbUser, Config.dbBase, Config.dbPassword.toCharArray());
-			
 			MongoClient mongoClient = new MongoClient(Arrays.asList(new ServerAddress(Config.dbIP, Config.dbPort)), Arrays.asList(credential),options);
-			
 			final Morphia morphia = new Morphia();
-			
-			morphia.mapPackage("model");
-			
+			morphia.mapPackage("blog.model");
 			MongoDBConnector.datastore = morphia.createDatastore(mongoClient, Config.dbBase);
 			MongoDBConnector.datastore.ensureIndexes();
-			
-			//MongoDBConnector.db = mongoClient.getDatabase("cedar_forum");
 			return;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
