@@ -6,22 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import blog.model.Block;
-import blog.model.Content;
 import blog.model.Draft;
-import blog.model.Topic;
+
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
 import blog.startup.Config;
-import blog.startup.FCache;
-import blog.startup.TCache;
 
 /**
  * 控制文章相关的东西
@@ -155,135 +150,5 @@ public class WriteController {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
 		this.contentService.setReplyForContent(u.getBM_ID(), contentid, reply);
 		return "redirect:/topic/art/" + contentid;
-	}
-
-	///////////////////////////// layui editor///////////////////////////////////////
-	@RequestMapping("/layui")
-	public String layuiWrite(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic) {
-		if(topic==null)
-		{
-			return "redirect:/index";
-		}
-		Topic t = TCache.getCache().titleCache.get(topic);
-		request.setAttribute("topic", t);
-		return "editor/layui";
-	}
-	
-	@RequestMapping("/imguploadforlayui")
-	@ResponseBody
-	public String imgUploadForLayUI(HttpServletRequest request,
-			@RequestParam(value = "file", required = false) MultipartFile file) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		if (u == null) {
-			return "";
-		}
-		String[] array = { "" };
-		// 判断文件是否为空
-		if (file != null && !file.isEmpty()) {
-			try {
-				array = this.imgService.getImgPhysicalPathForLayUI(u.getBM_ID(), file.getOriginalFilename());
-				// 转存文件
-				file.transferTo(new File(array[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		// 重定向
-		return array[0];
-	}
-	
-	/**
-	 * layui保存
-	 * 
-	 * @param request
-	 * @param title
-	 * @param content
-	 * @return
-	 */
-	@RequestMapping("/publishlayui")
-	@ResponseBody
-	public String publishLayUI(HttpServletRequest request,
-			@RequestParam(value = "topic", required = false) String topic,
-			@RequestParam(value = "price", required = false) Integer price,
-			@RequestParam(value = "title", required = false) String title,
-			@RequestParam(value = "content", required = false) String content) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, price, title, content);
-		return re;
-	}
-	
-	/////////////////////////////内容修改//////////////////////////////////
-	/**
-	 * 进入内容修改页
-	 * @param request
-	 * @param bmid
-	 * @return
-	 */
-	@RequestMapping("/layuiedit/{bmid}")
-	public String layuiEdit(HttpServletRequest request, @PathVariable String bmid) {
-		Content c = this.contentService.getContentByBMID(bmid);
-		request.setAttribute("c", c);
-		return "editor/layuiEdit";
-	}
-	
-	/**
-	 * layui编辑保存
-	 * 
-	 * @param request
-	 * @param title
-	 * @param content
-	 * @return
-	 */
-	@RequestMapping("/editlayui")
-	@ResponseBody
-	public String editLayUI(HttpServletRequest request,
-			@RequestParam(value = "bmid", required = false) String bmid,
-			@RequestParam(value = "content", required = false) String content) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		String re = this.contentService.layuiEditContent(u, bmid, content);
-		return re;
-	}
-	
-	
-	//////////////////////论坛写入/////////////////////////////////
-	/**
-	 * 进入写入论坛BLOCK
-	 * @param request
-	 * @param block
-	 * @return
-	 */
-	@RequestMapping("/layuiforum")
-	public String writeForum(HttpServletRequest request, @RequestParam(value = "block", required = false) String block)
-	{
-		Block node = FCache.getCache().getBlockmap().get(block);
-		request.setAttribute("node", node);
-		return "forum/layui";
-	}
-	
-	@RequestMapping("/forumsubmitlayui")
-	@ResponseBody
-	public String publishForumLayUI(HttpServletRequest request,
-			@RequestParam(value = "topic", required = false) String topic,
-			@RequestParam(value = "title", required = false) String title,
-			@RequestParam(value = "content", required = false) String content) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		String re = this.contentService.layuiPublishContent(u.getBM_ID(), topic, 0, title, content);
-		return re;
-	}
-	
-	/**
-	 * 用户回复
-	 * 
-	 * @param request
-	 * @param topic
-	 * @return
-	 */
-	@RequestMapping("/forumreply")
-	public String forumReply(HttpServletRequest request,
-			@RequestParam(value = "contentid", required = false) String contentid,
-			@RequestParam(value = "reply", required = false) String reply) {
-		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.setReplyForContent(u.getBM_ID(), contentid, reply);
-		return "redirect:/forum/point/" + contentid;
 	}
 }
