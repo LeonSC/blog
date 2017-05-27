@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="static/header.jsp"%>
@@ -18,25 +18,23 @@
 <body>
 	<%@ include file="static/nav.jsp"%>
 	<div class="container">
-		<br/>
+		<br />
 		<div class="row">
 			<div class="col col-12">
-				<div class="card">
-					<div class="card-header">草稿</div>
-					<div class="card-block">
-						<h4 class="card-title" contenteditable="true" id="editorTitle">
-							<c:if test="${empty draft.title}">输入标题</c:if>
-							<c:if test="${not empty draft.title}">${draft.title}</c:if>
-						</h4>
-						<div class="card-text" id="editor">
-							<c:if test="${empty draft.content}"><p>输入内容.</p></c:if>
-							<c:if test="${not empty draft.content}">${draft.content}</c:if>
-						</div>
-					</div>
-					<div class="card-footer">
-						<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a>
-						<a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
-					</div>
+				<button type="button" class="btn">草稿</button>
+				<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a>
+				<a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
+			</div>
+			<div class="col col-12">
+				<br/>
+				<h4 contenteditable="true" id="editorTitle" class="text-center">
+					<c:if test="${empty draft.title}">输入标题</c:if>
+					<c:if test="${not empty draft.title}">${draft.title}</c:if>
+				</h4>
+				<hr />
+				<div class="card-text" id="editor">
+					<c:if test="${empty draft.content}"></c:if>
+					<c:if test="${not empty draft.content}">${draft.content}</c:if>
 				</div>
 			</div>
 		</div>
@@ -44,51 +42,52 @@
 	<script>
 		$(document).ready(function() {
 			var editor = new MediumEditor('#editor', {
-				toolbar: {
-					buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'justifyLeft', 'justifyCenter'],
+				toolbar : {
+					buttons : [ 'bold', 'italic', 'underline', 'anchor', 'h2', 'justifyLeft', 'justifyCenter' ],
 				},
-				placeholder: {
-			        text: '请在这里输入您的文章'
-			    },
+				placeholder : {
+					text : '请在这里输入您的文章'
+				},
 				customClassOption : "card-text",
 				imageDragging : false
 			});
+			$('#editor').css("min-height","40rem");
 			$('#editor').mediumInsert({
-		        editor: editor,
-		        addons: { // (object) Addons configuration
-		            images: { // (object) Image addon configuration
-		                deleteScript: '${config.rootPath}/write/imgDelete', // (string) A relative path to a delete script
-		                deleteMethod: 'POST',
-		                fileDeleteOptions: {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
-		                fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
-		                    url: '${config.rootPath}/write/imgUpload', // (string) A relative path to an upload script
-		                    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i // (regexp) Regexp of accepted file types
-		                },
-		                messages: {
-		                    acceptFileTypesError: 'This file is not in a supported format: ',
-		                    maxFileSizeError: 'This file is too big: '
-		                },
-		                uploadCompleted: function ($el, data) {}, // (function) Callback function called when upload is completed
-		                uploadFailed: function (uploadErrors, data) {} // (function) Callback function called when upload failed
-		            }
-		        }
-		    });
+				editor : editor,
+				addons : { // (object) Addons configuration
+					images : { // (object) Image addon configuration
+						deleteScript : '${config.rootPath}/write/imgDelete', // (string) A relative path to a delete script
+						deleteMethod : 'POST',
+						fileDeleteOptions : {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
+						fileUploadOptions : { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
+							url : '${config.rootPath}/write/imgUpload', // (string) A relative path to an upload script
+							acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i // (regexp) Regexp of accepted file types
+						},
+						messages : {
+							acceptFileTypesError : 'This file is not in a supported format: ',
+							maxFileSizeError : 'This file is too big: '
+						},
+						uploadCompleted : function($el, data) {}, // (function) Callback function called when upload is completed
+						uploadFailed : function(uploadErrors, data) {} // (function) Callback function called when upload failed
+					}
+				}
+			});
 			$("#writeSave").click(function(e) {
 				e.preventDefault();
 				$('#postModal').modal('show');
 				var allContents = editor.serialize();
 				var elContent = allContents["editor"].value;
-				$.post("${config.rootPath}/write/savedraft", { title: $("#editorTitle").html(), content: elContent },
-					function(data){
-						if(data.status=="0")
-						{
+				$.post("${config.rootPath}/write/savedraft", {
+					title : $("#editorTitle").html(),
+					content : elContent
+				},
+					function(data) {
+						if (data.status == "0") {
 							location.href = '${config.rootPath}/write/preview';
-						}
-						else
-						{
+						} else {
 							alert(data.info);
 						}
-				},"json");
+					}, "json");
 				return;
 			});
 		});
@@ -101,7 +100,9 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="postModalLabel">提交中</h5>
 				</div>
-				<div class="modal-body text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true"></i></div>
+				<div class="modal-body text-center">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true"></i>
+				</div>
 			</div>
 		</div>
 	</div>
