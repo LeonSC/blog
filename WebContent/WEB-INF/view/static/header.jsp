@@ -14,6 +14,7 @@
 <style type="text/css">
 p {overflow:hidden}
 .custom-max { width:100%;}
+.custom-max-12rem { width:100%;height:12rem}
 .custom-max-70-70 { width:70px;height:70px;}
 .custom-height-22 { height:1.5rem;overflow:hidden}
 .custom-height-66 { height:9.1rem;overflow:hidden}
