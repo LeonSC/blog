@@ -4,8 +4,8 @@
 <%@ include file="static/header.jsp"%>
 <body>
 	<%@ include file="static/nav.jsp"%>
+	<%@ include file="static/navFunction.jsp"%>
 	<div class="container">
-		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 			<div class="col col-12">
 				<form method="post" action="${config.rootPath}/memregistersubmit">
