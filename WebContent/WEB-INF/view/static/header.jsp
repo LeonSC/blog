@@ -20,6 +20,7 @@ p {overflow:hidden}
 .custom-height-66 { height:9.1rem;overflow:hidden}
 .custom-height-180 { height:11.25rem;}
 .custom-max-75-75 { width:75px;height:75px;}
+.custom-min-height-22 { min-height:22rem;}
 .custom-table {}
 .custom-td{vertical-align:top;border:1px solid rgba(0,0,0,.125);overflow:hidden;}
 *{outline:0 none !important; blr:expression(this.onFocus=this.blur());} 

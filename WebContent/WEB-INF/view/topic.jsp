@@ -7,10 +7,11 @@
 <%@ include file="static/header.jsp"%>
 <body>
 	<%@ include file="static/nav.jsp"%>
+	<%@ include file="static/navFunction.jsp"%>
 	<div class="container">
-		<%@ include file="static/navFunction.jsp"%>
 		<div class="row">
 		<div class="col col-9">
+		<!-- 
 		<div class="row" style="margin-bottom:.3rem">
 			<div class="col col-12">
 			<button type="button" class="btn btn-outline-success btn-sm">${cache.titleCache[topic].name}</button>
@@ -21,6 +22,7 @@
 			</div>
 			</div>
 		</div>
+		 -->
 		<c:if test="${not empty toplist}">
 		<div class="row">
 			<div class="col col-12">
