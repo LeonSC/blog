@@ -2,10 +2,11 @@ package blog.dao;
 
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
+import org.springframework.stereotype.Repository;
 
 import blog.model.Setting;
 import blog.startup.MongoDBConnector;
-
+@Repository
 public class SettingDao {
 
 	/**
@@ -38,5 +39,10 @@ public class SettingDao {
 		ops.set("qiniuOnOff", setting.getQiniuOnOff());
 		MongoDBConnector.datastore.updateFirst(updateQuery, ops, true);
 		return 0;
+	}
+	
+	public Setting getSetting()
+	{
+		return MongoDBConnector.datastore.createQuery(Setting.class).get();
 	}
 }

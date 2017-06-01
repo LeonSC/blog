@@ -21,4 +21,8 @@ public class QiniuService {
 		this.settingDao.save(setting);
 		return 0;
 	}
+
+	public Setting getSetting() {
+		return this.settingDao.getSetting();
+	}
 }

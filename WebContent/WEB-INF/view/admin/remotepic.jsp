@@ -12,13 +12,16 @@
 				<form method="post" action="${config.rootPath}/admin/setting/qiniusubmit">
 					<div class="form-group row">
 						<div class="form-group col-3">
-							<label class="col-form-label">AccessKey</label> <input type="text" class="form-control" name="accesskey">
+							<label class="col-form-label">AccessKey</label>
+							<input type="text" class="form-control" name="accesskey" value="${setting.qiniuAccessKey}">
 						</div>
 						<div class="form-group col-3">
-							<label class="col-form-label">SecretKey</label> <input type="text" class="form-control" name="secretkey">
+							<label class="col-form-label">SecretKey</label>
+							<input type="text" class="form-control" name="secretkey">
 						</div>
 						<div class="form-group col-3">
-							<label class="col-form-label">单卡金额</label> <input type="text" class="form-control" name="bucket">
+							<label class="col-form-label">bucket</label>
+							<input type="text" class="form-control" name="bucket">
 						</div>
 						<div class="form-group col-1">
 							<label class="col-form-label">启用</label> 
