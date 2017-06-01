@@ -10,30 +10,32 @@ public class SettingDao {
 
 	/**
 	 * 保存setting
+	 * 
 	 * @param setting
 	 * @return
 	 */
-	public int save(Setting setting)
-	{
-		if(setting==null)
-		{
+	public int save(Setting setting) {
+		if (setting == null) {
 			return -1;
 		}
 		Query<Setting> updateQuery = MongoDBConnector.datastore.createQuery(Setting.class);
-		UpdateOperations<Setting> ops=MongoDBConnector.datastore.createUpdateOperations(Setting.class);
-		if(setting.getQiniuAccessKey()!=null)
-		{
-			ops.set("qiniuAccessKey",setting.getQiniuAccessKey());
+		UpdateOperations<Setting> ops = MongoDBConnector.datastore.createUpdateOperations(Setting.class);
+		if (setting.getQiniuAccessKey() != null) {
+			ops.set("qiniuAccessKey", setting.getQiniuAccessKey());
 		}
-		if(setting.getQiniuSecretKey()!=null)
-		{
-			ops.set("qiniuSecretKey",setting.getQiniuSecretKey());
+		if (setting.getQiniuSecretKey() != null) {
+			ops.set("qiniuSecretKey", setting.getQiniuSecretKey());
 		}
-		if(setting.getQiniuBucket()!=null)
-		{
-			ops.set("qiniuBucket",setting.getQiniuBucket());
+		if (setting.getQiniuBucket() != null) {
+			ops.set("qiniuBucket", setting.getQiniuBucket());
 		}
-		ops.set("qiniuOnOff",setting.getQiniuOnOff()==null?0:setting.getQiniuOnOff());
+		if (setting.getQiniuOnOff() == null) {
+			setting.setQiniuOnOff(0);
+		}
+		if (setting.getQiniuOnOff() != 0 && setting.getQiniuOnOff() != 1) {
+			setting.setQiniuOnOff(0);
+		}
+		ops.set("qiniuOnOff", setting.getQiniuOnOff());
 		MongoDBConnector.datastore.updateFirst(updateQuery, ops, true);
 		return 0;
 	}
