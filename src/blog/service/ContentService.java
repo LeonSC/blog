@@ -101,6 +101,8 @@ public class ContentService {
 	 * @return
 	 */
 	private String contentFilter(String content) {
+		String regEx_img_replace = "<img.*src\\s*=\\s*(data:image/)*\\s*(;base64,)*\\s*(.*?)[^>]*?>";
+		content = content.replaceAll(regEx_img_replace, "");
 		return content.trim();
 	}
 
