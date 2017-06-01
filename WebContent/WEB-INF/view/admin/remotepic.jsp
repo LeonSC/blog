@@ -17,11 +17,11 @@
 						</div>
 						<div class="form-group col-3">
 							<label class="col-form-label">SecretKey</label>
-							<input type="text" class="form-control" name="secretkey">
+							<input type="text" class="form-control" name="secretkey" value="${setting.qiniuSecretKey}">
 						</div>
 						<div class="form-group col-3">
 							<label class="col-form-label">bucket</label>
-							<input type="text" class="form-control" name="bucket">
+							<input type="text" class="form-control" name="bucket" value="${setting.qiniuBucket}">
 						</div>
 						<div class="form-group col-1">
 							<label class="col-form-label">启用</label> 
