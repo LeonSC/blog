@@ -3,6 +3,8 @@ package blog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qiniu.util.Auth;
+
 import blog.dao.SettingDao;
 import blog.model.Setting;
 
@@ -24,5 +26,14 @@ public class QiniuService {
 
 	public Setting getSetting() {
 		return this.settingDao.getSetting();
+	}
+	
+	public int test(){
+		Setting s = this.getSetting();
+		Auth auth = Auth.create(s.getQiniuAccessKey(), s.getQiniuSecretKey());
+		String upToken = auth.uploadToken(s.getQiniuBucket());
+		System.out.println(upToken);
+		
+		return 0;
 	}
 }

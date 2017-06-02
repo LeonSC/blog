@@ -27,7 +27,7 @@
 							<label class="col-form-label">启用</label> 
 							<select name="onoff" class="form-control">
 								<option value="0">不启用</option>
-								<option value="1">启用</option>
+								<option value="1" <c:if test="${setting.qiniuOnOff eq 1}">selected</c:if>>启用</option>
 							</select>
 						</div>
 						<div class="form-group col-1">

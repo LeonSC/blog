@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import blog.model.Setting;
 import blog.service.QiniuService;
@@ -31,5 +32,13 @@ public class AdminSettingController {
 			@RequestParam(value = "onoff", required = false) Integer onoff) {
 		this.qiniuService.saveSetting(accesskey, secretkey, bucket, onoff);
 		return "redirect:/admin/setting/remotepic";
+	}
+	
+	@RequestMapping("/qiniusubmittest")
+	@ResponseBody
+	public String qiniuSubmitTest()
+	{
+		this.qiniuService.test();
+		return "";
 	}
 }
