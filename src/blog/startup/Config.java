@@ -30,7 +30,7 @@ public class Config {
 	public static String updateTime=sdf.format(new Date(Tools.getServerTime()));
 
 	///////////////常用路径参数////////////////////////
-	public static String rootPath="";
+	public static String rootPath="";//页面浏览路径
 	
 	private static String imgPhysicalPath=null;//物理绝对路径
 	private static String imgWebPath=null;//文件夹的名字, 使用rootPath拼接可以访问图片

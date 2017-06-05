@@ -1,6 +1,7 @@
 package blog.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import blog.model.Draft;
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
+import blog.service.QiniuService;
 import blog.startup.Config;
 
 /**
@@ -32,6 +34,8 @@ public class WriteController {
 	private ImgService imgService;
 	@Autowired
 	private ContentService contentService;
+	@Autowired
+	private QiniuService qiniuService;
 
 	@RequestMapping("")
 	public String write(HttpServletRequest request) {
@@ -64,6 +68,11 @@ public class WriteController {
 				// 转存文件
 				file.transferTo(new File(array[1]));
 			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				this.qiniuService.upload(file.getBytes());
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

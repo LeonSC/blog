@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="user-scalable=yes" />
-<link rel="shortcut icon" type="image/ico" href=""/>
+<link rel="shortcut icon" type="image/ico" href="public/cedar.ico"/>
 <title>BLOG</title>
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
