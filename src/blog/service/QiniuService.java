@@ -24,11 +24,12 @@ public class QiniuService {
 	@Autowired
 	private SettingDao settingDao;
 
-	public int saveSetting(String accesskey, String secretkey, String bucket, Integer onoff) {
+	public int saveSetting(String accesskey, String secretkey, String bucket, String link, Integer onoff) {
 		Setting setting = new Setting();
 		setting.setQiniuAccessKey(accesskey);
 		setting.setQiniuSecretKey(secretkey);
 		setting.setQiniuBucket(bucket);
+		setting.setQiniuLink(link);
 		setting.setQiniuOnOff(onoff);
 		this.settingDao.save(setting);
 		return 0;

@@ -29,8 +29,9 @@ public class AdminSettingController {
 	public String qiniuSubmit(@RequestParam(value = "accesskey", required = false) String accesskey,
 			@RequestParam(value = "secretkey", required = false) String secretkey,
 			@RequestParam(value = "bucket", required = false) String bucket,
+			@RequestParam(value = "link", required = false) String link,
 			@RequestParam(value = "onoff", required = false) Integer onoff) {
-		this.qiniuService.saveSetting(accesskey, secretkey, bucket, onoff);
+		this.qiniuService.saveSetting(accesskey, secretkey, bucket, link, onoff);
 		return "redirect:/admin/setting/remotepic";
 	}
 	

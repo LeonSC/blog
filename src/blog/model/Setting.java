@@ -9,6 +9,7 @@ public class Setting extends BaseModel {
 	private String qiniuSecretKey = "";
 	private String qiniuBucket = "";
 	private Integer qiniuOnOff = 0; //0关闭, 1开启, 默认关闭
+	private String qiniuLink = "";
 	
 	public String getQiniuAccessKey() {
 		return qiniuAccessKey;
@@ -33,5 +34,11 @@ public class Setting extends BaseModel {
 	}
 	public void setQiniuOnOff(Integer qiniuOnOff) {
 		this.qiniuOnOff = qiniuOnOff;
+	}
+	public String getQiniuLink() {
+		return qiniuLink;
+	}
+	public void setQiniuLink(String qiniuLink) {
+		this.qiniuLink = qiniuLink;
 	}
 }

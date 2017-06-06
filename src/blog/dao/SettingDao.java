@@ -30,6 +30,9 @@ public class SettingDao {
 		if (setting.getQiniuBucket() != null) {
 			ops.set("qiniuBucket", setting.getQiniuBucket());
 		}
+		if (setting.getQiniuLink() != null) {
+			ops.set("qiniuLink", setting.getQiniuLink());
+		}
 		if (setting.getQiniuOnOff() == null) {
 			setting.setQiniuOnOff(0);
 		}
