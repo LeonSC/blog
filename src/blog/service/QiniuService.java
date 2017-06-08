@@ -71,8 +71,7 @@ public class QiniuService {
 		return 0;
 	}
 
-	public int test() {
-
+	public String test() {
 		Setting s = this.getSetting();
 		Auth auth = Auth.create(s.getQiniuAccessKey(), s.getQiniuSecretKey());
 		String upToken = auth.uploadToken(s.getQiniuBucket());
@@ -89,8 +88,11 @@ public class QiniuService {
 				Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
 				// 解析上传成功的结果
 				DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-				System.out.println(putRet.key);
-				System.out.println(putRet.hash);
+				if(putRet.hash.startsWith("{\"error\":"))
+				{
+					return putRet.hash;
+				}
+				return "{\"success\":\"0\"}";
 			} catch (QiniuException ex) {
 				Response r = ex.response;
 				System.err.println(r.toString());
@@ -103,6 +105,6 @@ public class QiniuService {
 		} catch (UnsupportedEncodingException ex) {
 			// ignore
 		}
-		return 0;
+		return "0";
 	}
 }

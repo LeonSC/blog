@@ -36,7 +36,7 @@
 						</div>
 						<div class="form-group col-2">
 							<label class="col-form-label">状态</label> 
-							<button type="button" class="form-control">测试 <i class="fa fa-cog fa-spin"></i></button>
+							<button type="button" class="form-control" id="qiniutest">测试</button>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -48,5 +48,21 @@
 			</div>
 		</div>
 	</div>
+<script>
+$(document).ready(function() {
+	$("#qiniutest").click(function(){
+		$.getJSON("${config.rootPath}/admin/setting/qiniusubmittest", function(json){
+			if(json.success*1==0)
+			{
+				alert("成功");
+			}
+			else
+			{
+				alert("检查参数");
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>

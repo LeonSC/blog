@@ -39,7 +39,6 @@ public class AdminSettingController {
 	@ResponseBody
 	public String qiniuSubmitTest()
 	{
-		this.qiniuService.test();
-		return "";
+		return this.qiniuService.test();
 	}
 }
