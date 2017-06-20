@@ -1,8 +1,5 @@
 package blog.controller;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import blog.model.Draft;
 import blog.model.User;
 import blog.service.ContentService;
 import blog.service.ImgService;
-import blog.service.QiniuService;
 import blog.startup.Config;
 
 /**
@@ -34,8 +30,6 @@ public class WriteController {
 	private ImgService imgService;
 	@Autowired
 	private ContentService contentService;
-	@Autowired
-	private QiniuService qiniuService;
 
 	@RequestMapping("")
 	public String write(HttpServletRequest request) {
@@ -60,24 +54,9 @@ public class WriteController {
 		if (u == null) {
 			return "";
 		}
-		String[] array = { "" };
-		// 判断文件是否为空
-		if (file != null && !file.isEmpty()) {
-			try {
-				array = this.imgService.getImgPhysicalPath(u.getBM_ID(), file.getOriginalFilename());
-				// 转存文件
-				file.transferTo(new File(array[1]));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				this.qiniuService.upload(file.getBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		// 重定向
-		return array[0];
+		String array = this.imgService.getImgPhysicalPath(u.getBM_ID(), file);
+		// 
+		return array;
 	}
 
 	/**

@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import blog.component.QiniuComponent;
 import blog.model.Setting;
-import blog.service.QiniuService;
 
 @Controller
 @RequestMapping("/admin/setting")
 public class AdminSettingController {
 
 	@Autowired
-	private QiniuService qiniuService;
+	private QiniuComponent qiniuComponent;
 
 	@RequestMapping("/remotepic")
 	public String remotePic(HttpServletRequest request) {
-		Setting s = this.qiniuService.getSetting();
+		Setting s = this.qiniuComponent.getSetting();
 		request.setAttribute("setting", s);
 		return "admin/remotepic";
 	}
@@ -31,7 +31,7 @@ public class AdminSettingController {
 			@RequestParam(value = "bucket", required = false) String bucket,
 			@RequestParam(value = "link", required = false) String link,
 			@RequestParam(value = "onoff", required = false) Integer onoff) {
-		this.qiniuService.saveSetting(accesskey, secretkey, bucket, link, onoff);
+		this.qiniuComponent.saveSetting(accesskey, secretkey, bucket, link, onoff);
 		return "redirect:/admin/setting/remotepic";
 	}
 	
@@ -39,6 +39,6 @@ public class AdminSettingController {
 	@ResponseBody
 	public String qiniuSubmitTest()
 	{
-		return this.qiniuService.test();
+		return this.qiniuComponent.test();
 	}
 }
