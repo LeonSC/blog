@@ -74,7 +74,7 @@ public class ImgService {
 		if(qiniuName!=null&&!"".equals(qiniuName))
 		{
 			map.put("name", qiniuName);
-			map.put("url", SettingCache.setting.getQiniuLink()+"/"+qiniuName);
+			map.put("url", "http://"+SettingCache.setting.getQiniuLink()+"/"+qiniuName);
 		}
 		map.put("delete_url", new StringBuffer(Config.rootPath + "/write/imgDelete?file=").append(File.separator)
 				.append(timePath).append(File.separator).append(newPicName).toString());
