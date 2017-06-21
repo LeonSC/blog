@@ -17,6 +17,7 @@ import com.qiniu.util.Auth;
 
 import blog.dao.SettingDao;
 import blog.model.Setting;
+import blog.startup.Checker;
 
 @Component
 public class QiniuComponent {
@@ -40,7 +41,7 @@ public class QiniuComponent {
 		return this.settingDao.getSetting();
 	}
 
-	public String upload(byte[] uploadBytes) {
+	private String qiniu(byte[] uploadBytes) throws QiniuException {
 		Setting s = this.getSetting();
 		if (s == null || s.getQiniuOnOff() == 0) {
 			return "";
@@ -54,16 +55,45 @@ public class QiniuComponent {
 		// ...其他参数参考类注释
 		UploadManager uploadManager = new UploadManager(cfg);
 		ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
+
+		Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
+		// 解析上传成功的结果
+		DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+		if (putRet.hash.startsWith("{\"error\":")) {
+			return putRet.hash;
+		}
+		return putRet.key;
+	}
+
+	/**
+	 * 测试上传接口
+	 * 
+	 * @return
+	 */
+	public String test() {
 		try {
-			Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
-			// 解析上传成功的结果
-			DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-			if(putRet.hash.startsWith("{\"error\":"))
-			{
-				return putRet.hash;
-			}
-			return "{\"success\":\"0\"}";
+			byte[] uploadBytes = "hello qiniu cloud".getBytes("utf-8");
+			this.qiniu(uploadBytes);
+			Checker.qiniuChecker = 1;
+		} catch (QiniuException e) {
+			Checker.qiniuChecker = 0;
+		} catch (UnsupportedEncodingException e) {
+			Checker.qiniuChecker = 0;
+		}
+		return "";
+	}
+
+	/**
+	 * 对外上传接口
+	 * 
+	 * @param uploadBytes
+	 * @return
+	 */
+	public String upload(byte[] uploadBytes) {
+		try {
+			return this.qiniu(uploadBytes);
 		} catch (QiniuException ex) {
+			Checker.qiniuChecker = 0;
 			Response r = ex.response;
 			System.err.println(r.toString());
 			try {
@@ -71,15 +101,6 @@ public class QiniuComponent {
 			} catch (QiniuException ex2) {
 				// ignore
 			}
-		}
-		return "";
-	}
-	
-	public String test() {
-		try {
-			byte[] uploadBytes = "hello qiniu cloud".getBytes("utf-8");
-			return this.upload(uploadBytes);
-		} catch (UnsupportedEncodingException e) {
 		}
 		return "";
 	}

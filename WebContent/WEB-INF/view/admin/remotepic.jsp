@@ -35,8 +35,13 @@
 							</select>
 						</div>
 						<div class="form-group col-2">
-							<label class="col-form-label">状态</label> 
-							<button type="button" class="form-control" id="qiniutest">测试</button>
+							<label class="col-form-label">状态${checker.qiniuChecker}</label>
+							<c:if test="${checker.qiniuChecker eq 0}">
+							<button type="button" class="form-control">未连接</button>
+							</c:if>
+							<c:if test="${checker.qiniuChecker eq 1}">
+							<button type="button" class="form-control btn-outline-success">正常连接</button>
+							</c:if>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -50,18 +55,6 @@
 	</div>
 <script>
 $(document).ready(function() {
-	$("#qiniutest").click(function(){
-		$.getJSON("${config.rootPath}/admin/setting/qiniusubmittest", function(json){
-			if(json.success*1==0)
-			{
-				alert("成功");
-			}
-			else
-			{
-				alert("检查参数");
-			}
-		});
-	});
 });
 </script>
 </body>

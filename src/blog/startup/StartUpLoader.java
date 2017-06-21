@@ -43,6 +43,10 @@ public class StartUpLoader extends HttpServlet{
 		application.setAttribute("cache", TCache.getCache());
 		System.out.println("目录结构=>"+ JSON.toJSONString(TCache.getCache().titleCache));
 		System.out.println("===============================缓存设置结束=================================");
+		
+		System.out.println("===============================常用参数设置=================================");
+		application.setAttribute("checker", Checker.getChecker());
+		System.out.println("===============================常用参数结束=================================");
 	}
 
 }
