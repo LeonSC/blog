@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import blog.component.QiniuComponent;
-import blog.model.Setting;
 
 @Controller
 @RequestMapping("/admin/setting")
@@ -20,8 +19,6 @@ public class AdminSettingController {
 
 	@RequestMapping("/remotepic")
 	public String remotePic(HttpServletRequest request) {
-		Setting s = this.qiniuComponent.getSetting();
-		request.setAttribute("setting", s);
 		return "admin/remotepic";
 	}
 

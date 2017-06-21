@@ -45,7 +45,7 @@ public class StartUpLoader extends HttpServlet{
 		System.out.println("===============================缓存设置结束=================================");
 		
 		System.out.println("===============================常用参数设置=================================");
-		application.setAttribute("checker", Checker.getChecker());
+		application.setAttribute("setting", SettingCache.getSettingCache());
 		System.out.println("===============================常用参数结束=================================");
 	}
 

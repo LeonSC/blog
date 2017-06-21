@@ -17,7 +17,7 @@ import com.qiniu.util.Auth;
 
 import blog.dao.SettingDao;
 import blog.model.Setting;
-import blog.startup.Checker;
+import blog.startup.SettingCache;
 
 @Component
 public class QiniuComponent {
@@ -33,22 +33,18 @@ public class QiniuComponent {
 		setting.setQiniuLink(link);
 		setting.setQiniuOnOff(onoff);
 		this.settingDao.save(setting);
-		Checker.setting = this.settingDao.getSetting();
+		SettingCache.setting = this.settingDao.getSetting();
 		this.test();
 		return 0;
 	}
 
-	public Setting getSetting() {
-		return this.settingDao.getSetting();
-	}
-
 	private String qiniu(byte[] uploadBytes) throws QiniuException {
-		if (Checker.setting == null || Checker.setting.getQiniuOnOff() == 0) {
-			Checker.qiniuChecker = 0;
+		if (SettingCache.setting == null || SettingCache.setting.getQiniuOnOff() == 0) {
+			SettingCache.qiniuChecker = 0;
 			return "";
 		}
-		Auth auth = Auth.create(Checker.setting.getQiniuAccessKey(), Checker.setting.getQiniuSecretKey());
-		String upToken = auth.uploadToken(Checker.setting.getQiniuBucket());
+		Auth auth = Auth.create(SettingCache.setting.getQiniuAccessKey(), SettingCache.setting.getQiniuSecretKey());
+		String upToken = auth.uploadToken(SettingCache.setting.getQiniuBucket());
 		// 默认不指定key的情况下，以文件内容的hash值作为文件名
 		String key = null;
 		// 构造一个带指定Zone对象的配置类
@@ -74,11 +70,11 @@ public class QiniuComponent {
 		try {
 			byte[] uploadBytes = "hello qiniu cloud".getBytes("utf-8");
 			this.qiniu(uploadBytes);
-			Checker.qiniuChecker = 1;
+			SettingCache.qiniuChecker = 1;
 		} catch (QiniuException e) {
-			Checker.qiniuChecker = 0;
+			SettingCache.qiniuChecker = 0;
 		} catch (UnsupportedEncodingException e) {
-			Checker.qiniuChecker = 0;
+			SettingCache.qiniuChecker = 0;
 		}
 		return "";
 	}
@@ -93,7 +89,7 @@ public class QiniuComponent {
 		try {
 			return this.qiniu(uploadBytes);
 		} catch (QiniuException ex) {
-			Checker.qiniuChecker = 0;
+			SettingCache.qiniuChecker = 0;
 			Response r = ex.response;
 			System.err.println(r.toString());
 			try {
