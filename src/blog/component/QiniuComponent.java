@@ -33,25 +33,22 @@ public class QiniuComponent {
 		setting.setQiniuLink(link);
 		setting.setQiniuOnOff(onoff);
 		this.settingDao.save(setting);
+		Checker.setting = this.settingDao.getSetting();
 		this.test();
 		return 0;
 	}
 
 	public Setting getSetting() {
-		if (Checker.setting == null) {
-			Checker.setting = this.settingDao.getSetting();
-		}
-		return Checker.setting;
+		return this.settingDao.getSetting();
 	}
 
 	private String qiniu(byte[] uploadBytes) throws QiniuException {
-		Setting s = this.getSetting();
-		if (s == null || s.getQiniuOnOff() == 0) {
+		if (Checker.setting == null || Checker.setting.getQiniuOnOff() == 0) {
 			Checker.qiniuChecker = 0;
 			return "";
 		}
-		Auth auth = Auth.create(s.getQiniuAccessKey(), s.getQiniuSecretKey());
-		String upToken = auth.uploadToken(s.getQiniuBucket());
+		Auth auth = Auth.create(Checker.setting.getQiniuAccessKey(), Checker.setting.getQiniuSecretKey());
+		String upToken = auth.uploadToken(Checker.setting.getQiniuBucket());
 		// 默认不指定key的情况下，以文件内容的hash值作为文件名
 		String key = null;
 		// 构造一个带指定Zone对象的配置类
@@ -59,7 +56,6 @@ public class QiniuComponent {
 		// ...其他参数参考类注释
 		UploadManager uploadManager = new UploadManager(cfg);
 		ByteArrayInputStream byteInputStream = new ByteArrayInputStream(uploadBytes);
-
 		Response response = uploadManager.put(byteInputStream, key, upToken, null, null);
 		// 解析上传成功的结果
 		DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
