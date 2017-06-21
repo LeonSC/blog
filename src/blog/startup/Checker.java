@@ -1,5 +1,7 @@
 package blog.startup;
 
+import blog.model.Setting;
+
 public class Checker {
 
 	private static Checker checker;
@@ -12,4 +14,5 @@ public class Checker {
 	public int getQiniuChecker() {
 		return qiniuChecker;
 	}
+	public static Setting setting=null;
 }

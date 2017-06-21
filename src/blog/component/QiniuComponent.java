@@ -38,12 +38,16 @@ public class QiniuComponent {
 	}
 
 	public Setting getSetting() {
-		return this.settingDao.getSetting();
+		if (Checker.setting == null) {
+			Checker.setting = this.settingDao.getSetting();
+		}
+		return Checker.setting;
 	}
 
 	private String qiniu(byte[] uploadBytes) throws QiniuException {
 		Setting s = this.getSetting();
 		if (s == null || s.getQiniuOnOff() == 0) {
+			Checker.qiniuChecker = 0;
 			return "";
 		}
 		Auth auth = Auth.create(s.getQiniuAccessKey(), s.getQiniuSecretKey());
