@@ -100,7 +100,7 @@ public class WriteController {
 		Draft draft = this.contentService.getDraftByUser(u.getBM_ID());
 		if(draft==null)
 		{
-			return "redirect:/write/layui";
+			return "redirect:/write";
 		}
 		request.setAttribute("draft", draft);
 		return "preview";

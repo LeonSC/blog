@@ -3,6 +3,8 @@ package blog.component;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -66,6 +68,7 @@ public class QiniuComponent {
 	 * 
 	 * @return
 	 */
+	@PostConstruct
 	public String test() {
 		try {
 			byte[] uploadBytes = "hello qiniu cloud".getBytes("utf-8");

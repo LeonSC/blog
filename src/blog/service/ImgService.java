@@ -21,7 +21,7 @@ import blog.startup.Tools;
 /**
  * 用于处理图片相关
  * 
- * @author sasgs
+ * @author sasgsc
  *
  */
 @Service
@@ -71,10 +71,9 @@ public class ImgService {
 		Map<String, String> map = new HashMap<>();
 		map.put("name", newPicName);
 		map.put("url", visitPath);
-		if(qiniuName!=null&&!"".equals(qiniuName))
-		{
+		if (qiniuName != null && !"".equals(qiniuName)) {
 			map.put("name", qiniuName);
-			map.put("url", "http://"+SettingCache.setting.getQiniuLink()+"/"+qiniuName);
+			map.put("url", "http://" + SettingCache.setting.getQiniuLink() + "/" + qiniuName);
 		}
 		map.put("delete_url", new StringBuffer(Config.rootPath + "/write/imgDelete?file=").append(File.separator)
 				.append(timePath).append(File.separator).append(newPicName).toString());
@@ -92,7 +91,7 @@ public class ImgService {
 	 * @return
 	 */
 	public String delImgPhysicalPath(String path) {
-		if (path.startsWith("data")) {
+		if (path == null || path.startsWith("data")) {
 			return "";
 		}
 		// 拼装需要返回给JS的字符串

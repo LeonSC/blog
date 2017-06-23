@@ -21,13 +21,13 @@
 							</ol>
 							<div class="carousel-inner" role="listbox">
 								<div class="carousel-item active" data-href="http://${cache.indexPageCarouselList[0].link}">
-									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[0].img}" data-src="holder.js/100px160?theme=simple">
+									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[0].img}" data-src="holder.js/100px160?theme=simple&text=banner">
 								</div>
 								<div class="carousel-item" data-href="http://${cache.indexPageCarouselList[1].link}">
-									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[1].img}" data-src="holder.js/100px160?theme=simple">
+									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[1].img}" data-src="holder.js/100px160?theme=simple&text=banner">
 								</div>
 								<div class="carousel-item" data-href="http://${cache.indexPageCarouselList[2].link}">
-									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[2].img}" data-src="holder.js/100px160?theme=simple">
+									<img class="d-block img-fluid" src="${cache.indexPageCarouselList[2].img}" data-src="holder.js/100px160?theme=simple&text=banner">
 								</div>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							<c:forEach var="item" items="${cache.indexPageContentList}">
 							<div class="card" data-href="${config.rootPath}/topic/art/${item.BM_ID}">
 								<c:if test="${not empty item.cover}">
-								<img class="card-img-top img-fluid custom-max" src="${item.cover}" data-src="holder.js/100px160?theme=simple">
+								<img class="card-img-top img-fluid custom-max" src="${item.cover}" data-src="holder.js/100px160?theme=simple&text=cover">
 								</c:if>
 								<div class="card-block">
 									<h4 class="card-title text-truncate">${item.title}</h4>
