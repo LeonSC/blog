@@ -52,6 +52,7 @@
 				imageDragging : false
 			});
 			$('#editor').css("min-height","40rem");
+			var op = {};
 			$('#editor').mediumInsert({
 				editor : editor,
 				addons : { // (object) Addons configuration
@@ -61,13 +62,13 @@
 						fileDeleteOptions : {}, // (object) extra parameters send on the delete ajax request, see http://api.jquery.com/jquery.ajax/
 						fileUploadOptions : { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
 							url : '${config.rootPath}/write/imgUpload', // (string) A relative path to an upload script
-							acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i // (regexp) Regexp of accepted file types
+							acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i
 						},
 						messages : {
 							acceptFileTypesError : 'This file is not in a supported format: ',
 							maxFileSizeError : 'This file is too big: '
 						},
-						uploadCompleted : function($el, data) {}, // (function) Callback function called when upload is completed
+						uploadCompleted : function($el, data) {console.log("上传完成")},
 						uploadFailed : function(uploadErrors, data) {} // (function) Callback function called when upload failed
 					}
 				}
