@@ -192,7 +192,7 @@ public class ContentService {
 	 * @param topic
 	 * @return
 	 */
-	public Content publishContent(String userid, String topic, Integer price) {
+	public Content publishContent(String userid, String topic, Integer price, String wipestr) {
 		if (topic == null || topic.isEmpty()) {
 			return null;
 		}
@@ -213,6 +213,26 @@ public class ContentService {
 		c.getNeed().setLv(0);
 		c.getNeed().setVisible(0);
 		c.getNeed().setLoginVisible(0);
+		// 处理过滤字符
+		if (wipestr != null && !wipestr.isEmpty()) {
+			String[] str = wipestr.split(",");
+			List<String> l = new ArrayList<>();
+			for (String each : str) {
+				if (each.isEmpty()) {
+					continue;
+				}
+				StringBuffer ttbuf = new StringBuffer("^");
+				char[] cc = each.toCharArray();
+				for (char tmp : cc) {
+					ttbuf.append(tmp).append(".*");
+				}
+				ttbuf.deleteCharAt(ttbuf.length() - 1);
+				ttbuf.deleteCharAt(ttbuf.length() - 1);
+				ttbuf.append("$");
+				l.add(ttbuf.toString());
+			}
+			c.setWipeStr(l);
+		}
 		c = this.contentDao.save(c);
 		// 删除草稿
 		this.draftDao.deleteDraftByUser(userid);

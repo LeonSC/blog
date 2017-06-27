@@ -31,6 +31,12 @@
 									<input class="form-control" type="number" name="price">
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class="col-2 col-form-label">过滤</label>
+								<div class="col-6">
+									<input class="form-control" type="text" name="wipestr" placeholder="过滤A,过滤B,过滤C">
+								</div>
+							</div>
 							<input type="hidden" name="draft" value="${draft.BM_ID}"/>
 							<!-- <fieldset class="form-group row">
 								<legend class="col-form-legend col-sm-2">Radios</legend>

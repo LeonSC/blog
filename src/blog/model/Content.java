@@ -2,6 +2,7 @@ package blog.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mongodb.morphia.annotations.Entity;
@@ -45,7 +46,12 @@ public class Content extends BaseModel {
 	 * ISODATE
 	 */
 	private Date date = new Date();
+	/**
+	 * 在评论中需要过滤掉的字符串
+	 */
+	private List<String> wipeStr = null;
 	
+
 	public String getTitle() {
 		return title;
 	}
@@ -146,6 +152,14 @@ public class Content extends BaseModel {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public List<String> getWipeStr() {
+		return wipeStr;
+	}
+
+	public void setWipeStr(List<String> wipeStr) {
+		this.wipeStr = wipeStr;
 	}
 	
 }

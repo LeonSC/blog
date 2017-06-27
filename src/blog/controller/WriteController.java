@@ -118,9 +118,10 @@ public class WriteController {
 	@RequestMapping("/publish")
 	public String publish(HttpServletRequest request, @RequestParam(value = "topic", required = false) String topic,
 			@RequestParam(value = "price", required = false) Integer price,
+			@RequestParam(value = "wipestr", required = false) String wipestr,
 			@RequestParam(value = "draft", required = false) String bmid) {
 		User u = (User) request.getSession().getAttribute(Config.memAuth);
-		this.contentService.publishContent(u.getBM_ID(), topic, price);
+		this.contentService.publishContent(u.getBM_ID(), topic, price, wipestr);
 		return "redirect:/topic/" + topic;
 	}
 
