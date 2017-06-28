@@ -22,11 +22,10 @@
 		<div class="row">
 			<div class="col col-12">
 				<button type="button" class="btn">草稿</button>
-				<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a>
-				<a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
+				<a href="#" class="btn btn-primary" id="writeSave">保存并预览</a> <a href="${config.rootPath}/write/preview" class="btn btn-primary">预览</a>
 			</div>
 			<div class="col col-12">
-				<br/>
+				<br />
 				<h4 contenteditable="true" id="editorTitle" class="text-center">
 					<c:if test="${empty draft.title}">输入标题</c:if>
 					<c:if test="${not empty draft.title}">${draft.title}</c:if>
@@ -51,7 +50,7 @@
 				customClassOption : "card-text",
 				imageDragging : false
 			});
-			$('#editor').css("min-height","40rem");
+			$('#editor').css("min-height", "40rem");
 			var op = {};
 			$('#editor').mediumInsert({
 				editor : editor,
@@ -68,7 +67,9 @@
 							acceptFileTypesError : 'This file is not in a supported format: ',
 							maxFileSizeError : 'This file is too big: '
 						},
-						uploadCompleted : function($el, data) {console.log("上传完成")},
+						uploadCompleted : function($el, data) {
+							console.log("上传完成")
+						},
 						uploadFailed : function(uploadErrors, data) {} // (function) Callback function called when upload failed
 					}
 				}
