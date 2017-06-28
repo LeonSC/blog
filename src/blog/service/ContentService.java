@@ -221,14 +221,13 @@ public class ContentService {
 				if (each.isEmpty()) {
 					continue;
 				}
-				StringBuffer ttbuf = new StringBuffer("^");
+				StringBuffer ttbuf = new StringBuffer();
 				char[] cc = each.toCharArray();
 				for (char tmp : cc) {
-					ttbuf.append(tmp).append(".*");
+					ttbuf.append(tmp).append(".{0,5}");
 				}
 				ttbuf.deleteCharAt(ttbuf.length() - 1);
 				ttbuf.deleteCharAt(ttbuf.length() - 1);
-				ttbuf.append("$");
 				l.add(ttbuf.toString());
 			}
 			c.setWipeStr(l);
@@ -272,6 +271,18 @@ public class ContentService {
 	public int setReplyForContent(String userid, String contentid, String reply) {
 		reply = reply.replaceAll("<(S*?)[^>]*>.*?|<.*? />", "").replaceAll("&.{2,6}?;", "").replaceAll("\r|\n|\t| ", "")
 				.trim();
+		/**
+		 * 获取过滤条件
+		 */
+		Content c = this.contentDao.getContentByBMID(contentid);
+		if (c.getWipeStr() != null) {
+			for (String wipe : c.getWipeStr()) {
+				reply = reply.replaceAll(wipe, "****");
+			}
+		}
+		/**
+		 * 提交新回复
+		 */
 		Reply r = new Reply();
 		r.setOkey(contentid);
 		User u = this.userDao.findUserByBMID(userid);
