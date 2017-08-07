@@ -49,6 +49,35 @@ public class ContentDao {
 	}
 	
 	/**
+	 * 根据主题查找主题下面有多少帖子
+	 * @param bmid
+	 * @return
+	 */
+	public long countArtInTopic(String bmid)
+	{
+		return MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(bmid).count();
+	}
+	
+	/**
+	 * 把一个主题下的文章全部移动到另外一个主题中
+	 * @param old
+	 * @param yo
+	 * @return
+	 */
+	public int moveArtTopicByBMID(String old, String yo)
+	{
+		if(yo==null)
+		{
+			return -1;
+		}
+		Query<Content> updateQuery = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal(old);
+		UpdateOperations<Content> ops=MongoDBConnector.datastore.createUpdateOperations(Content.class);
+		ops.set("topic", yo);
+		UpdateResults re =MongoDBConnector.datastore.update(updateQuery, ops);
+		return re.getUpdatedCount();
+	}
+	
+	/**
 	 * 根据ID找文章
 	 * @param bmid
 	 * @return
@@ -120,6 +149,23 @@ public class ContentDao {
 	{
 		List<Content> list = MongoDBConnector.datastore.createQuery(Content.class).field("BM_DEL").equal(0).field("topic").equal(topic).field("top").exists().field("top").notEqual(0L).order("-top").asList(new FindOptions().limit(3));
 		return list;
+	}
+	
+	/**
+	 * 查询回收站中的帖子
+	 * @return
+	 */
+	public Page<Content> getContentTrashCanList(int nowPage, int numInPage)
+	{
+		Query<Content> query = MongoDBConnector.datastore.createQuery(Content.class).field("topic").equal("intrashcan");
+		Page<Content> page = new Page<>();
+		page.setTotal(query.count());
+		page.setNowPage(nowPage);
+		page.setTotalInPage(numInPage);
+		page.getPage();
+		List<Content> list = query.order("-BM_TIME").asList(new FindOptions().skip(page.getSkip()).limit(page.getTotalInPage()));
+		page.setList(list);
+		return page;
 	}
 	
 	/**

@@ -382,4 +382,19 @@ public class ContentService {
 		}
 		return c;
 	}
+	
+	
+	
+	//回收站列表读取======================================
+	public Page<Content> getContentTrashCanList(Integer nowPage, Integer numInPage)
+	{
+		if (nowPage == null) {
+			nowPage = 1;
+		}
+		if (numInPage == null) {
+			numInPage = 15;
+		}
+		Page<Content> page = this.contentDao.getContentTrashCanList(nowPage, numInPage);
+		return page;
+	}
 }

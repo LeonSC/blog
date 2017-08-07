@@ -14,7 +14,7 @@ public class Auth {
 	
 	private String password;
 
-	private Integer visible=999;//可视等级, 小于文档等级不现实. 这个数大于文档的阅读权限才显示
+	private Integer visible=999;//可视等级, 用户的可视等级小于文档等级不显示. 这个数大于文档的阅读权限才显示
 	
 	private Integer create=10;
 	private Integer delete=100;

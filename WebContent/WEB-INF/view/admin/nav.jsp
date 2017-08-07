@@ -7,6 +7,7 @@
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/index/setting">首页设置</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/account">会员管理</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/topic">主题管理</a></li>
+			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/content">内容管理</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/deposit">发卡管理</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/admin/setting/remotepic">远程图片</a></li>
 			<li class="nav-item"><a class="nav-link" href="${config.rootPath}/adminlogoutsubmit">登出</a></li>

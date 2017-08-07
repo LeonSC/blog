@@ -10,7 +10,7 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity("content")
 public class Content extends BaseModel {
 
-	private String topic;//标识属于哪个topic
+	private String topic;//标识属于哪个topic, topic的bmid
 	
 	private String title;
 	private String intro;

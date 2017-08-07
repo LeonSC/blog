@@ -12,18 +12,14 @@
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs">
 							<c:forEach var="item" items="${cache.titleCache}" varStatus="i">
-								<c:if test="${i.first}">
-									<li class="nav-item"><a class="nav-link active" href="#tab${item.value.BM_ID}" data-toggle="tab" role="tab">${item.value.name}</a></li>
-								</c:if>
-								<c:if test="${not i.first}">
-									<li class="nav-item"><a class="nav-link" href="#tab${item.value.BM_ID}" data-toggle="tab" role="tab">${item.value.name}</a></li>
-								</c:if>
+							<li class="nav-item"><a class="nav-link" href="#tab${item.value.BM_ID}" data-toggle="tab" role="tab">${item.value.name}</a></li>
 							</c:forEach>
+							<li class="nav-item"><a class="nav-link active" href="#tab_add" data-toggle="tab" role="tab">添加</a></li>
 						</ul>
 					</div>
 					<div class="tab-content">
 						<c:forEach var="item" items="${cache.titleCache}" varStatus="i">
-							<div class="tab-pane fade <c:if test="${i.first}">show active</c:if>" id="tab${item.value.BM_ID}" role="tabpanel">
+							<div class="tab-pane fade" id="tab${item.value.BM_ID}" role="tabpanel">
 								<div class="card-block">
 									<p class="card-text">已有管理员</p>
 									<p class="card-text">
@@ -80,16 +76,27 @@
 										 -->
 										<button type="submit" class="btn btn-primary btn-sm">提交</button>
 									</form>
+									<hr/>
+									<a class="btn btn-danger btn-sm" role="button" href="${config.rootPath}/admin/topic/remove?bmid=${item.value.BM_ID}">删除</a>
 								</div>
 							</div>
 						</c:forEach>
+						<div class="tab-pane fade show active" id="tab_add" role="tabpanel">
+							<div class="card-block">
+							<form method="post" action="${config.rootPath}/admin/topic/add">
+								<div class="form-group row">
+									<label class="col-2 col-form-label">添加</label>
+									<div class="col-10">
+										<input class="form-control" type="text" name="name" />
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-sm">提交</button>
+							</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<br />
-		<div class="row">
-			<div class="col col-12"></div>
 		</div>
 	</div>
 </body>

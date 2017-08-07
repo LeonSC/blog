@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import blog.dao.ContentDao;
 import blog.dao.TopicDao;
 import blog.dao.UserDao;
 import blog.model.Auth;
@@ -20,7 +21,15 @@ public class TopicService {
 	private UserDao userDao;
 	@Autowired
 	private TopicDao topicDao;
+	@Autowired
+	private ContentDao contentDao;
 	
+	/**
+	 * 添加管理员
+	 * @param topicid
+	 * @param username
+	 * @return
+	 */
 	public int updateTopicManager(String topicid, String username)
 	{
 		User u = this.userDao.findByUserName(username);
@@ -95,5 +104,68 @@ public class TopicService {
 		//重新设置缓存
 		TCache.getCache().initTitleCache();
 		return 0;
+	}
+	
+	/**
+	 * 保存一个topic
+	 * @param name
+	 * @param icon
+	 * @param order
+	 * @param intro
+	 * @return
+	 */
+	public int saveTopic(String name, String icon, Integer order, String intro)
+	{
+		if(name==null)
+		{
+			return -1;
+		}
+		if(order==null)
+		{
+			order = this.topicDao.getLastOrder();
+		}
+		Topic topic = new Topic();
+		topic.setName(name);
+		topic.setIcon(icon);
+		topic.setOrder(order);
+		topic.setIntro(intro);
+		topic.getAuth().setVisible(0);
+		this.topicDao.save(topic);
+		//重新设置缓存
+		TCache.getCache().initTitleCache();
+		return 0;
+	}
+	
+	/**
+	 * 删除一个节点/主题
+	 * @param bmid
+	 * @return
+	 */
+	public int removeTopic(String bmid)
+	{
+		int re = this.topicDao.remove(bmid);
+		TCache.getCache().initTitleCache();
+		return re;
+	}
+	
+	/**
+	 * 根据主题查找主题下面有多少帖子
+	 * @param bmid
+	 * @return long
+	 */
+	public long countArtInTopic(String bmid)
+	{
+		return this.contentDao.countArtInTopic(bmid);
+	}
+	
+	/**
+	 * 把一个主题下的文章全部移动到另外一个主题中
+	 * @param old
+	 * @param yo
+	 * @return
+	 */
+	public int moveArtToOtherTopic(String old, String yo)
+	{
+		return this.contentDao.moveArtTopicByBMID(old, yo);
 	}
 }
